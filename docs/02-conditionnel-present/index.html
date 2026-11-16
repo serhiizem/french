@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px/1.4 system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<title>Si j'étais riche…</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: one narrow column like a French school notebook (Seyès lines, red margin); sticky tabs; red-pen corrections. */
+:root {
+  --paper: #f7f8fc;
+  --card: #ffffff;
+  --ink: #1b2140;
+  --muted: #5b6386;
+  --line: #e0e5f2;
+  --seyes: #d6def5;
+  --blue: #2846b4;
+  --blue-soft: #e8edfc;
+  --red: #c8303a;
+  --red-soft: #fdecee;
+  --green: #1d7f47;
+  --green-soft: #e5f5ec;
+  --amber: #a46a0e;
+  --amber-soft: #fbf1df;
+  --f-display: "Bricolage Grotesque", "Space Grotesk", system-ui, sans-serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-pen: "Caveat", "Comic Sans MS", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+    --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+    --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+  --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+  --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.wrap { max-width: 720px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 7vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.35rem; font-weight: 800; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+b, strong { font-weight: 600; }
+.k { color: var(--blue); font-weight: 600; }
+
+/* Header: Seyès ruling + red margin */
+header.top {
+  margin-top: 16px; padding: 22px 18px 20px 30px; border-radius: 6px; position: relative;
+  background-color: var(--card);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 23px, var(--seyes) 23px 24px);
+  border: 1px solid var(--line);
+  display: grid; gap: 8px;
+}
+header.top::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: var(--red); opacity: .7; }
+.eyebrow { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.sub { color: var(--muted); }
+
+/* Tabs */
+nav.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper);
+  display: flex; gap: 6px; padding-block: 12px; margin-top: 8px; border-bottom: 1px solid var(--line);
+}
+nav.tabs button {
+  flex: 1; font: 600 .95rem var(--f-body); color: var(--muted); background: transparent; border: 1px solid transparent;
+  padding: 9px 6px; border-radius: 999px; cursor: pointer;
+}
+nav.tabs button[aria-selected="true"] { color: var(--blue); background: var(--blue-soft); border-color: var(--blue-soft); }
+nav.tabs button:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+section.view { display: grid; gap: 22px; padding-top: 22px; }
+
+/* Lesson */
+.order { display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; }
+.slot { flex: 1 1 90px; min-width: 0; border-radius: 6px; padding: 8px 8px 9px; text-align: center; border: 1px solid var(--line); background: var(--card); }
+.slot .n { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.slot .w { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 1.25; }
+.slot.s1 .w { color: var(--blue); } .slot.s2 .w { color: var(--red); } .slot.s3 .w { color: var(--green); } .slot.s4 .w, .slot.s5 .w { color: var(--amber); }
+.slot.v { background: var(--ink); border-color: var(--ink); } .slot.v .w, .slot.v .n { color: var(--paper); }
+.block { display: grid; gap: 10px; }
+.ex { font-size: 1.1rem; }
+.tip { background: var(--blue-soft); border-radius: 6px; padding: 12px 14px; }
+.warn { background: var(--amber-soft); border-radius: 6px; padding: 12px 14px; }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.bad { color: var(--red); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+td.good { color: var(--green); font-weight: 600; }
+.p1 { color: var(--blue); font-weight: 600; } .p2 { color: var(--red); font-weight: 600; } .p3 { color: var(--green); font-weight: 600; } .p5 { color: var(--amber); font-weight: 600; }
+
+/* Vocab */
+.vtools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.vlist { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+.vrow { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.vrow:last-child { border-bottom: 0; }
+.vrow .fr { font-weight: 600; }
+.vrow .eg { grid-column: 1 / -1; font-size: .88rem; color: var(--muted); margin-top: -6px; }
+.vrow .en { color: var(--muted); }
+.hide-en .vrow .en { color: transparent; background: var(--line); border-radius: 4px; }
+.hide-en .vrow.show .en { color: var(--muted); background: transparent; }
+.vgroup { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 14px 6px; border-bottom: 1px solid var(--line); background: var(--paper); }
+.vgroup:first-child { border-radius: 6px 6px 0 0; }
+
+/* Buttons */
+.btn { font: 600 .92rem var(--f-body); border-radius: 999px; padding: 9px 16px; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: var(--paper); }
+.btn.ghost { background: transparent; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Exercises */
+.score {
+  display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-items: center; background: var(--card);
+  border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px;
+}
+.score .big { font-family: var(--f-display); font-weight: 800; font-size: 2rem; font-variant-numeric: tabular-nums; line-height: 1; }
+.bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--green); transition: width .4s ease; }
+.score .row { grid-column: 1 / -1; }
+.exsec { display: grid; gap: 12px; }
+.exhead { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+.exhead h2 .L { color: var(--red); font-family: var(--f-pen); font-size: 1.7rem; margin-right: 6px; }
+.instr { color: var(--muted); font-size: .93rem; }
+.badge { font-variant-numeric: tabular-nums; font-weight: 600; font-size: .85rem; padding: 3px 10px; border-radius: 999px; background: var(--line); color: var(--muted); }
+.badge.full { background: var(--green-soft); color: var(--green); }
+.items { display: grid; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+.item { padding: 12px 14px 12px 40px; border-bottom: 1px solid var(--line); position: relative; display: grid; gap: 6px; min-width: 0; }
+.item:last-child { border-bottom: 0; }
+.item .num { position: absolute; left: 14px; top: 13px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.item .src { color: var(--muted); font-size: .92rem; }
+.item .line { font-size: 1.08rem; line-height: 2.1; overflow-wrap: anywhere; }
+input.blank {
+  font: 500 1.02rem var(--f-body); color: var(--blue); background: transparent; border: 0; border-bottom: 2px solid var(--seyes);
+  padding: 0 4px 1px; border-radius: 0; text-align: center; min-width: 3.2em; max-width: 100%;
+}
+input.blank.wide { width: 100%; text-align: left; }
+input.blank:focus { border-bottom-color: var(--blue); outline: none; background: var(--blue-soft); }
+input.ok { border-bottom-color: var(--green); color: var(--green); }
+input.near { border-bottom-color: var(--amber); color: var(--amber); }
+input.bad { border-bottom-color: var(--red); color: var(--red); }
+.mc { display: flex; flex-wrap: wrap; gap: 8px; }
+.mc button { font: 500 1rem var(--f-body); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+.mc button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+.mc button.ok { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+.mc button.bad { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+.fb { font-size: .95rem; display: grid; gap: 2px; }
+.fb .ans { color: var(--red); }
+.fb .ans b { font-weight: 600; }
+.fb .pen { font-family: var(--f-pen); font-size: 1.25rem; line-height: 1.2; color: var(--red); }
+.fb.ok .pen { color: var(--green); }
+.fb.near .pen { color: var(--amber); }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 999px; font-weight: 500; font-size: .9rem; z-index: 20; }
+.copybox { width: 100%; min-height: 120px; font: .85rem/1.4 ui-monospace, monospace; padding: 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+footer { color: var(--muted); font-size: .85rem; padding-top: 28px; }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+textarea.free { width: 100%; font: 1rem/1.5 var(--f-body); color: var(--blue); background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; resize: vertical; }
+textarea.free:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+a.home { color: var(--muted); font-size: .88rem; text-decoration: none; font-weight: 500; }
+a.home:hover, a.home:focus-visible { color: var(--blue); }
+.conj { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px 18px; font-size: 1.05rem; }
+.conj .e { color: var(--red); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="home" href="../">← Tous les topics</a>
+    <div class="eyebrow">Topic 02 · A2–B1 · Grammaire</div>
+    <h1>Si j'étais riche, je voyager<span style="color:var(--red)">ais</span>.</h1>
+    <p class="sub">Le conditionnel présent: <i>would</i> + verb. Read the rule, learn the words, then do the exercises and tap <b>Vérifier</b>.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-regle" aria-selected="false" data-view="regle">Règle</button>
+    <button role="tab" id="tab-vocab" aria-selected="false" data-view="vocab">Vocabulaire</button>
+    <button role="tab" id="tab-exos" aria-selected="false" data-view="exos">Exercices</button>
+  </nav>
+
+  <!-- ============ RÈGLE ============ -->
+  <section class="view" id="regle" hidden>
+    <div class="block">
+      <h2>1. Formation</h2>
+      <p><b>Futur stem + imparfait endings.</b> For regular verbs the stem is the infinitive. Verbs in <b>-re</b> drop the final <i>e</i>: prendr-, vendr-.</p>
+      <div class="order" aria-label="Formula">
+        <div class="slot s1"><div class="n">stem</div><div class="w">parler-</div></div>
+        <div class="slot s2"><div class="n">+ endings</div><div class="w">-ais -ait<br>-ions -iez -aient</div></div>
+        <div class="slot v"><div class="n">=</div><div class="w">je parlerais</div></div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th>parler</th><th>finir</th><th>prendre</th></tr>
+        <tr><td>je</td><td>parler<span class="p2">ais</span></td><td>finir<span class="p2">ais</span></td><td>prendr<span class="p2">ais</span></td></tr>
+        <tr><td>tu</td><td>parler<span class="p2">ais</span></td><td>finir<span class="p2">ais</span></td><td>prendr<span class="p2">ais</span></td></tr>
+        <tr><td>il / elle / on</td><td>parler<span class="p2">ait</span></td><td>finir<span class="p2">ait</span></td><td>prendr<span class="p2">ait</span></td></tr>
+        <tr><td>nous</td><td>parler<span class="p2">ions</span></td><td>finir<span class="p2">ions</span></td><td>prendr<span class="p2">ions</span></td></tr>
+        <tr><td>vous</td><td>parler<span class="p2">iez</span></td><td>finir<span class="p2">iez</span></td><td>prendr<span class="p2">iez</span></td></tr>
+        <tr><td>ils / elles</td><td>parler<span class="p2">aient</span></td><td>finir<span class="p2">aient</span></td><td>prendr<span class="p2">aient</span></td></tr>
+      </table></div>
+      <p class="tip">The endings are exactly the <b>imparfait</b> endings. The <b>r</b> just before them is the sign of the conditionnel.</p>
+    </div>
+
+    <div class="block">
+      <h2>2. Irregular stems</h2>
+      <p>The same stems as the <b>futur</b>. Learn them once, use them twice.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>Infinitif</th><th>Stem</th><th>Exemple</th></tr>
+        <tr><td>être</td><td class="k">ser-</td><td>je serais</td></tr>
+        <tr><td>avoir</td><td class="k">aur-</td><td>j'aurais</td></tr>
+        <tr><td>aller</td><td class="k">ir-</td><td>j'irais</td></tr>
+        <tr><td>faire</td><td class="k">fer-</td><td>je ferais</td></tr>
+        <tr><td>pouvoir</td><td class="k">pourr-</td><td>je pourrais</td></tr>
+        <tr><td>vouloir</td><td class="k">voudr-</td><td>je voudrais</td></tr>
+        <tr><td>devoir</td><td class="k">devr-</td><td>je devrais</td></tr>
+        <tr><td>savoir</td><td class="k">saur-</td><td>je saurais</td></tr>
+        <tr><td>venir</td><td class="k">viendr-</td><td>je viendrais</td></tr>
+        <tr><td>voir</td><td class="k">verr-</td><td>je verrais</td></tr>
+        <tr><td>envoyer</td><td class="k">enverr-</td><td>j'enverrais</td></tr>
+        <tr><td>recevoir</td><td class="k">recevr-</td><td>je recevrais</td></tr>
+        <tr><td>falloir</td><td class="k">faudr-</td><td>il faudrait</td></tr>
+        <tr><td>valoir</td><td class="k">vaudr-</td><td>il vaudrait mieux</td></tr>
+      </table></div>
+      <p class="warn">Spelling changes, as in the futur: acheter → j'<b>achè</b>terais · appeler → j'<b>appell</b>erais · payer → je <b>pai</b>erais.</p>
+    </div>
+
+    <div class="block">
+      <h2>3. When do we use it?</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>Use</th><th>Exemple</th></tr>
+        <tr><td>Politeness</td><td>Je <b class="k">voudrais</b> un café.<br><b class="k">Pourriez</b>-vous m'aider ?</td></tr>
+        <tr><td>Wish</td><td>J'<b class="k">aimerais</b> visiter le Japon.<br>Ce <b class="k">serait</b> génial !</td></tr>
+        <tr><td>Advice</td><td>Tu <b class="k">devrais</b> dormir plus.<br>À ta place, je <b class="k">prendrais</b> le train.<br>Il <b class="k">vaudrait</b> mieux partir.</td></tr>
+        <tr><td>Hypothesis</td><td>Si j'avais le temps, je <b class="k">lirais</b> plus.</td></tr>
+        <tr><td>News (bonus)</td><td>Le ministre <b class="k">serait</b> malade. <span class="sub">(= reportedly)</span></td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>4. The golden rule with « si »</h2>
+      <div class="order" aria-label="Si rule">
+        <div class="slot s3"><div class="n">si +</div><div class="w">imparfait</div></div>
+        <div class="slot v"><div class="n">→</div><div class="w">conditionnel</div></div>
+      </div>
+      <p class="ex">Si j'<span class="p3">avais</span> de l'argent, j'<span class="p2">achèterais</span> une maison.</p>
+      <p class="ex">J'<span class="p2">achèterais</span> une maison si j'<span class="p3">avais</span> de l'argent.</p>
+      <p class="warn"><b>Never</b> the conditionnel right after <i>si</i>: <s>Si j'aurais</s> → Si j'<b>avais</b>.</p>
+      <p class="tip">A real possibility uses <b>si + présent → futur</b>: S'il <b>fait</b> beau demain, nous <b>irons</b> à la plage.</p>
+    </div>
+
+    <div class="block">
+      <h2>5. Futur or conditionnel?</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>Futur (will)</th><th>Conditionnel (would)</th></tr>
+        <tr><td>je parler<span class="p3">ai</span></td><td>je parler<span class="p2">ais</span></td></tr>
+        <tr><td>tu parler<span class="p3">as</span></td><td>tu parler<span class="p2">ais</span></td></tr>
+        <tr><td>il parler<span class="p3">a</span></td><td>il parler<span class="p2">ait</span></td></tr>
+        <tr><td>nous parler<span class="p3">ons</span></td><td>nous parler<span class="p2">ions</span></td></tr>
+        <tr><td>vous parler<span class="p3">ez</span></td><td>vous parler<span class="p2">iez</span></td></tr>
+        <tr><td>ils parler<span class="p3">ont</span></td><td>ils parler<span class="p2">aient</span></td></tr>
+      </table></div>
+      <p class="warn">With <b>je</b>, they sound almost the same (-rai / -rais), so check the spelling. In a café: je voudr<b>ais</b> ✓, not je voudr<b>ai</b> (= I will want).</p>
+    </div>
+
+    <div class="block">
+      <h2>6. Common mistakes</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>✗</th><th>✓</th></tr>
+        <tr><td class="bad">Si j'aurais le temps…</td><td class="good">Si j'avais le temps…</td></tr>
+        <tr><td class="bad">Je voudrai un café, s'il vous plaît.</td><td class="good">Je voudrais un café…</td></tr>
+        <tr><td class="bad">Tu pouvrais m'aider ?</td><td class="good">Tu pourrais m'aider ?</td></tr>
+        <tr><td class="bad">Nous prendrerions le bus.</td><td class="good">Nous prendrions le bus.</td></tr>
+        <tr><td class="bad">Je serai content si tu venais.</td><td class="good">Je serais content si tu venais.</td></tr>
+      </table></div>
+      <div class="row"><button class="btn primary" data-go="vocab">Next: vocabulaire →</button></div>
+    </div>
+  </section>
+
+  <!-- ============ VOCAB ============ -->
+  <section class="view" id="vocab" hidden>
+    <div class="block">
+      <h2>Rêves et projets</h2>
+      <p class="sub">Dreams and plans: the words you need to talk about what you <i>would</i> do. All of them appear in the exercises.</p>
+    </div>
+    <div class="vtools">
+      <label class="row" style="gap:8px; cursor:pointer;"><input type="checkbox" id="hideEn"> Hide English (tap a row to reveal)</label>
+    </div>
+    <div class="vlist" id="vlist"></div>
+    <p class="warn"><b>à ta place</b> = <b>si j'étais toi</b> = if I were you. Both are followed by the conditionnel: À ta place, je <b>partirais</b>.</p>
+    <div class="row"><button class="btn primary" data-go="exos">Next: exercices →</button></div>
+  </section>
+
+  <!-- ============ EXERCICES (built by shared/engine.js) ============ -->
+  <section class="view" id="exos" hidden></section>
+
+  <footer>Accents: on a phone, press and hold a letter (e → é è ê). Missing accents count as "presque".</footer>
+</div>
+
+<script>
+const TOPIC = { num: "02", name: "conditionnel présent" };
+const VOCAB = [
+  { g: "Verbes" },
+  { fr: "rêver de", en: "to dream of", eg: "Je rêve de voir Tokyo." },
+  { fr: "voyager", en: "to travel", eg: "Je voyagerais partout." },
+  { fr: "faire le tour du monde", en: "to travel around the world", eg: "Elle ferait le tour du monde." },
+  { fr: "déménager", en: "to move (house)", eg: "On aimerait déménager." },
+  { fr: "s'installer à / en", en: "to settle in", eg: "Ils se sont installés à Lyon." },
+  { fr: "changer de métier", en: "to change career", eg: "Je changerais de métier." },
+  { fr: "prendre une année sabbatique", en: "to take a year off", eg: "Il prendrait une année sabbatique." },
+  { fr: "gagner au loto", en: "to win the lottery", eg: "Si je gagnais au loto…" },
+  { fr: "économiser", en: "to save (money)", eg: "Il faudrait économiser." },
+  { fr: "se reposer", en: "to rest", eg: "Tu devrais te reposer." },
+  { fr: "profiter de", en: "to enjoy, make the most of", eg: "Profite de tes vacances !" },
+  { fr: "plaire à qqn", en: "to please, appeal to", eg: "Ça me plairait." },
+  { g: "Noms" },
+  { fr: "un rêve", en: "a dream" },
+  { fr: "un projet", en: "a plan, a project" },
+  { fr: "la campagne", en: "the countryside" },
+  { fr: "le bord de la mer", en: "the seaside" },
+  { fr: "un voilier", en: "a sailboat" },
+  { fr: "la retraite", en: "retirement" },
+  { fr: "un conseil", en: "a piece of advice" },
+  { fr: "les moyens (m. pl.)", en: "the means (money)" },
+  { g: "Expressions" },
+  { fr: "avoir envie de", en: "to feel like, to want" },
+  { fr: "volontiers", en: "gladly, I'd love to" },
+  { fr: "à ta place / à votre place", en: "if I were you" },
+  { fr: "si j'étais toi", en: "if I were you" },
+  { fr: "il vaudrait mieux + inf.", en: "it would be better to" },
+  { fr: "ce serait génial", en: "that would be great" },
+  { fr: "je n'en ai pas les moyens", en: "I can't afford it" },
+];
+
+const EX = [
+  { id: "A", title: "Regular verbs", instr: "Infinitive + -ais, -ais, -ait, -ions, -iez, -aient.", type: "blanks", items: [
+    { src: "(aimer)", text: "J'[] partir en vacances.", ans: [["aimerais"]] },
+    { src: "(parler)", text: "Tu [] plus lentement, s'il te plaît ?", ans: [["parlerais"]] },
+    { src: "(choisir)", text: "Elle [] la robe rouge.", ans: [["choisirait"]] },
+    { src: "(prendre)", text: "Nous [] le train de nuit.", ans: [["prendrions"]], why: "-re verbs drop the e: prendr-." },
+    { src: "(finir)", text: "Vous [] avant six heures ?", ans: [["finiriez"]] },
+    { src: "(vendre)", text: "Ils [] leur voiture.", ans: [["vendraient"]] },
+    { src: "(manger)", text: "On [] au restaurant ce soir ?", ans: [["mangerait"]] },
+    { src: "(acheter)", text: "J'[] une maison à la campagne.", ans: [["achèterais"]], why: "acheter → achèter- (accent grave)." },
+  ]},
+  { id: "B", title: "Irregular verbs", instr: "Same stems as the futur.", type: "blanks", items: [
+    { src: "(vouloir)", text: "Je [] un café, s'il vous plaît.", ans: [["voudrais"]] },
+    { src: "(pouvoir)", text: "[]-vous m'aider ?", ans: [["pourriez"]] },
+    { src: "(être)", text: "Ce [] génial !", ans: [["serait"]] },
+    { src: "(avoir)", text: "Nous [] besoin d'une plus grande voiture.", ans: [["aurions"]] },
+    { src: "(devoir)", text: "Tu [] te reposer.", ans: [["devrais"]] },
+    { src: "(aller)", text: "Ils [] à la mer chaque été.", ans: [["iraient"]] },
+    { src: "(faire)", text: "Elle [] le tour du monde.", ans: [["ferait"]] },
+    { src: "(venir)", text: "Vous [] avec nous ?", ans: [["viendriez"]] },
+    { src: "(falloir)", text: "Il [] partir plus tôt.", ans: [["faudrait"]] },
+    { src: "(savoir)", text: "Sans toi, je ne [] pas quoi faire.", ans: [["saurais"]] },
+    { src: "(voir)", text: "On [] la mer depuis le balcon.", ans: [["verrait"]] },
+  ]},
+  { id: "C", title: "Futur or conditionnel?", instr: "Will or would? Tap the correct option.", type: "mc", items: [
+    { src: "A definite plan.", text: "Demain, je ___ mes parents.", opts: ["téléphonerai", "téléphonerais"], c: 0, why: "A real plan → futur." },
+    { src: "An imagined situation.", text: "Si j'avais le temps, j'___ le piano.", opts: ["apprendrai", "apprendrais"], c: 1, why: "si + imparfait → conditionnel." },
+    { src: "At the café.", text: "___ un thé, s'il vous plaît.", opts: ["Je voudrai", "Je voudrais"], c: 1, why: "Politeness → conditionnel." },
+    { src: "About the future.", text: "Quand il sera grand, il ___ pilote.", opts: ["sera", "serait"], c: 0, why: "quand + futur → futur." },
+    { src: "Giving advice.", text: "À ta place, j'___ ce travail.", opts: ["accepterai", "accepterais"], c: 1, why: "À ta place → conditionnel." },
+    { src: "A real possibility.", text: "S'il fait beau samedi, nous ___ à la plage.", opts: ["irons", "irions"], c: 0, why: "si + présent → futur." },
+  ]},
+  { id: "D", title: "Be polite!", instr: "Make each request more polite with the conditionnel.", type: "blanks", items: [
+    { src: "Je veux un croissant.", text: "Je [] un croissant, s'il vous plaît.", ans: [["voudrais"]] },
+    { src: "Tu peux fermer la fenêtre ?", text: "Tu [] fermer la fenêtre ?", ans: [["pourrais"]] },
+    { src: "Vous avez l'heure ?", text: "Vous [] l'heure, s'il vous plaît ?", ans: [["auriez"]] },
+    { src: "Ça vous dérange si j'ouvre la fenêtre ?", text: "Ça vous [] si j'ouvrais la fenêtre ?", ans: [["dérangerait"]] },
+    { src: "Nous voulons réserver une table pour deux.", text: "Nous [] réserver une table pour deux.", ans: [["voudrions", "aimerions"]] },
+  ]},
+  { id: "E", title: "Give advice", instr: "Tu devrais… · À ta place… · Il vaudrait mieux…", type: "blanks", items: [
+    { src: "Je suis fatigué. (devoir)", text: "Tu [] dormir plus.", ans: [["devrais"]] },
+    { src: "J'ai mal aux dents. (aller)", text: "À ta place, j'[] chez le dentiste.", ans: [["irais"]] },
+    { src: "Mon français n'est pas bon. (pouvoir)", text: "Tu [] regarder des films en français.", ans: [["pourrais"]] },
+    { src: "Il pleut. (valoir)", text: "Il [] mieux prendre un parapluie.", ans: [["vaudrait"]] },
+    { src: "Je ne sais pas quoi offrir à ma mère. (offrir)", text: "À ta place, je lui [] des fleurs.", ans: [["offrirais"]], why: "lui = à ta mère (remember topic 01!)." },
+  ]},
+  { id: "F", title: "Si + imparfait → conditionnel", instr: "First blank: imparfait. Second blank: conditionnel.", type: "blanks", items: [
+    { src: "(avoir · voyager)", text: "Si j'[] de l'argent, je [] partout.", ans: [["avais"], ["voyagerais"]] },
+    { src: "(être · venir)", text: "Si tu [] libre ce soir, tu [] avec nous ?", ans: [["étais"], ["viendrais"]] },
+    { src: "(habiter · aller)", text: "Si nous [] à Paris, nous [] au musée tous les week-ends.", ans: [["habitions"], ["irions"]] },
+    { src: "(faire · pouvoir)", text: "S'il [] beau, on [] manger dehors.", ans: [["faisait"], ["pourrait"]] },
+    { src: "(gagner · faire)", text: "Si vous [] au loto, qu'est-ce que vous [] ?", ans: [["gagniez"], ["feriez"]] },
+    { src: "(parler · trouver)", text: "Si elles [] français, elles [] du travail plus facilement.", ans: [["parlaient"], ["trouveraient"]] },
+  ]},
+  { id: "G", title: "Find the mistake", instr: "Rewrite the whole sentence correctly.", type: "sentence", items: [
+    { src: "Si j'aurais le temps, je lirais plus.", lead: "", ans: ["Si j'avais le temps, je lirais plus."], why: "Never the conditionnel after si." },
+    { src: "Je voudrai un verre d'eau, s'il vous plaît.", lead: "", ans: ["Je voudrais un verre d'eau, s'il vous plaît."], why: "voudrai = futur. Politeness → voudrais." },
+    { src: "Tu pouvrais m'aider ?", lead: "", ans: ["Tu pourrais m'aider ?"], why: "pouvoir → pourr-." },
+    { src: "Nous prendrerions le bus.", lead: "", ans: ["Nous prendrions le bus."], why: "prendre → prendr- (no extra e)." },
+    { src: "S'il serait là, il nous aiderait.", lead: "", ans: ["S'il était là, il nous aiderait."], why: "si + imparfait: était." },
+  ]},
+  { id: "V", title: "Vocabulaire", instr: "Rêves et projets.", type: "blanks", items: [
+    { src: "dream", text: "Mon plus grand [], c'est de faire le tour du monde.", ans: [["rêve"]] },
+    { src: "a year off", text: "Je suis fatigué de mon travail. J'aimerais prendre une année [].", ans: [["sabbatique"]] },
+    { src: "to move house", text: "La ville, c'est trop bruyant : on voudrait [] à la campagne.", ans: [["déménager", "vivre", "habiter"]] },
+    { src: "gladly", text: "Tu viens prendre un café ? — Oui, [] !", ans: [["volontiers"]] },
+    { src: "would please me", text: "Une maison au bord de la mer ? Ça me [] beaucoup !", ans: [["plairait"]] },
+    { src: "can't afford it", text: "Un voilier ? C'est trop cher, je n'en ai pas les [].", ans: [["moyens"]] },
+    { src: "to save money", text: "Pour acheter une maison, il faudrait [] de l'argent chaque mois.", ans: [["économiser"]] },
+  ]},
+  { id: "W", title: "À toi !", instr: "Free writing, 2–3 simple sentences each. Not checked here: tap \"Copier pour Claude\" and paste it to Claude for a correction.", type: "free", items: [
+    { src: "Si tu gagnais au loto, qu'est-ce que tu ferais ?" },
+    { src: "Où est-ce que tu aimerais habiter ? Pourquoi ?" },
+    { src: "Ton ami veut apprendre le français. Donne-lui deux conseils (Tu devrais…, À ta place…)." },
+  ]},
+];
+</script>
+<script>
+/* Shared exercise engine for every topic page.
+   The topic page defines, before loading this file:
+     TOPIC = { num: "02", name: "Conditionnel présent" }
+     VOCAB = [ { g: "Group" } | { fr, en, eg? } ]
+     EX    = [ { id, title, instr, type: "mc"|"blanks"|"sentence"|"free", items: [...] } ]
+   Item shapes:
+     mc:       { src, text: "… ___ …", opts: [..], c: indexOfCorrect, why? }
+     blanks:   { src, text: "… [] … [] …", ans: [[accepted…], [accepted…]], why? }
+     sentence: { src, lead: "Oui," | "", ans: [accepted full answers…], why? }
+     free:     { src }  (not graded: included in "Copier" so Claude can correct it)
+*/
+(function () {
+  const KEY = "fr" + TOPIC.num + "-v1";
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { store = {}; }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+
+  const norm = s => (s || "").toLowerCase().replace(/[’`´]/g, "'").replace(/\s+/g, " ").replace(/\s*'\s*/g, "'").trim();
+  const sentNorm = s => norm(s).replace(/[.!?,;…]+/g, " ").replace(/^(oui|non)\s+/, "").replace(/\s+/g, " ").trim();
+  const strip = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const $ = s => document.querySelector(s);
+  const graded = EX.filter(s => s.type !== "free");
+  const TOTAL = graded.reduce((n, s) => n + s.items.length, 0);
+  const INPUT_ATTRS = 'autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"';
+
+  function grade(val, accepted, f) {
+    const v = f(val);
+    if (!v) return "empty";
+    if (accepted.some(a => f(a) === v)) return "ok";
+    if (accepted.some(a => strip(f(a)) === strip(v))) return "near";
+    return "bad";
+  }
+
+  /* ---------- Exercise shell ---------- */
+  $("#exos").innerHTML = `
+    <div class="score">
+      <div class="big" id="scoreBig">0/${TOTAL}</div>
+      <div style="display:grid; gap:6px; min-width:0;">
+        <div class="bar"><i id="scoreBar"></i></div>
+        <div class="instr" id="scoreTxt"></div>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="checkAll">Tout vérifier</button>
+        <button class="btn" id="copyErr">Copier pour Claude</button>
+        <button class="btn ghost" id="resetAll">Effacer tout</button>
+      </div>
+    </div>
+    <div id="resetConfirm" class="warn" hidden>
+      <div class="row" style="justify-content:space-between;"><span>Erase all your answers?</span>
+      <span class="row"><button class="btn" id="resetYes">Oui, effacer</button><button class="btn ghost" id="resetNo">Annuler</button></span></div>
+    </div>
+    <textarea id="copyBox" class="copybox" readonly hidden></textarea>
+    <div id="exList" style="display:grid; gap:28px;"></div>`;
+  document.body.insertAdjacentHTML("beforeend", '<div class="toast" id="toast" hidden></div>');
+
+  /* ---------- Tabs ---------- */
+  function show(view) {
+    if (!["regle", "vocab", "exos"].includes(view)) view = "regle";
+    document.querySelectorAll("section.view").forEach(s => s.hidden = s.id !== view);
+    document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.view === view));
+    try { localStorage.setItem(KEY + "-tab", view); } catch (e) {}
+  }
+  document.querySelectorAll("[data-view]").forEach(b => b.onclick = () => show(b.dataset.view));
+  document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { show(b.dataset.go); window.scrollTo(0, 0); });
+
+  /* ---------- Vocab ---------- */
+  const vlist = $("#vlist");
+  vlist.innerHTML = VOCAB.map(v => v.g ? `<div class="vgroup">${esc(v.g)}</div>` :
+    `<div class="vrow"><div class="fr">${esc(v.fr)}</div><div class="en">${esc(v.en)}</div>${v.eg ? `<div class="eg">${esc(v.eg)}</div>` : ""}</div>`).join("");
+  vlist.addEventListener("click", e => { const r = e.target.closest(".vrow"); if (r) r.classList.toggle("show"); });
+  $("#hideEn").onchange = e => { vlist.classList.toggle("hide-en", e.target.checked); vlist.querySelectorAll(".vrow").forEach(r => r.classList.remove("show")); };
+
+  /* ---------- Render exercises ---------- */
+  const fillTemplate = (text, answers) => { let i = 0; return esc(text).replace(/\[\]/g, () => `<b>${esc(answers[i++] || "")}</b>`); };
+  const withStop = s => /[.!?…]$/.test(s.trim()) ? s : s + ".";
+
+  function itemBody(sec, it, id) {
+    if (sec.type === "mc") {
+      return `<div class="line">${esc(it.text)}</div><div class="mc" data-id="${id}">${it.opts.map((o, k) =>
+        `<button type="button" data-k="${k}" aria-pressed="${store[id] === k}">${String.fromCharCode(97 + k)}) ${esc(o)}</button>`).join("")}</div>`;
+    }
+    if (sec.type === "blanks") {
+      let n = 0;
+      const line = esc(it.text).replace(/\[\]/g, () => {
+        const bid = `${id}-${n}`, w = Math.max(3, it.ans[n][0].length + 1.5); n++;
+        return `<input class="blank" id="in-${bid}" data-b="${bid}" style="width:${w}ch" ${INPUT_ATTRS} value="${esc(store[bid] || "")}">`;
+      });
+      return `<div class="line">${line}</div>`;
+    }
+    if (sec.type === "sentence") {
+      return `<div class="line">${it.lead ? esc(it.lead) + " " : ""}<input class="blank wide" id="in-${id}-0" data-b="${id}-0" ${INPUT_ATTRS} value="${esc(store[id + "-0"] || "")}"></div>`;
+    }
+    return `<textarea class="free" id="in-${id}-0" data-b="${id}-0" rows="3" spellcheck="false" placeholder="Écris ici…">${esc(store[id + "-0"] || "")}</textarea>`;
+  }
+
+  function render() {
+    $("#exList").innerHTML = EX.map(sec => {
+      const items = sec.items.map((it, i) => {
+        const id = `${sec.id}${i + 1}`;
+        return `<div class="item" id="it-${id}"><span class="num">${i + 1}</span><div class="src">${it.src}</div>${itemBody(sec, it, id)}<div class="fb" hidden></div></div>`;
+      }).join("");
+      const badge = sec.type === "free" ? "for Claude" : `${sec.items.length} items`;
+      const btn = sec.type === "free" ? "" : `<div class="row"><button class="btn primary" data-check="${sec.id}">Vérifier ${sec.id}</button></div>`;
+      return `<div class="exsec" id="sec-${sec.id}">
+        <div class="exhead"><h2><span class="L">${sec.id}</span>${esc(sec.title)}</h2><span class="badge" id="badge-${sec.id}">${badge}</span></div>
+        <p class="instr">${esc(sec.instr)}</p>
+        <div class="items">${items}</div>${btn}
+      </div>`;
+    }).join("");
+  }
+  render();
+
+  const list = $("#exList");
+  list.addEventListener("input", e => {
+    const b = e.target.dataset.b; if (!b) return;
+    store[b] = e.target.value; e.target.classList.remove("ok", "bad", "near"); save();
+  });
+  list.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || !e.target.matches("input.blank")) return;
+    e.preventDefault();
+    const all = [...document.querySelectorAll("input.blank")], nx = all[all.indexOf(e.target) + 1];
+    if (nx) nx.focus(); else e.target.blur();
+  });
+  list.addEventListener("click", e => {
+    const opt = e.target.closest(".mc button");
+    if (opt) {
+      const box = opt.parentElement;
+      store[box.dataset.id] = +opt.dataset.k; save();
+      box.querySelectorAll("button").forEach(b => { b.setAttribute("aria-pressed", b === opt); b.classList.remove("ok", "bad"); });
+      return;
+    }
+    const c = e.target.closest("[data-check]");
+    if (c) { checkSection(c.dataset.check); updateScore(); }
+  });
+
+  /* ---------- Checking ---------- */
+  const results = {};
+  function checkSection(sid) {
+    const sec = EX.find(s => s.id === sid);
+    if (sec.type === "free") return;
+    let ok = 0;
+    sec.items.forEach((it, i) => {
+      const id = `${sid}${i + 1}`, el = $(`#it-${id}`), fb = el.querySelector(".fb");
+      let state, mine, correct;
+      if (sec.type === "mc") {
+        const pick = store[id];
+        state = pick == null ? "empty" : pick === it.c ? "ok" : "bad";
+        mine = pick == null ? "" : it.opts[pick];
+        correct = esc(it.text).replace("___", `<b>${esc(it.opts[it.c])}</b>`);
+        el.querySelectorAll(".mc button").forEach(b => {
+          b.classList.remove("ok", "bad");
+          if (+b.dataset.k === it.c && state !== "empty") b.classList.add("ok");
+          else if (+b.dataset.k === pick) b.classList.add("bad");
+        });
+      } else if (sec.type === "blanks") {
+        const states = it.ans.map((acc, n) => {
+          const inp = $(`#in-${id}-${n}`), st = grade(inp.value, acc, norm);
+          inp.classList.remove("ok", "bad", "near"); inp.classList.add(st === "empty" ? "bad" : st);
+          return st;
+        });
+        state = states.every(s => s === "ok") ? "ok"
+          : states.every(s => s === "empty") ? "empty"
+          : states.every(s => s === "ok" || s === "near") ? "near" : "bad";
+        mine = it.ans.map((_, n) => $(`#in-${id}-${n}`).value.trim() || "…").join(" / ");
+        correct = fillTemplate(it.text, it.ans.map(a => a[0]));
+      } else {
+        const inp = $(`#in-${id}-0`);
+        state = grade(inp.value, it.ans, sentNorm);
+        inp.classList.remove("ok", "bad", "near"); inp.classList.add(state === "empty" ? "bad" : state);
+        mine = inp.value.trim();
+        correct = `${it.lead ? esc(it.lead) + " " : ""}<b>${esc(withStop(it.ans[0]))}</b>`;
+      }
+      if (state === "ok") ok++;
+      results[id] = { state, mine, correct: correct.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"') };
+      const why = it.why ? esc(it.why) : "";
+      fb.hidden = false;
+      fb.className = "fb " + (state === "ok" ? "ok" : state === "near" ? "near" : "bad");
+      fb.innerHTML =
+        state === "ok" ? `<span class="pen">Très bien !</span>` :
+        state === "near" ? `<span class="pen">Presque ! Check the accents.</span><span class="ans">${correct}</span>` :
+        state === "empty" ? `<span class="pen">Pas de réponse.</span><span class="ans">${correct}</span>${why ? `<span class="instr">${why}</span>` : ""}` :
+        `<span class="ans">${correct}</span>${why ? `<span class="pen">${why}</span>` : ""}`;
+    });
+    const badge = $(`#badge-${sid}`);
+    badge.textContent = `${ok}/${sec.items.length}`;
+    badge.classList.toggle("full", ok === sec.items.length);
+  }
+
+  function updateScore() {
+    const checked = Object.values(results), ok = checked.filter(r => r.state === "ok").length;
+    $("#scoreBig").textContent = `${ok}/${TOTAL}`;
+    $("#scoreBar").style.width = (100 * ok / TOTAL) + "%";
+    $("#scoreTxt").textContent = checked.length === 0 ? `Tap "Vérifier" under each exercise, or check everything at once.`
+      : ok === TOTAL ? "Parfait ! Everything is correct."
+      : `${checked.length} of ${TOTAL} checked · ${checked.length - ok} to review.`;
+  }
+  updateScore();
+
+  function toast(msg) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2200); }
+
+  const checkAll = () => { graded.forEach(s => checkSection(s.id)); updateScore(); };
+  $("#checkAll").onclick = () => { checkAll(); toast("Tout est vérifié"); };
+
+  $("#copyErr").onclick = () => {
+    checkAll();
+    const errs = Object.entries(results).filter(([, r]) => r.state !== "ok")
+      .map(([id, r]) => `${id}: I wrote "${r.mine || "—"}" · correct: ${r.correct}`);
+    const free = EX.filter(s => s.type === "free").flatMap(s => s.items.map((it, i) => {
+      const v = (store[`${s.id}${i + 1}-0`] || "").trim();
+      return v ? `${s.id}${i + 1} (${it.src.replace(/<[^>]+>/g, "")}): ${v}` : "";
+    })).filter(Boolean);
+    let text = `Topic ${TOPIC.num} (${TOPIC.name}): ${TOTAL - errs.length}/${TOTAL}.`;
+    text += errs.length ? `\nMy mistakes:\n${errs.join("\n")}` : " No mistakes.";
+    if (free.length) text += `\n\nPlease correct my free writing:\n${free.join("\n")}`;
+    const box = $("#copyBox"); box.value = text;
+    const fallback = () => { box.hidden = false; box.focus(); box.select(); toast("Select the text below and copy it"); };
+    try {
+      navigator.clipboard.writeText(text).then(() => { box.hidden = true; toast("Copied. Paste it to Claude."); }, fallback);
+    } catch (e) { fallback(); }
+  };
+
+  $("#resetAll").onclick = () => { $("#resetConfirm").hidden = false; };
+  $("#resetNo").onclick = () => { $("#resetConfirm").hidden = true; };
+  $("#resetYes").onclick = () => {
+    store = {}; save(); for (const k in results) delete results[k];
+    render(); updateScore();
+    EX.forEach(s => { if (s.type !== "free") { const b = $(`#badge-${s.id}`); b.textContent = `${s.items.length} items`; b.classList.remove("full"); } });
+    $("#resetConfirm").hidden = true; $("#copyBox").hidden = true; toast("Answers erased");
+  };
+
+  let startTab = "regle"; try { startTab = localStorage.getItem(KEY + "-tab") || "regle"; } catch (e) {}
+  show(startTab);
+})();
+</script>
+
+</body>
+</html>

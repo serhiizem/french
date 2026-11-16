@@ -64,6 +64,15 @@ def first(pattern, text, default="", flags=re.S):
     return m.group(1).strip() if m else default
 
 
+def inline_shared(src):
+    """Replace links to shared/ files with their contents, so each page is one self-contained file."""
+    css = (ROOT / "shared" / "style.css").read_text(encoding="utf-8")
+    js = (ROOT / "shared" / "engine.js").read_text(encoding="utf-8")
+    src = src.replace('<link rel="stylesheet" href="../shared/style.css">', f"<style>\n{css}</style>")
+    src = src.replace('<script src="../shared/engine.js"></script>', f"<script>\n{js}</script>")
+    return src
+
+
 def main():
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -75,7 +84,7 @@ def main():
         page = topic / "index.html"
         if not page.exists():
             continue
-        src = page.read_text(encoding="utf-8")
+        src = inline_shared(page.read_text(encoding="utf-8"))
         dest = OUT / topic.name
         dest.mkdir()
         (dest / "index.html").write_text(HEAD.format(body=src), encoding="utf-8")
