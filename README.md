@@ -34,3 +34,8 @@ Each topic has its own folder:
 - Le futur simple and the conditionnel
 - Le subjonctif présent (after *il faut que*, *je veux que*)
 - Discours indirect (*Il dit que…, Il m'a demandé si…*)
+
+## Publishing (public link)
+
+`./publish.sh` builds the pages into `docs/` and pushes them to GitHub. GitHub Pages serves them at
+`https://<github-user>.github.io/<repo>/`, with one page per topic.
