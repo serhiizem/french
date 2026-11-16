@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px/1.4 system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<title>Le quartier où j'habite</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: one narrow column like a French school notebook (Seyès lines, red margin); sticky tabs; red-pen corrections. */
+:root {
+  --paper: #f7f8fc;
+  --card: #ffffff;
+  --ink: #1b2140;
+  --muted: #5b6386;
+  --line: #e0e5f2;
+  --seyes: #d6def5;
+  --blue: #2846b4;
+  --blue-soft: #e8edfc;
+  --red: #c8303a;
+  --red-soft: #fdecee;
+  --green: #1d7f47;
+  --green-soft: #e5f5ec;
+  --amber: #a46a0e;
+  --amber-soft: #fbf1df;
+  --f-display: "Bricolage Grotesque", "Space Grotesk", system-ui, sans-serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-pen: "Caveat", "Comic Sans MS", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+    --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+    --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+  --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+  --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.wrap { max-width: 720px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 7vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.35rem; font-weight: 800; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+b, strong { font-weight: 600; }
+.k { color: var(--blue); font-weight: 600; }
+
+/* Header: Seyès ruling + red margin */
+header.top {
+  margin-top: 16px; padding: 22px 18px 20px 30px; border-radius: 6px; position: relative;
+  background-color: var(--card);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 23px, var(--seyes) 23px 24px);
+  border: 1px solid var(--line);
+  display: grid; gap: 8px;
+}
+header.top::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: var(--red); opacity: .7; }
+.eyebrow { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.sub { color: var(--muted); }
+
+/* Tabs */
+nav.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper);
+  display: flex; gap: 6px; padding-block: 12px; margin-top: 8px; border-bottom: 1px solid var(--line);
+}
+nav.tabs button {
+  flex: 1; font: 600 .95rem var(--f-body); color: var(--muted); background: transparent; border: 1px solid transparent;
+  padding: 9px 6px; border-radius: 999px; cursor: pointer;
+}
+nav.tabs button[aria-selected="true"] { color: var(--blue); background: var(--blue-soft); border-color: var(--blue-soft); }
+nav.tabs button:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+section.view { display: grid; gap: 22px; padding-top: 22px; }
+
+/* Lesson */
+.order { display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; }
+.slot { flex: 1 1 90px; min-width: 0; border-radius: 6px; padding: 8px 8px 9px; text-align: center; border: 1px solid var(--line); background: var(--card); }
+.slot .n { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.slot .w { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 1.25; }
+.slot.s1 .w { color: var(--blue); } .slot.s2 .w { color: var(--red); } .slot.s3 .w { color: var(--green); } .slot.s4 .w, .slot.s5 .w { color: var(--amber); }
+.slot.v { background: var(--ink); border-color: var(--ink); } .slot.v .w, .slot.v .n { color: var(--paper); }
+.block { display: grid; gap: 10px; }
+.ex { font-size: 1.1rem; }
+.tip { background: var(--blue-soft); border-radius: 6px; padding: 12px 14px; }
+.warn { background: var(--amber-soft); border-radius: 6px; padding: 12px 14px; }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.bad { color: var(--red); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+td.good { color: var(--green); font-weight: 600; }
+.p1 { color: var(--blue); font-weight: 600; } .p2 { color: var(--red); font-weight: 600; } .p3 { color: var(--green); font-weight: 600; } .p5 { color: var(--amber); font-weight: 600; }
+
+/* Vocab */
+.vtools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.vlist { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+.vrow { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.vrow:last-child { border-bottom: 0; }
+.vrow .fr { font-weight: 600; }
+.vrow .eg { grid-column: 1 / -1; font-size: .88rem; color: var(--muted); margin-top: -6px; }
+.vrow .en { color: var(--muted); }
+.hide-en .vrow .en { color: transparent; background: var(--line); border-radius: 4px; }
+.hide-en .vrow.show .en { color: var(--muted); background: transparent; }
+.vgroup { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 14px 6px; border-bottom: 1px solid var(--line); background: var(--paper); }
+.vgroup:first-child { border-radius: 6px 6px 0 0; }
+
+/* Buttons */
+.btn { font: 600 .92rem var(--f-body); border-radius: 999px; padding: 9px 16px; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: var(--paper); }
+.btn.ghost { background: transparent; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Exercises */
+.score {
+  display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-items: center; background: var(--card);
+  border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px;
+}
+.score .big { font-family: var(--f-display); font-weight: 800; font-size: 2rem; font-variant-numeric: tabular-nums; line-height: 1; }
+.bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--green); transition: width .4s ease; }
+.score .row { grid-column: 1 / -1; }
+.exsec { display: grid; gap: 12px; }
+.exhead { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+.exhead h2 .L { color: var(--red); font-family: var(--f-pen); font-size: 1.7rem; margin-right: 6px; }
+.instr { color: var(--muted); font-size: .93rem; }
+.badge { font-variant-numeric: tabular-nums; font-weight: 600; font-size: .85rem; padding: 3px 10px; border-radius: 999px; background: var(--line); color: var(--muted); }
+.badge.full { background: var(--green-soft); color: var(--green); }
+.items { display: grid; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+.item { padding: 12px 14px 12px 40px; border-bottom: 1px solid var(--line); position: relative; display: grid; gap: 6px; min-width: 0; }
+.item:last-child { border-bottom: 0; }
+.item .num { position: absolute; left: 14px; top: 13px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.item .src { color: var(--muted); font-size: .92rem; }
+.item .line { font-size: 1.08rem; line-height: 2.1; overflow-wrap: anywhere; }
+input.blank {
+  font: 500 1.02rem var(--f-body); color: var(--blue); background: transparent; border: 0; border-bottom: 2px solid var(--seyes);
+  padding: 0 4px 1px; border-radius: 0; text-align: center; min-width: 3.2em; max-width: 100%;
+}
+input.blank.wide { width: 100%; text-align: left; }
+input.blank:focus { border-bottom-color: var(--blue); outline: none; background: var(--blue-soft); }
+input.ok { border-bottom-color: var(--green); color: var(--green); }
+input.near { border-bottom-color: var(--amber); color: var(--amber); }
+input.bad { border-bottom-color: var(--red); color: var(--red); }
+.mc { display: flex; flex-wrap: wrap; gap: 8px; }
+.mc button { font: 500 1rem var(--f-body); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+.mc button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+.mc button.ok { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+.mc button.bad { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+.fb { font-size: .95rem; display: grid; gap: 2px; }
+.fb .ans { color: var(--red); }
+.fb .ans b { font-weight: 600; }
+.fb .pen { font-family: var(--f-pen); font-size: 1.25rem; line-height: 1.2; color: var(--red); }
+.fb.ok .pen { color: var(--green); }
+.fb.near .pen { color: var(--amber); }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 999px; font-weight: 500; font-size: .9rem; z-index: 20; }
+.copybox { width: 100%; min-height: 120px; font: .85rem/1.4 ui-monospace, monospace; padding: 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+footer { color: var(--muted); font-size: .85rem; padding-top: 28px; }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+textarea.free { width: 100%; font: 1rem/1.5 var(--f-body); color: var(--blue); background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; resize: vertical; }
+textarea.free:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+a.home { color: var(--muted); font-size: .88rem; text-decoration: none; font-weight: 500; }
+a.home:hover, a.home:focus-visible { color: var(--blue); }
+.conj { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px 18px; font-size: 1.05rem; }
+.conj .e { color: var(--red); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="home" href="../">← Tous les topics</a>
+    <div class="eyebrow">Topic 06 · A2–B1 · Grammaire</div>
+    <h1>Le quartier <span style="color:var(--green)">où</span> j'habite, <span style="color:var(--red)">que</span> j'adore.</h1>
+    <p class="sub">Les pronoms relatifs <b>qui, que, où, dont</b> join two sentences and avoid repeating a noun.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-regle" aria-selected="false" data-view="regle">Règle</button>
+    <button role="tab" id="tab-vocab" aria-selected="false" data-view="vocab">Vocabulaire</button>
+    <button role="tab" id="tab-exos" aria-selected="false" data-view="exos">Exercices</button>
+  </nav>
+
+  <!-- ============ RÈGLE ============ -->
+  <section class="view" id="regle" hidden>
+    <div class="block">
+      <h2>1. The four pronouns</h2>
+      <div class="order" aria-label="Relative pronouns">
+        <div class="slot s1"><div class="n">subject</div><div class="w">qui</div></div>
+        <div class="slot s2"><div class="n">COD</div><div class="w">que</div></div>
+        <div class="slot s3"><div class="n">place · time</div><div class="w">où</div></div>
+        <div class="slot s4"><div class="n">de + …</div><div class="w">dont</div></div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th>Pronoun</th><th>Followed by</th><th>Exemple</th></tr>
+        <tr><td><b class="p1">qui</b></td><td>a <b>verb</b></td><td>J'ai un voisin <b class="p1">qui</b> joue du piano.</td></tr>
+        <tr><td><b class="p2">que / qu'</b></td><td>a <b>subject + verb</b></td><td>C'est le film <b class="p2">que</b> je préfère.</td></tr>
+        <tr><td><b class="p3">où</b></td><td>place or time</td><td>La ville <b class="p3">où</b> j'habite.<br>Le jour <b class="p3">où</b> je suis né.</td></tr>
+        <tr><td><b class="p5">dont</b></td><td>a verb with <b>de</b></td><td>Le livre <b class="p5">dont</b> je t'ai parlé.<br><span class="sub">(parler de)</span></td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>2. How to choose</h2>
+      <p>Look at what comes <b>right after</b> the gap, and at the verb:</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>If…</th><th>→</th><th>Exemple</th></tr>
+        <tr><td>a <b>verb</b> comes next</td><td><b class="p1">qui</b></td><td>le bus <b>qui va</b> au centre</td></tr>
+        <tr><td>a subject + verb, and the verb takes a direct object</td><td><b class="p2">que</b></td><td>le film <b>que je regarde</b> <span class="sub">(regarder qqch)</span></td></tr>
+        <tr><td>it's a place or a time</td><td><b class="p3">où</b></td><td>la rue <b>où</b> j'habite · l'année <b>où</b>…</td></tr>
+        <tr><td>the verb or adjective takes <b>de</b></td><td><b class="p5">dont</b></td><td>parler <b>de</b> → le film <b>dont</b> je parle</td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>3. Details</h2>
+      <p class="warn"><b>qui</b> never elides: l'homme <b>qui</b> habite ici (✗ qu'habite). <b>que</b> does: le gâteau <b>qu'</b>il a fait.</p>
+      <p class="tip"><b>où for time:</b> French says le jour <b>où</b>, not <s>le jour quand</s>.</p>
+      <p><b>Agreement with que</b> (passé composé): <i>que</i> is a COD placed before <i>avoir</i>, so the participle agrees.</p>
+      <p class="ex">La robe <b class="p2">que</b> j'ai acheté<b class="p2">e</b>. · Les amis <b class="p2">qu'</b>il a invité<b class="p2">s</b>.</p>
+      <p><b>dont</b> can also mean <i>whose</i>:</p>
+      <p class="ex">J'ai une amie <b class="p5">dont</b> le frère est acteur. <span class="sub">(le frère de mon amie)</span></p>
+      <p class="sub">Verbs with <b>de</b> → dont: parler de, avoir besoin de, avoir peur de, se souvenir de, rêver de, s'occuper de, se servir de, être fier de.</p>
+    </div>
+
+    <div class="block">
+      <h2>4. Bonus: ce qui / ce que (= what)</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th>Exemple</th></tr>
+        <tr><td><b class="p1">ce qui</b> + verb</td><td><b>Ce qui</b> me plaît, c'est le calme.<br>Je ne comprends pas <b>ce qui</b> se passe.</td></tr>
+        <tr><td><b class="p2">ce que</b> + subject + verb</td><td><b>Ce que</b> je veux, c'est un café.<br>Dis-moi <b>ce que</b> tu penses.</td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>5. Common mistakes</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>✗</th><th>✓</th></tr>
+        <tr><td class="bad">Le livre qui je lis…</td><td class="good">Le livre que je lis…</td></tr>
+        <tr><td class="bad">C'est la ville que j'habite.</td><td class="good">C'est la ville où j'habite.</td></tr>
+        <tr><td class="bad">Le film que je t'ai parlé…</td><td class="good">Le film dont je t'ai parlé…</td></tr>
+        <tr><td class="bad">L'homme qu'habite ici…</td><td class="good">L'homme qui habite ici…</td></tr>
+        <tr><td class="bad">Le jour quand je suis né…</td><td class="good">Le jour où je suis né…</td></tr>
+        <tr><td class="bad">Je ne sais pas qu'est-ce que tu veux.</td><td class="good">Je ne sais pas ce que tu veux.</td></tr>
+      </table></div>
+      <div class="row"><button class="btn primary" data-go="vocab">Next: vocabulaire →</button></div>
+    </div>
+  </section>
+
+  <!-- ============ VOCAB ============ -->
+  <section class="view" id="vocab" hidden>
+    <div class="block">
+      <h2>Mon quartier et mon logement</h2>
+      <p class="sub">Your neighbourhood and home: <i>le quartier <b>où</b> j'habite</i>, <i>l'appartement <b>que</b> je loue</i>. The last group lists verbs with <i>de</i>, which go with <b>dont</b>.</p>
+    </div>
+    <div class="vtools">
+      <label class="row" style="gap:8px; cursor:pointer;"><input type="checkbox" id="hideEn"> Hide English (tap a row to reveal)</label>
+    </div>
+    <div class="vlist" id="vlist"></div>
+    <p class="warn">Floors: the ground floor is <b>le rez-de-chaussée</b>, so <i>le premier étage</i> is one floor up (UK first floor, US second floor).</p>
+    <div class="row"><button class="btn primary" data-go="exos">Next: exercices →</button></div>
+  </section>
+
+  <!-- ============ EXERCICES (built by shared/engine.js) ============ -->
+  <section class="view" id="exos" hidden></section>
+
+  <footer>Accents: on a phone, press and hold a letter (e → é è ê). Missing accents count as "presque".</footer>
+</div>
+
+<script>
+const TOPIC = { num: "06", name: "pronoms relatifs" };
+const VOCAB = [
+  { g: "Le logement" },
+  { fr: "un immeuble", en: "a block of flats" },
+  { fr: "un étage", en: "a floor", eg: "J'habite au 3e étage." },
+  { fr: "un ascenseur", en: "a lift, elevator" },
+  { fr: "louer", en: "to rent", eg: "L'appartement que je loue." },
+  { fr: "le loyer", en: "the rent", eg: "Le loyer est trop cher." },
+  { fr: "le / la propriétaire", en: "the landlord / owner" },
+  { fr: "le / la locataire", en: "the tenant" },
+  { fr: "un(e) colocataire", en: "a flatmate" },
+  { g: "Le quartier" },
+  { fr: "le quartier", en: "the neighbourhood" },
+  { fr: "le centre-ville", en: "the town centre" },
+  { fr: "la banlieue", en: "the suburbs" },
+  { fr: "une rue piétonne", en: "a pedestrian street" },
+  { fr: "une place", en: "a square" },
+  { fr: "la mairie", en: "the town hall" },
+  { fr: "animé(e)", en: "lively" },
+  { fr: "calme", en: "quiet" },
+  { g: "Verbs with de (→ dont)" },
+  { fr: "parler de", en: "to talk about", eg: "Le film dont je parle." },
+  { fr: "avoir besoin de", en: "to need", eg: "Ce dont j'ai besoin." },
+  { fr: "avoir peur de", en: "to be afraid of", eg: "Le chien dont j'ai peur." },
+  { fr: "se souvenir de", en: "to remember", eg: "Un jour dont je me souviens." },
+  { fr: "rêver de", en: "to dream of", eg: "La ville dont je rêve." },
+  { fr: "s'occuper de", en: "to take care of", eg: "Les enfants dont elle s'occupe." },
+  { fr: "se servir de", en: "to use", eg: "L'outil dont je me sers." },
+  { fr: "être fier / fière de", en: "to be proud of", eg: "Un projet dont je suis fier." },
+];
+
+const EX = [
+  { id: "A", title: "Qui or que (qu') ?", instr: "Verb next → qui. Subject + verb next → que.", type: "blanks", items: [
+    { src: "", text: "J'ai un voisin [] joue du piano.", ans: [["qui"]] },
+    { src: "", text: "C'est le film [] je préfère.", ans: [["que"]] },
+    { src: "", text: "La femme [] habite en face est médecin.", ans: [["qui"]] },
+    { src: "", text: "Le gâteau [] tu as fait est délicieux.", ans: [["que"]] },
+    { src: "Watch the vowel.", text: "Voici l'appartement []on va louer.", ans: [["qu'"]], why: "que → qu' before a vowel." },
+    { src: "", text: "Le bus [] va au centre-ville passe toutes les dix minutes.", ans: [["qui"]] },
+    { src: "Watch the vowel.", text: "Les amis []il a invités sont sympas.", ans: [["qu'"]], why: "que → qu' before a vowel; invités agrees with les amis." },
+    { src: "", text: "C'est une ville [] attire beaucoup de touristes.", ans: [["qui"]] },
+  ]},
+  { id: "B", title: "Qui, que or où ?", instr: "où is for places and for time.", type: "blanks", items: [
+    { src: "", text: "La rue [] j'habite est très calme.", ans: [["où"]] },
+    { src: "", text: "Le jour [] je suis arrivé, il pleuvait.", ans: [["où"]], why: "Time → où (not quand)." },
+    { src: "", text: "Le quartier [] je préfère, c'est le Marais.", ans: [["que"]], why: "préférer qqch → que." },
+    { src: "", text: "C'est le café [] on s'est rencontrés.", ans: [["où"]] },
+    { src: "", text: "L'été [] nous sommes partis en Italie, il faisait très chaud.", ans: [["où"]], why: "Time → où." },
+    { src: "", text: "Le propriétaire [] nous loue l'appartement est sympa.", ans: [["qui"]] },
+    { src: "", text: "La ville [] elle est née est très petite.", ans: [["où"]] },
+    { src: "", text: "C'est la maison [] mes parents ont achetée.", ans: [["que"]], why: "acheter qqch → que; achetée agrees with la maison." },
+  ]},
+  { id: "C", title: "Dont", instr: "Find the de: parler de, avoir besoin de, avoir peur de…", type: "blanks", items: [
+    { src: "parler de", text: "C'est le livre [] je t'ai parlé.", ans: [["dont"]] },
+    { src: "avoir besoin de", text: "Voilà l'outil [] j'ai besoin.", ans: [["dont"]] },
+    { src: "être fier de", text: "C'est un projet [] je suis très fier.", ans: [["dont"]] },
+    { src: "avoir peur de", text: "Le chien [] j'ai peur habite au troisième étage.", ans: [["dont"]] },
+    { src: "rêver de", text: "Lisbonne ? C'est la ville [] je rêve.", ans: [["dont"]] },
+    { src: "le frère de mon amie", text: "J'ai une amie [] le frère est acteur.", ans: [["dont"]], why: "dont = whose." },
+  ]},
+  { id: "D", title: "Qui, que, où or dont ?", instr: "All four mixed. Tap the correct one.", type: "mc", items: [
+    { src: "", text: "L'homme ___ tu vois là-bas est mon oncle.", opts: ["qui", "que", "où", "dont"], c: 1, why: "voir qqn → que." },
+    { src: "", text: "La maison ___ j'ai grandi n'existe plus.", opts: ["qui", "que", "où", "dont"], c: 2, why: "A place → où." },
+    { src: "", text: "Le restaurant ___ tout le monde parle est fermé.", opts: ["qui", "que", "où", "dont"], c: 3, why: "parler de → dont." },
+    { src: "", text: "C'est un collègue ___ travaille beaucoup.", opts: ["qui", "que", "où", "dont"], c: 0, why: "A verb follows → qui." },
+    { src: "", text: "C'était l'année ___ j'ai eu mon diplôme.", opts: ["qui", "que", "où", "dont"], c: 2, why: "Time → où." },
+    { src: "", text: "Les choses ___ j'ai besoin sont dans le sac.", opts: ["qui", "que", "où", "dont"], c: 3, why: "avoir besoin de → dont." },
+    { src: "", text: "Le loyer ___ je paie est trop cher.", opts: ["qui", "que", "où", "dont"], c: 1, why: "payer qqch → que." },
+    { src: "", text: "J'ai une voisine ___ s'occupe de mon chat.", opts: ["qui", "que", "où", "dont"], c: 0, why: "A verb follows → qui." },
+  ]},
+  { id: "E", title: "Join the two sentences", instr: "Write one sentence with qui, que, où or dont.", type: "sentence", items: [
+    { src: "J'ai une amie. Elle habite à Lyon.", lead: "", ans: ["J'ai une amie qui habite à Lyon."] },
+    { src: "C'est le quartier. J'aime ce quartier.", lead: "", ans: ["C'est le quartier que j'aime."] },
+    { src: "Voici le parc. Je cours dans ce parc le matin.", lead: "", ans: ["Voici le parc où je cours le matin."] },
+    { src: "C'est un film. Tout le monde parle de ce film.", lead: "", ans: ["C'est un film dont tout le monde parle."] },
+    { src: "J'ai trouvé les clés. Tu as perdu ces clés hier.", lead: "", ans: ["J'ai trouvé les clés que tu as perdues hier."], why: "perdues agrees with les clés (que before avoir)." },
+    { src: "Je me souviens du jour. Nous nous sommes rencontrés ce jour-là.", lead: "", ans: ["Je me souviens du jour où nous nous sommes rencontrés."] },
+  ]},
+  { id: "F", title: "Ce qui or ce que ?", instr: "Bonus: ce qui + verb, ce que + subject + verb.", type: "blanks", items: [
+    { src: "", text: "[] je veux, c'est un café.", ans: [["ce que"]] },
+    { src: "", text: "Dis-moi [] tu penses.", ans: [["ce que"]] },
+    { src: "", text: "[] me plaît ici, c'est le calme.", ans: [["ce qui"]] },
+    { src: "", text: "Je ne comprends pas [] se passe.", ans: [["ce qui"]] },
+    { src: "", text: "Tu peux faire [] tu veux.", ans: [["ce que"]] },
+  ]},
+  { id: "G", title: "Find the mistake", instr: "Rewrite the whole sentence correctly.", type: "sentence", items: [
+    { src: "Le livre qui je lis est intéressant.", lead: "", ans: ["Le livre que je lis est intéressant."], why: "A subject follows (je) → que." },
+    { src: "C'est la ville que j'habite.", lead: "", ans: ["C'est la ville où j'habite."], why: "A place → où." },
+    { src: "Le film que je t'ai parlé est super.", lead: "", ans: ["Le film dont je t'ai parlé est super."], why: "parler de → dont." },
+    { src: "L'homme qu'habite ici est très gentil.", lead: "", ans: ["L'homme qui habite ici est très gentil."], why: "qui never elides." },
+    { src: "Le jour quand je suis né, il neigeait.", lead: "", ans: ["Le jour où je suis né, il neigeait."], why: "Time → où." },
+  ]},
+  { id: "V", title: "Vocabulaire", instr: "Mon quartier et mon logement.", type: "blanks", items: [
+    { src: "rent", text: "Je paie mon [] le premier de chaque mois.", ans: [["loyer"]] },
+    { src: "floor", text: "J'habite au cinquième [] : heureusement, il y a un ascenseur !", ans: [["étage"]] },
+    { src: "suburbs", text: "Il n'habite pas dans le centre, il habite en [].", ans: [["banlieue"]] },
+    { src: "landlord", text: "Le [] de mon appartement est très sympa.", ans: [["propriétaire"]] },
+    { src: "neighbourhood", text: "Mon [] est très animé : il y a beaucoup de cafés.", ans: [["quartier"]] },
+    { src: "remember", text: "Je me [] très bien de mon premier jour à Paris.", ans: [["souviens"]] },
+    { src: "proud", text: "Tu as fini ton projet ? Tu peux être [] de toi !", ans: [["fier", "fière"]] },
+  ]},
+  { id: "W", title: "À toi !", instr: "Free writing, 2–3 simple sentences each. Not checked here: tap \"Copier pour Claude\" and paste it to Claude for a correction.", type: "free", items: [
+    { src: "Décris ton quartier. (C'est un quartier où…, qui…, que…)" },
+    { src: "Parle d'une personne dont tu es fier / fière. (C'est quelqu'un qui…, dont…)" },
+    { src: "Ce qui te plaît dans ta ville, et ce que tu n'aimes pas." },
+  ]},
+];
+</script>
+<script>
+/* Shared exercise engine for every topic page.
+   The topic page defines, before loading this file:
+     TOPIC = { num: "02", name: "Conditionnel présent" }
+     VOCAB = [ { g: "Group" } | { fr, en, eg? } ]
+     EX    = [ { id, title, instr, type: "mc"|"blanks"|"sentence"|"free", items: [...] } ]
+   Item shapes:
+     mc:       { src, text: "… ___ …", opts: [..], c: indexOfCorrect, why? }
+     blanks:   { src, text: "… [] … [] …", ans: [[accepted…], [accepted…]], why? }
+     sentence: { src, lead: "Oui," | "", ans: [accepted full answers…], why? }
+     free:     { src }  (not graded: included in "Copier" so Claude can correct it)
+*/
+(function () {
+  const KEY = "fr" + TOPIC.num + "-v1";
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { store = {}; }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+
+  const norm = s => (s || "").toLowerCase().replace(/[’`´]/g, "'").replace(/\s+/g, " ").replace(/\s*'\s*/g, "'").trim();
+  const sentNorm = s => norm(s).replace(/[.!?,;…]+/g, " ").replace(/^(oui|non)\s+/, "").replace(/\s+/g, " ").trim();
+  const strip = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const $ = s => document.querySelector(s);
+  const graded = EX.filter(s => s.type !== "free");
+  const TOTAL = graded.reduce((n, s) => n + s.items.length, 0);
+  const INPUT_ATTRS = 'autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"';
+
+  function grade(val, accepted, f) {
+    const v = f(val);
+    if (!v) return "empty";
+    if (accepted.some(a => f(a) === v)) return "ok";
+    if (accepted.some(a => strip(f(a)) === strip(v))) return "near";
+    return "bad";
+  }
+
+  /* ---------- Exercise shell ---------- */
+  $("#exos").innerHTML = `
+    <div class="score">
+      <div class="big" id="scoreBig">0/${TOTAL}</div>
+      <div style="display:grid; gap:6px; min-width:0;">
+        <div class="bar"><i id="scoreBar"></i></div>
+        <div class="instr" id="scoreTxt"></div>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="checkAll">Tout vérifier</button>
+        <button class="btn" id="copyErr">Copier pour Claude</button>
+        <button class="btn ghost" id="resetAll">Effacer tout</button>
+      </div>
+    </div>
+    <div id="resetConfirm" class="warn" hidden>
+      <div class="row" style="justify-content:space-between;"><span>Erase all your answers?</span>
+      <span class="row"><button class="btn" id="resetYes">Oui, effacer</button><button class="btn ghost" id="resetNo">Annuler</button></span></div>
+    </div>
+    <textarea id="copyBox" class="copybox" readonly hidden></textarea>
+    <div id="exList" style="display:grid; gap:28px;"></div>`;
+  document.body.insertAdjacentHTML("beforeend", '<div class="toast" id="toast" hidden></div>');
+
+  /* ---------- Tabs ---------- */
+  function show(view) {
+    if (!["regle", "vocab", "exos"].includes(view)) view = "regle";
+    document.querySelectorAll("section.view").forEach(s => s.hidden = s.id !== view);
+    document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.view === view));
+    try { localStorage.setItem(KEY + "-tab", view); } catch (e) {}
+  }
+  document.querySelectorAll("[data-view]").forEach(b => b.onclick = () => show(b.dataset.view));
+  document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { show(b.dataset.go); window.scrollTo(0, 0); });
+
+  /* ---------- Vocab ---------- */
+  const vlist = $("#vlist");
+  vlist.innerHTML = VOCAB.map(v => v.g ? `<div class="vgroup">${esc(v.g)}</div>` :
+    `<div class="vrow"><div class="fr">${esc(v.fr)}</div><div class="en">${esc(v.en)}</div>${v.eg ? `<div class="eg">${esc(v.eg)}</div>` : ""}</div>`).join("");
+  vlist.addEventListener("click", e => { const r = e.target.closest(".vrow"); if (r) r.classList.toggle("show"); });
+  $("#hideEn").onchange = e => { vlist.classList.toggle("hide-en", e.target.checked); vlist.querySelectorAll(".vrow").forEach(r => r.classList.remove("show")); };
+
+  /* ---------- Render exercises ---------- */
+  const fillTemplate = (text, answers) => { let i = 0; return esc(text).replace(/\[\]/g, () => `<b>${esc(answers[i++] || "")}</b>`); };
+  const withStop = s => /[.!?…]$/.test(s.trim()) ? s : s + ".";
+
+  function itemBody(sec, it, id) {
+    if (sec.type === "mc") {
+      return `<div class="line">${esc(it.text)}</div><div class="mc" data-id="${id}">${it.opts.map((o, k) =>
+        `<button type="button" data-k="${k}" aria-pressed="${store[id] === k}">${String.fromCharCode(97 + k)}) ${esc(o)}</button>`).join("")}</div>`;
+    }
+    if (sec.type === "blanks") {
+      let n = 0;
+      const line = esc(it.text).replace(/\[\]/g, () => {
+        const bid = `${id}-${n}`, w = Math.max(3, it.ans[n][0].length + 1.5); n++;
+        return `<input class="blank" id="in-${bid}" data-b="${bid}" style="width:${w}ch" ${INPUT_ATTRS} value="${esc(store[bid] || "")}">`;
+      });
+      return `<div class="line">${line}</div>`;
+    }
+    if (sec.type === "sentence") {
+      return `<div class="line">${it.lead ? esc(it.lead) + " " : ""}<input class="blank wide" id="in-${id}-0" data-b="${id}-0" ${INPUT_ATTRS} value="${esc(store[id + "-0"] || "")}"></div>`;
+    }
+    return `<textarea class="free" id="in-${id}-0" data-b="${id}-0" rows="3" spellcheck="false" placeholder="Écris ici…">${esc(store[id + "-0"] || "")}</textarea>`;
+  }
+
+  function render() {
+    $("#exList").innerHTML = EX.map(sec => {
+      const items = sec.items.map((it, i) => {
+        const id = `${sec.id}${i + 1}`;
+        return `<div class="item" id="it-${id}"><span class="num">${i + 1}</span>${it.src ? `<div class="src">${it.src}</div>` : ""}${itemBody(sec, it, id)}<div class="fb" hidden></div></div>`;
+      }).join("");
+      const badge = sec.type === "free" ? "for Claude" : `${sec.items.length} items`;
+      const btn = sec.type === "free" ? "" : `<div class="row"><button class="btn primary" data-check="${sec.id}">Vérifier ${sec.id}</button></div>`;
+      return `<div class="exsec" id="sec-${sec.id}">
+        <div class="exhead"><h2><span class="L">${sec.id}</span>${esc(sec.title)}</h2><span class="badge" id="badge-${sec.id}">${badge}</span></div>
+        <p class="instr">${esc(sec.instr)}</p>
+        <div class="items">${items}</div>${btn}
+      </div>`;
+    }).join("");
+  }
+  render();
+
+  const list = $("#exList");
+  list.addEventListener("input", e => {
+    const b = e.target.dataset.b; if (!b) return;
+    store[b] = e.target.value; e.target.classList.remove("ok", "bad", "near"); save();
+  });
+  list.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || !e.target.matches("input.blank")) return;
+    e.preventDefault();
+    const all = [...document.querySelectorAll("input.blank")], nx = all[all.indexOf(e.target) + 1];
+    if (nx) nx.focus(); else e.target.blur();
+  });
+  list.addEventListener("click", e => {
+    const opt = e.target.closest(".mc button");
+    if (opt) {
+      const box = opt.parentElement;
+      store[box.dataset.id] = +opt.dataset.k; save();
+      box.querySelectorAll("button").forEach(b => { b.setAttribute("aria-pressed", b === opt); b.classList.remove("ok", "bad"); });
+      return;
+    }
+    const c = e.target.closest("[data-check]");
+    if (c) { checkSection(c.dataset.check); updateScore(); }
+  });
+
+  /* ---------- Checking ---------- */
+  const results = {};
+  function checkSection(sid) {
+    const sec = EX.find(s => s.id === sid);
+    if (sec.type === "free") return;
+    let ok = 0;
+    sec.items.forEach((it, i) => {
+      const id = `${sid}${i + 1}`, el = $(`#it-${id}`), fb = el.querySelector(".fb");
+      let state, mine, correct;
+      if (sec.type === "mc") {
+        const pick = store[id];
+        state = pick == null ? "empty" : pick === it.c ? "ok" : "bad";
+        mine = pick == null ? "" : it.opts[pick];
+        correct = esc(it.text).replace("___", `<b>${esc(it.opts[it.c])}</b>`);
+        el.querySelectorAll(".mc button").forEach(b => {
+          b.classList.remove("ok", "bad");
+          if (+b.dataset.k === it.c && state !== "empty") b.classList.add("ok");
+          else if (+b.dataset.k === pick) b.classList.add("bad");
+        });
+      } else if (sec.type === "blanks") {
+        const states = it.ans.map((acc, n) => {
+          const inp = $(`#in-${id}-${n}`), st = grade(inp.value, acc, norm);
+          inp.classList.remove("ok", "bad", "near"); inp.classList.add(st === "empty" ? "bad" : st);
+          return st;
+        });
+        state = states.every(s => s === "ok") ? "ok"
+          : states.every(s => s === "empty") ? "empty"
+          : states.every(s => s === "ok" || s === "near") ? "near" : "bad";
+        mine = it.ans.map((_, n) => $(`#in-${id}-${n}`).value.trim() || "…").join(" / ");
+        correct = fillTemplate(it.text, it.ans.map(a => a[0]));
+      } else {
+        const inp = $(`#in-${id}-0`);
+        state = grade(inp.value, it.ans, sentNorm);
+        inp.classList.remove("ok", "bad", "near"); inp.classList.add(state === "empty" ? "bad" : state);
+        mine = inp.value.trim();
+        correct = `${it.lead ? esc(it.lead) + " " : ""}<b>${esc(withStop(it.ans[0]))}</b>`;
+      }
+      if (state === "ok") ok++;
+      results[id] = { state, mine, correct: correct.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"') };
+      const why = it.why ? esc(it.why) : "";
+      fb.hidden = false;
+      fb.className = "fb " + (state === "ok" ? "ok" : state === "near" ? "near" : "bad");
+      fb.innerHTML =
+        state === "ok" ? `<span class="pen">Très bien !</span>` :
+        state === "near" ? `<span class="pen">Presque ! Check the accents.</span><span class="ans">${correct}</span>` :
+        state === "empty" ? `<span class="pen">Pas de réponse.</span><span class="ans">${correct}</span>${why ? `<span class="instr">${why}</span>` : ""}` :
+        `<span class="ans">${correct}</span>${why ? `<span class="pen">${why}</span>` : ""}`;
+    });
+    const badge = $(`#badge-${sid}`);
+    badge.textContent = `${ok}/${sec.items.length}`;
+    badge.classList.toggle("full", ok === sec.items.length);
+  }
+
+  function updateScore() {
+    const checked = Object.values(results), ok = checked.filter(r => r.state === "ok").length;
+    $("#scoreBig").textContent = `${ok}/${TOTAL}`;
+    $("#scoreBar").style.width = (100 * ok / TOTAL) + "%";
+    $("#scoreTxt").textContent = checked.length === 0 ? `Tap "Vérifier" under each exercise, or check everything at once.`
+      : ok === TOTAL ? "Parfait ! Everything is correct."
+      : `${checked.length} of ${TOTAL} checked · ${checked.length - ok} to review.`;
+  }
+  updateScore();
+
+  function toast(msg) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2200); }
+
+  const checkAll = () => { graded.forEach(s => checkSection(s.id)); updateScore(); };
+  $("#checkAll").onclick = () => { checkAll(); toast("Tout est vérifié"); };
+
+  $("#copyErr").onclick = () => {
+    checkAll();
+    const errs = Object.entries(results).filter(([, r]) => r.state !== "ok")
+      .map(([id, r]) => `${id}: I wrote "${r.mine || "—"}" · correct: ${r.correct}`);
+    const free = EX.filter(s => s.type === "free").flatMap(s => s.items.map((it, i) => {
+      const v = (store[`${s.id}${i + 1}-0`] || "").trim();
+      return v ? `${s.id}${i + 1} (${it.src.replace(/<[^>]+>/g, "")}): ${v}` : "";
+    })).filter(Boolean);
+    let text = `Topic ${TOPIC.num} (${TOPIC.name}): ${TOTAL - errs.length}/${TOTAL}.`;
+    text += errs.length ? `\nMy mistakes:\n${errs.join("\n")}` : " No mistakes.";
+    if (free.length) text += `\n\nPlease correct my free writing:\n${free.join("\n")}`;
+    const box = $("#copyBox"); box.value = text;
+    const fallback = () => { box.hidden = false; box.focus(); box.select(); toast("Select the text below and copy it"); };
+    try {
+      navigator.clipboard.writeText(text).then(() => { box.hidden = true; toast("Copied. Paste it to Claude."); }, fallback);
+    } catch (e) { fallback(); }
+  };
+
+  $("#resetAll").onclick = () => { $("#resetConfirm").hidden = false; };
+  $("#resetNo").onclick = () => { $("#resetConfirm").hidden = true; };
+  $("#resetYes").onclick = () => {
+    store = {}; save(); for (const k in results) delete results[k];
+    render(); updateScore();
+    EX.forEach(s => { if (s.type !== "free") { const b = $(`#badge-${s.id}`); b.textContent = `${s.items.length} items`; b.classList.remove("full"); } });
+    $("#resetConfirm").hidden = true; $("#copyBox").hidden = true; toast("Answers erased");
+  };
+
+  let startTab = "regle"; try { startTab = localStorage.getItem(KEY + "-tab") || "regle"; } catch (e) {}
+  show(startTab);
+})();
+</script>
+
+</body>
+</html>

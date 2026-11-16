@@ -1,0 +1,217 @@
+<title>Le quartier où j'habite</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="../shared/style.css">
+
+<div class="wrap">
+  <header class="top">
+    <a class="home" href="../">← Tous les topics</a>
+    <div class="eyebrow">Topic 06 · A2–B1 · Grammaire</div>
+    <h1>Le quartier <span style="color:var(--green)">où</span> j'habite, <span style="color:var(--red)">que</span> j'adore.</h1>
+    <p class="sub">Les pronoms relatifs <b>qui, que, où, dont</b> join two sentences and avoid repeating a noun.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-regle" aria-selected="false" data-view="regle">Règle</button>
+    <button role="tab" id="tab-vocab" aria-selected="false" data-view="vocab">Vocabulaire</button>
+    <button role="tab" id="tab-exos" aria-selected="false" data-view="exos">Exercices</button>
+  </nav>
+
+  <!-- ============ RÈGLE ============ -->
+  <section class="view" id="regle" hidden>
+    <div class="block">
+      <h2>1. The four pronouns</h2>
+      <div class="order" aria-label="Relative pronouns">
+        <div class="slot s1"><div class="n">subject</div><div class="w">qui</div></div>
+        <div class="slot s2"><div class="n">COD</div><div class="w">que</div></div>
+        <div class="slot s3"><div class="n">place · time</div><div class="w">où</div></div>
+        <div class="slot s4"><div class="n">de + …</div><div class="w">dont</div></div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th>Pronoun</th><th>Followed by</th><th>Exemple</th></tr>
+        <tr><td><b class="p1">qui</b></td><td>a <b>verb</b></td><td>J'ai un voisin <b class="p1">qui</b> joue du piano.</td></tr>
+        <tr><td><b class="p2">que / qu'</b></td><td>a <b>subject + verb</b></td><td>C'est le film <b class="p2">que</b> je préfère.</td></tr>
+        <tr><td><b class="p3">où</b></td><td>place or time</td><td>La ville <b class="p3">où</b> j'habite.<br>Le jour <b class="p3">où</b> je suis né.</td></tr>
+        <tr><td><b class="p5">dont</b></td><td>a verb with <b>de</b></td><td>Le livre <b class="p5">dont</b> je t'ai parlé.<br><span class="sub">(parler de)</span></td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>2. How to choose</h2>
+      <p>Look at what comes <b>right after</b> the gap, and at the verb:</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>If…</th><th>→</th><th>Exemple</th></tr>
+        <tr><td>a <b>verb</b> comes next</td><td><b class="p1">qui</b></td><td>le bus <b>qui va</b> au centre</td></tr>
+        <tr><td>a subject + verb, and the verb takes a direct object</td><td><b class="p2">que</b></td><td>le film <b>que je regarde</b> <span class="sub">(regarder qqch)</span></td></tr>
+        <tr><td>it's a place or a time</td><td><b class="p3">où</b></td><td>la rue <b>où</b> j'habite · l'année <b>où</b>…</td></tr>
+        <tr><td>the verb or adjective takes <b>de</b></td><td><b class="p5">dont</b></td><td>parler <b>de</b> → le film <b>dont</b> je parle</td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>3. Details</h2>
+      <p class="warn"><b>qui</b> never elides: l'homme <b>qui</b> habite ici (✗ qu'habite). <b>que</b> does: le gâteau <b>qu'</b>il a fait.</p>
+      <p class="tip"><b>où for time:</b> French says le jour <b>où</b>, not <s>le jour quand</s>.</p>
+      <p><b>Agreement with que</b> (passé composé): <i>que</i> is a COD placed before <i>avoir</i>, so the participle agrees.</p>
+      <p class="ex">La robe <b class="p2">que</b> j'ai acheté<b class="p2">e</b>. · Les amis <b class="p2">qu'</b>il a invité<b class="p2">s</b>.</p>
+      <p><b>dont</b> can also mean <i>whose</i>:</p>
+      <p class="ex">J'ai une amie <b class="p5">dont</b> le frère est acteur. <span class="sub">(le frère de mon amie)</span></p>
+      <p class="sub">Verbs with <b>de</b> → dont: parler de, avoir besoin de, avoir peur de, se souvenir de, rêver de, s'occuper de, se servir de, être fier de.</p>
+    </div>
+
+    <div class="block">
+      <h2>4. Bonus: ce qui / ce que (= what)</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th>Exemple</th></tr>
+        <tr><td><b class="p1">ce qui</b> + verb</td><td><b>Ce qui</b> me plaît, c'est le calme.<br>Je ne comprends pas <b>ce qui</b> se passe.</td></tr>
+        <tr><td><b class="p2">ce que</b> + subject + verb</td><td><b>Ce que</b> je veux, c'est un café.<br>Dis-moi <b>ce que</b> tu penses.</td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>5. Common mistakes</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>✗</th><th>✓</th></tr>
+        <tr><td class="bad">Le livre qui je lis…</td><td class="good">Le livre que je lis…</td></tr>
+        <tr><td class="bad">C'est la ville que j'habite.</td><td class="good">C'est la ville où j'habite.</td></tr>
+        <tr><td class="bad">Le film que je t'ai parlé…</td><td class="good">Le film dont je t'ai parlé…</td></tr>
+        <tr><td class="bad">L'homme qu'habite ici…</td><td class="good">L'homme qui habite ici…</td></tr>
+        <tr><td class="bad">Le jour quand je suis né…</td><td class="good">Le jour où je suis né…</td></tr>
+        <tr><td class="bad">Je ne sais pas qu'est-ce que tu veux.</td><td class="good">Je ne sais pas ce que tu veux.</td></tr>
+      </table></div>
+      <div class="row"><button class="btn primary" data-go="vocab">Next: vocabulaire →</button></div>
+    </div>
+  </section>
+
+  <!-- ============ VOCAB ============ -->
+  <section class="view" id="vocab" hidden>
+    <div class="block">
+      <h2>Mon quartier et mon logement</h2>
+      <p class="sub">Your neighbourhood and home: <i>le quartier <b>où</b> j'habite</i>, <i>l'appartement <b>que</b> je loue</i>. The last group lists verbs with <i>de</i>, which go with <b>dont</b>.</p>
+    </div>
+    <div class="vtools">
+      <label class="row" style="gap:8px; cursor:pointer;"><input type="checkbox" id="hideEn"> Hide English (tap a row to reveal)</label>
+    </div>
+    <div class="vlist" id="vlist"></div>
+    <p class="warn">Floors: the ground floor is <b>le rez-de-chaussée</b>, so <i>le premier étage</i> is one floor up (UK first floor, US second floor).</p>
+    <div class="row"><button class="btn primary" data-go="exos">Next: exercices →</button></div>
+  </section>
+
+  <!-- ============ EXERCICES (built by shared/engine.js) ============ -->
+  <section class="view" id="exos" hidden></section>
+
+  <footer>Accents: on a phone, press and hold a letter (e → é è ê). Missing accents count as "presque".</footer>
+</div>
+
+<script>
+const TOPIC = { num: "06", name: "pronoms relatifs" };
+const VOCAB = [
+  { g: "Le logement" },
+  { fr: "un immeuble", en: "a block of flats" },
+  { fr: "un étage", en: "a floor", eg: "J'habite au 3e étage." },
+  { fr: "un ascenseur", en: "a lift, elevator" },
+  { fr: "louer", en: "to rent", eg: "L'appartement que je loue." },
+  { fr: "le loyer", en: "the rent", eg: "Le loyer est trop cher." },
+  { fr: "le / la propriétaire", en: "the landlord / owner" },
+  { fr: "le / la locataire", en: "the tenant" },
+  { fr: "un(e) colocataire", en: "a flatmate" },
+  { g: "Le quartier" },
+  { fr: "le quartier", en: "the neighbourhood" },
+  { fr: "le centre-ville", en: "the town centre" },
+  { fr: "la banlieue", en: "the suburbs" },
+  { fr: "une rue piétonne", en: "a pedestrian street" },
+  { fr: "une place", en: "a square" },
+  { fr: "la mairie", en: "the town hall" },
+  { fr: "animé(e)", en: "lively" },
+  { fr: "calme", en: "quiet" },
+  { g: "Verbs with de (→ dont)" },
+  { fr: "parler de", en: "to talk about", eg: "Le film dont je parle." },
+  { fr: "avoir besoin de", en: "to need", eg: "Ce dont j'ai besoin." },
+  { fr: "avoir peur de", en: "to be afraid of", eg: "Le chien dont j'ai peur." },
+  { fr: "se souvenir de", en: "to remember", eg: "Un jour dont je me souviens." },
+  { fr: "rêver de", en: "to dream of", eg: "La ville dont je rêve." },
+  { fr: "s'occuper de", en: "to take care of", eg: "Les enfants dont elle s'occupe." },
+  { fr: "se servir de", en: "to use", eg: "L'outil dont je me sers." },
+  { fr: "être fier / fière de", en: "to be proud of", eg: "Un projet dont je suis fier." },
+];
+
+const EX = [
+  { id: "A", title: "Qui or que (qu') ?", instr: "Verb next → qui. Subject + verb next → que.", type: "blanks", items: [
+    { src: "", text: "J'ai un voisin [] joue du piano.", ans: [["qui"]] },
+    { src: "", text: "C'est le film [] je préfère.", ans: [["que"]] },
+    { src: "", text: "La femme [] habite en face est médecin.", ans: [["qui"]] },
+    { src: "", text: "Le gâteau [] tu as fait est délicieux.", ans: [["que"]] },
+    { src: "Watch the vowel.", text: "Voici l'appartement []on va louer.", ans: [["qu'"]], why: "que → qu' before a vowel." },
+    { src: "", text: "Le bus [] va au centre-ville passe toutes les dix minutes.", ans: [["qui"]] },
+    { src: "Watch the vowel.", text: "Les amis []il a invités sont sympas.", ans: [["qu'"]], why: "que → qu' before a vowel; invités agrees with les amis." },
+    { src: "", text: "C'est une ville [] attire beaucoup de touristes.", ans: [["qui"]] },
+  ]},
+  { id: "B", title: "Qui, que or où ?", instr: "où is for places and for time.", type: "blanks", items: [
+    { src: "", text: "La rue [] j'habite est très calme.", ans: [["où"]] },
+    { src: "", text: "Le jour [] je suis arrivé, il pleuvait.", ans: [["où"]], why: "Time → où (not quand)." },
+    { src: "", text: "Le quartier [] je préfère, c'est le Marais.", ans: [["que"]], why: "préférer qqch → que." },
+    { src: "", text: "C'est le café [] on s'est rencontrés.", ans: [["où"]] },
+    { src: "", text: "L'été [] nous sommes partis en Italie, il faisait très chaud.", ans: [["où"]], why: "Time → où." },
+    { src: "", text: "Le propriétaire [] nous loue l'appartement est sympa.", ans: [["qui"]] },
+    { src: "", text: "La ville [] elle est née est très petite.", ans: [["où"]] },
+    { src: "", text: "C'est la maison [] mes parents ont achetée.", ans: [["que"]], why: "acheter qqch → que; achetée agrees with la maison." },
+  ]},
+  { id: "C", title: "Dont", instr: "Find the de: parler de, avoir besoin de, avoir peur de…", type: "blanks", items: [
+    { src: "parler de", text: "C'est le livre [] je t'ai parlé.", ans: [["dont"]] },
+    { src: "avoir besoin de", text: "Voilà l'outil [] j'ai besoin.", ans: [["dont"]] },
+    { src: "être fier de", text: "C'est un projet [] je suis très fier.", ans: [["dont"]] },
+    { src: "avoir peur de", text: "Le chien [] j'ai peur habite au troisième étage.", ans: [["dont"]] },
+    { src: "rêver de", text: "Lisbonne ? C'est la ville [] je rêve.", ans: [["dont"]] },
+    { src: "le frère de mon amie", text: "J'ai une amie [] le frère est acteur.", ans: [["dont"]], why: "dont = whose." },
+  ]},
+  { id: "D", title: "Qui, que, où or dont ?", instr: "All four mixed. Tap the correct one.", type: "mc", items: [
+    { src: "", text: "L'homme ___ tu vois là-bas est mon oncle.", opts: ["qui", "que", "où", "dont"], c: 1, why: "voir qqn → que." },
+    { src: "", text: "La maison ___ j'ai grandi n'existe plus.", opts: ["qui", "que", "où", "dont"], c: 2, why: "A place → où." },
+    { src: "", text: "Le restaurant ___ tout le monde parle est fermé.", opts: ["qui", "que", "où", "dont"], c: 3, why: "parler de → dont." },
+    { src: "", text: "C'est un collègue ___ travaille beaucoup.", opts: ["qui", "que", "où", "dont"], c: 0, why: "A verb follows → qui." },
+    { src: "", text: "C'était l'année ___ j'ai eu mon diplôme.", opts: ["qui", "que", "où", "dont"], c: 2, why: "Time → où." },
+    { src: "", text: "Les choses ___ j'ai besoin sont dans le sac.", opts: ["qui", "que", "où", "dont"], c: 3, why: "avoir besoin de → dont." },
+    { src: "", text: "Le loyer ___ je paie est trop cher.", opts: ["qui", "que", "où", "dont"], c: 1, why: "payer qqch → que." },
+    { src: "", text: "J'ai une voisine ___ s'occupe de mon chat.", opts: ["qui", "que", "où", "dont"], c: 0, why: "A verb follows → qui." },
+  ]},
+  { id: "E", title: "Join the two sentences", instr: "Write one sentence with qui, que, où or dont.", type: "sentence", items: [
+    { src: "J'ai une amie. Elle habite à Lyon.", lead: "", ans: ["J'ai une amie qui habite à Lyon."] },
+    { src: "C'est le quartier. J'aime ce quartier.", lead: "", ans: ["C'est le quartier que j'aime."] },
+    { src: "Voici le parc. Je cours dans ce parc le matin.", lead: "", ans: ["Voici le parc où je cours le matin."] },
+    { src: "C'est un film. Tout le monde parle de ce film.", lead: "", ans: ["C'est un film dont tout le monde parle."] },
+    { src: "J'ai trouvé les clés. Tu as perdu ces clés hier.", lead: "", ans: ["J'ai trouvé les clés que tu as perdues hier."], why: "perdues agrees with les clés (que before avoir)." },
+    { src: "Je me souviens du jour. Nous nous sommes rencontrés ce jour-là.", lead: "", ans: ["Je me souviens du jour où nous nous sommes rencontrés."] },
+  ]},
+  { id: "F", title: "Ce qui or ce que ?", instr: "Bonus: ce qui + verb, ce que + subject + verb.", type: "blanks", items: [
+    { src: "", text: "[] je veux, c'est un café.", ans: [["ce que"]] },
+    { src: "", text: "Dis-moi [] tu penses.", ans: [["ce que"]] },
+    { src: "", text: "[] me plaît ici, c'est le calme.", ans: [["ce qui"]] },
+    { src: "", text: "Je ne comprends pas [] se passe.", ans: [["ce qui"]] },
+    { src: "", text: "Tu peux faire [] tu veux.", ans: [["ce que"]] },
+  ]},
+  { id: "G", title: "Find the mistake", instr: "Rewrite the whole sentence correctly.", type: "sentence", items: [
+    { src: "Le livre qui je lis est intéressant.", lead: "", ans: ["Le livre que je lis est intéressant."], why: "A subject follows (je) → que." },
+    { src: "C'est la ville que j'habite.", lead: "", ans: ["C'est la ville où j'habite."], why: "A place → où." },
+    { src: "Le film que je t'ai parlé est super.", lead: "", ans: ["Le film dont je t'ai parlé est super."], why: "parler de → dont." },
+    { src: "L'homme qu'habite ici est très gentil.", lead: "", ans: ["L'homme qui habite ici est très gentil."], why: "qui never elides." },
+    { src: "Le jour quand je suis né, il neigeait.", lead: "", ans: ["Le jour où je suis né, il neigeait."], why: "Time → où." },
+  ]},
+  { id: "V", title: "Vocabulaire", instr: "Mon quartier et mon logement.", type: "blanks", items: [
+    { src: "rent", text: "Je paie mon [] le premier de chaque mois.", ans: [["loyer"]] },
+    { src: "floor", text: "J'habite au cinquième [] : heureusement, il y a un ascenseur !", ans: [["étage"]] },
+    { src: "suburbs", text: "Il n'habite pas dans le centre, il habite en [].", ans: [["banlieue"]] },
+    { src: "landlord", text: "Le [] de mon appartement est très sympa.", ans: [["propriétaire"]] },
+    { src: "neighbourhood", text: "Mon [] est très animé : il y a beaucoup de cafés.", ans: [["quartier"]] },
+    { src: "remember", text: "Je me [] très bien de mon premier jour à Paris.", ans: [["souviens"]] },
+    { src: "proud", text: "Tu as fini ton projet ? Tu peux être [] de toi !", ans: [["fier", "fière"]] },
+  ]},
+  { id: "W", title: "À toi !", instr: "Free writing, 2–3 simple sentences each. Not checked here: tap \"Copier pour Claude\" and paste it to Claude for a correction.", type: "free", items: [
+    { src: "Décris ton quartier. (C'est un quartier où…, qui…, que…)" },
+    { src: "Parle d'une personne dont tu es fier / fière. (C'est quelqu'un qui…, dont…)" },
+    { src: "Ce qui te plaît dans ta ville, et ce que tu n'aimes pas." },
+  ]},
+];
+</script>
+<script src="../shared/engine.js"></script>

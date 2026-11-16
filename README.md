@@ -30,11 +30,11 @@ All topics: **https://serhiizem.github.io/french/**
 | 03 | [Les phrases avec si : si + présent](03-si-present/) — *S'il pleut demain, je prendrai le bus* | [open](https://serhiizem.github.io/french/03-si-present/) |
 | 04 | [Les pronoms y et en](04-pronoms-y-en/) — *J'y vais, j'en prends un kilo* | [open](https://serhiizem.github.io/french/04-pronoms-y-en/) |
 | 05 | [COD ou COI ?](05-cod-coi/) — *Je l'aide, je lui téléphone* | [open](https://serhiizem.github.io/french/05-cod-coi/) |
+| 06 | [Les pronoms relatifs : qui, que, où, dont](06-pronoms-relatifs/) — *Le quartier où j'habite* | [open](https://serhiizem.github.io/french/06-pronoms-relatifs/) |
 
 ### Ideas for the next topics
 - Passé composé ou imparfait ?
 - Accord du participe passé (avoir / être)
-- Pronoms relatifs : *qui, que, où, dont*
 - Le futur simple
 - Le conditionnel passé (*j'aurais dû…*)
 - Le subjonctif présent (after *il faut que*, *je veux que*)

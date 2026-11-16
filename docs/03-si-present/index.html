@@ -479,7 +479,7 @@ const EX = [
     $("#exList").innerHTML = EX.map(sec => {
       const items = sec.items.map((it, i) => {
         const id = `${sec.id}${i + 1}`;
-        return `<div class="item" id="it-${id}"><span class="num">${i + 1}</span><div class="src">${it.src}</div>${itemBody(sec, it, id)}<div class="fb" hidden></div></div>`;
+        return `<div class="item" id="it-${id}"><span class="num">${i + 1}</span>${it.src ? `<div class="src">${it.src}</div>` : ""}${itemBody(sec, it, id)}<div class="fb" hidden></div></div>`;
       }).join("");
       const badge = sec.type === "free" ? "for Claude" : `${sec.items.length} items`;
       const btn = sec.type === "free" ? "" : `<div class="row"><button class="btn primary" data-check="${sec.id}">Vérifier ${sec.id}</button></div>`;
