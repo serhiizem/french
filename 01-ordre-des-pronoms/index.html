@@ -1,0 +1,567 @@
+<title>Je le lui donne</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: one narrow column like a French school notebook (Seyès lines, red margin); sticky tabs; red-pen corrections. */
+:root {
+  --paper: #f7f8fc;
+  --card: #ffffff;
+  --ink: #1b2140;
+  --muted: #5b6386;
+  --line: #e0e5f2;
+  --seyes: #d6def5;
+  --blue: #2846b4;
+  --blue-soft: #e8edfc;
+  --red: #c8303a;
+  --red-soft: #fdecee;
+  --green: #1d7f47;
+  --green-soft: #e5f5ec;
+  --amber: #a46a0e;
+  --amber-soft: #fbf1df;
+  --f-display: "Bricolage Grotesque", "Space Grotesk", system-ui, sans-serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-pen: "Caveat", "Comic Sans MS", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+    --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+    --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+  --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+  --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.wrap { max-width: 720px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 7vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.35rem; font-weight: 800; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+b, strong { font-weight: 600; }
+.k { color: var(--blue); font-weight: 600; }
+
+/* Header: Seyès ruling + red margin */
+header.top {
+  margin-top: 16px; padding: 22px 18px 20px 30px; border-radius: 6px; position: relative;
+  background-color: var(--card);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 23px, var(--seyes) 23px 24px);
+  border: 1px solid var(--line);
+  display: grid; gap: 8px;
+}
+header.top::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: var(--red); opacity: .7; }
+.eyebrow { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.sub { color: var(--muted); }
+
+/* Tabs */
+nav.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper);
+  display: flex; gap: 6px; padding-block: 12px; margin-top: 8px; border-bottom: 1px solid var(--line);
+}
+nav.tabs button {
+  flex: 1; font: 600 .95rem var(--f-body); color: var(--muted); background: transparent; border: 1px solid transparent;
+  padding: 9px 6px; border-radius: 999px; cursor: pointer;
+}
+nav.tabs button[aria-selected="true"] { color: var(--blue); background: var(--blue-soft); border-color: var(--blue-soft); }
+nav.tabs button:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+section.view { display: grid; gap: 22px; padding-top: 22px; }
+
+/* Lesson */
+.order { display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; }
+.slot { flex: 1 1 90px; min-width: 0; border-radius: 6px; padding: 8px 8px 9px; text-align: center; border: 1px solid var(--line); background: var(--card); }
+.slot .n { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.slot .w { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 1.25; }
+.slot.s1 .w { color: var(--blue); } .slot.s2 .w { color: var(--red); } .slot.s3 .w { color: var(--green); } .slot.s4 .w, .slot.s5 .w { color: var(--amber); }
+.slot.v { background: var(--ink); border-color: var(--ink); } .slot.v .w, .slot.v .n { color: var(--paper); }
+.block { display: grid; gap: 10px; }
+.ex { font-size: 1.1rem; }
+.tip { background: var(--blue-soft); border-radius: 6px; padding: 12px 14px; }
+.warn { background: var(--amber-soft); border-radius: 6px; padding: 12px 14px; }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.bad { color: var(--red); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+td.good { color: var(--green); font-weight: 600; }
+.p1 { color: var(--blue); font-weight: 600; } .p2 { color: var(--red); font-weight: 600; } .p3 { color: var(--green); font-weight: 600; } .p5 { color: var(--amber); font-weight: 600; }
+
+/* Vocab */
+.vtools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.vlist { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+.vrow { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.vrow:last-child { border-bottom: 0; }
+.vrow .fr { font-weight: 600; }
+.vrow .eg { grid-column: 1 / -1; font-size: .88rem; color: var(--muted); margin-top: -6px; }
+.vrow .en { color: var(--muted); }
+.hide-en .vrow .en { color: transparent; background: var(--line); border-radius: 4px; }
+.hide-en .vrow.show .en { color: var(--muted); background: transparent; }
+.vgroup { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 14px 6px; border-bottom: 1px solid var(--line); background: var(--paper); }
+.vgroup:first-child { border-radius: 6px 6px 0 0; }
+
+/* Buttons */
+.btn { font: 600 .92rem var(--f-body); border-radius: 999px; padding: 9px 16px; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: var(--paper); }
+.btn.ghost { background: transparent; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Exercises */
+.score {
+  display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-items: center; background: var(--card);
+  border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px;
+}
+.score .big { font-family: var(--f-display); font-weight: 800; font-size: 2rem; font-variant-numeric: tabular-nums; line-height: 1; }
+.bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--green); transition: width .4s ease; }
+.score .row { grid-column: 1 / -1; }
+.exsec { display: grid; gap: 12px; }
+.exhead { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+.exhead h2 .L { color: var(--red); font-family: var(--f-pen); font-size: 1.7rem; margin-right: 6px; }
+.instr { color: var(--muted); font-size: .93rem; }
+.badge { font-variant-numeric: tabular-nums; font-weight: 600; font-size: .85rem; padding: 3px 10px; border-radius: 999px; background: var(--line); color: var(--muted); }
+.badge.full { background: var(--green-soft); color: var(--green); }
+.items { display: grid; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+.item { padding: 12px 14px 12px 40px; border-bottom: 1px solid var(--line); position: relative; display: grid; gap: 6px; min-width: 0; }
+.item:last-child { border-bottom: 0; }
+.item .num { position: absolute; left: 14px; top: 13px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.item .src { color: var(--muted); font-size: .92rem; }
+.item .line { font-size: 1.08rem; line-height: 2.1; overflow-wrap: anywhere; }
+input.blank {
+  font: 500 1.02rem var(--f-body); color: var(--blue); background: transparent; border: 0; border-bottom: 2px solid var(--seyes);
+  padding: 0 4px 1px; border-radius: 0; text-align: center; min-width: 3.2em; max-width: 100%;
+}
+input.blank.wide { width: 100%; text-align: left; }
+input.blank:focus { border-bottom-color: var(--blue); outline: none; background: var(--blue-soft); }
+input.ok { border-bottom-color: var(--green); color: var(--green); }
+input.near { border-bottom-color: var(--amber); color: var(--amber); }
+input.bad { border-bottom-color: var(--red); color: var(--red); }
+.mc { display: flex; flex-wrap: wrap; gap: 8px; }
+.mc button { font: 500 1rem var(--f-body); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+.mc button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+.mc button.ok { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+.mc button.bad { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+.fb { font-size: .95rem; display: grid; gap: 2px; }
+.fb .ans { color: var(--red); }
+.fb .ans b { font-weight: 600; }
+.fb .pen { font-family: var(--f-pen); font-size: 1.25rem; line-height: 1.2; color: var(--red); }
+.fb.ok .pen { color: var(--green); }
+.fb.near .pen { color: var(--amber); }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 999px; font-weight: 500; font-size: .9rem; z-index: 20; }
+.copybox { width: 100%; min-height: 120px; font: .85rem/1.4 ui-monospace, monospace; padding: 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+footer { color: var(--muted); font-size: .85rem; padding-top: 28px; }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Topic 01 · A2–B1 · Grammaire</div>
+    <h1>Je <span style="color:var(--red)">le</span> <span style="color:var(--green)">lui</span> donne.</h1>
+    <p class="sub">L'ordre des pronoms compléments. Read the rule, learn the words, then do the exercises and tap <b>Vérifier</b>.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-regle" aria-selected="false" data-view="regle">Règle</button>
+    <button role="tab" id="tab-vocab" aria-selected="false" data-view="vocab">Vocabulaire</button>
+    <button role="tab" id="tab-exos" aria-selected="false" data-view="exos">Exercices</button>
+  </nav>
+
+  <!-- ============ RÈGLE ============ -->
+  <section class="view" id="regle" hidden>
+    <div class="block">
+      <h2>1. L'ordre</h2>
+      <p>All the object pronouns go <b>before the verb</b>, always in this order:</p>
+      <div class="order" aria-label="Pronoun order">
+        <div class="slot s1"><div class="n">1</div><div class="w">me te se<br>nous vous</div></div>
+        <div class="slot s2"><div class="n">2</div><div class="w">le la l'<br>les</div></div>
+        <div class="slot s3"><div class="n">3</div><div class="w">lui<br>leur</div></div>
+        <div class="slot s4"><div class="n">4</div><div class="w">y</div></div>
+        <div class="slot s5"><div class="n">5</div><div class="w">en</div></div>
+        <div class="slot v"><div class="n">→</div><div class="w">verbe</div></div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th>Phrase</th><th>Pattern</th></tr>
+        <tr><td>Il <span class="p1">me</span> <span class="p2">le</span> donne.</td><td>1 + 2</td></tr>
+        <tr><td>Je <span class="p1">te</span> <span class="p2">la</span> prête.</td><td>1 + 2</td></tr>
+        <tr><td>Elle <span class="p1">nous</span> <span class="p2">les</span> montre.</td><td>1 + 2</td></tr>
+        <tr><td>Je <span class="p2">le</span> <span class="p3">lui</span> donne.</td><td>2 + 3</td></tr>
+        <tr><td>Nous <span class="p2">la</span> <span class="p3">leur</span> envoyons.</td><td>2 + 3</td></tr>
+        <tr><td>Je <span class="p3">lui</span> <span class="p5">en</span> donne.</td><td>3 + 5</td></tr>
+      </table></div>
+      <p class="tip"><b>Memory trick for the 3rd person:</b> sort them alphabetically. <b>la, le, les</b> come before <b>leur, lui</b> (<i>e</i> before <i>u</i>). With <b>me, te, nous, vous</b>, those go first: <i>Il <b>me le</b> dit.</i></p>
+    </div>
+
+    <div class="block">
+      <h2>2. Où ? Where they go</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>Structure</th><th>Rule</th><th>Exemple</th></tr>
+        <tr><td>Présent</td><td>before the verb</td><td>Je <b class="k">le lui</b> donne.</td></tr>
+        <tr><td>Négation</td><td><i>ne</i> + pronouns + verb + <i>pas</i></td><td>Je <b class="k">ne le lui</b> donne <b class="k">pas</b>.</td></tr>
+        <tr><td>Passé composé</td><td>before the <b>auxiliary</b></td><td>Je <b class="k">le lui ai</b> donné.</td></tr>
+        <tr><td>Verbe + infinitif</td><td>before the <b>infinitive</b></td><td>Je vais <b class="k">le lui donner</b>.</td></tr>
+        <tr><td>Impératif +</td><td>after the verb, hyphens, COD first</td><td>Donne-<b class="k">le-lui</b> !<br>Donne-<b class="k">le-moi</b> !</td></tr>
+        <tr><td>Impératif −</td><td>normal order</td><td><b class="k">Ne le lui</b> donne <b class="k">pas</b> !</td></tr>
+      </table></div>
+      <p class="tip">In the positive imperative, <b>me → moi</b> and <b>te → toi</b>: <i>Donne-le-<b>moi</b> !</i></p>
+    </div>
+
+    <div class="block">
+      <h2>3. Passé composé : l'accord</h2>
+      <p>When <b>le / la / les</b> comes <b>before avoir</b>, the past participle agrees with it:</p>
+      <p class="ex">J'ai donné <u>la clé</u> à Paul. → Je <span class="p2">la</span> lui ai donné<span class="p2">e</span>.</p>
+      <p class="ex">J'ai rendu <u>les clés</u> à Marie. → Je <span class="p2">les</span> lui ai rendu<span class="p2">es</span>.</p>
+      <p class="warn">No agreement with <b>lui / leur</b>. They are indirect objects (COI).</p>
+    </div>
+
+    <div class="block">
+      <h2>4. L'élision</h2>
+      <p><b>me, te, le, la</b> → <b>m', t', l'</b> before a vowel or a silent <i>h</i>.</p>
+      <p class="ex">Je <b class="k">te l'</b>ai dit. · Il <b class="k">me l'</b>a prêté. · Elle <b class="k">nous l'</b>apporte.</p>
+      <p class="warn"><b>lui</b> never elides: Je <b>le lui</b> ai dit. The <i>le</i> stays full too, because <i>lui</i> comes next.</p>
+    </div>
+
+    <div class="block">
+      <h2>5. Bonus : « en » always comes last</h2>
+      <p class="ex">Je <b class="k">lui en</b> donne. · Il <b class="k">m'en</b> reste. · Donne-<b class="k">m'en</b> !</p>
+    </div>
+
+    <div class="block">
+      <h2>6. Common mistakes</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>✗</th><th>✓</th></tr>
+        <tr><td class="bad">Je lui le donne.</td><td class="good">Je le lui donne.</td></tr>
+        <tr><td class="bad">Donne-moi-le !</td><td class="good">Donne-le-moi !</td></tr>
+        <tr><td class="bad">Je l'ai lui donné.</td><td class="good">Je le lui ai donné.</td></tr>
+        <tr><td class="bad">Je ne lui le donne pas.</td><td class="good">Je ne le lui donne pas.</td></tr>
+        <tr><td class="bad">Je le lui vais donner.</td><td class="good">Je vais le lui donner.</td></tr>
+      </table></div>
+      <div class="row"><button class="btn primary" data-go="vocab">Next: vocabulaire →</button></div>
+    </div>
+  </section>
+
+  <!-- ============ VOCAB ============ -->
+  <section class="view" id="vocab" hidden>
+    <div class="block">
+      <h2>Rendre service</h2>
+      <p class="sub">Doing favours. These verbs take two objects (<i>qqch <b>à</b> qqn</i>), so they're perfect for <i>le lui</i>. All of them appear in the exercises.</p>
+    </div>
+    <div class="vtools">
+      <label class="row" style="gap:8px; cursor:pointer;"><input type="checkbox" id="hideEn"> Hide English (tap a row to reveal)</label>
+    </div>
+    <div class="vlist" id="vlist"></div>
+    <p class="warn"><b>prêter</b> = lend (give for a while) · <b>emprunter</b> = borrow (take for a while).<br>Mon frère <b>me prête</b> sa voiture. = J'<b>emprunte</b> la voiture <b>à</b> mon frère.</p>
+    <div class="row"><button class="btn primary" data-go="exos">Next: exercices →</button></div>
+  </section>
+
+  <!-- ============ EXERCICES ============ -->
+  <section class="view" id="exos" hidden>
+    <div class="score">
+      <div class="big" id="scoreBig">0/0</div>
+      <div style="display:grid; gap:6px; min-width:0;">
+        <div class="bar"><i id="scoreBar"></i></div>
+        <div class="instr" id="scoreTxt">Tap "Vérifier" under each exercise, or check everything at once.</div>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="checkAll">Tout vérifier</button>
+        <button class="btn" id="copyErr">Copier mes erreurs</button>
+        <button class="btn ghost" id="resetAll">Effacer tout</button>
+      </div>
+    </div>
+    <div id="resetConfirm" class="warn" hidden>
+      <div class="row" style="justify-content:space-between;"><span>Erase all your answers?</span>
+      <span class="row"><button class="btn" id="resetYes">Oui, effacer</button><button class="btn ghost" id="resetNo">Annuler</button></span></div>
+    </div>
+    <textarea id="copyBox" class="copybox" readonly hidden></textarea>
+    <div id="exList" style="display:grid; gap:28px;"></div>
+  </section>
+
+  <footer>Accents: on a phone, press and hold a letter (e → é è ê). Missing accents count as "presque".</footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const VOCAB = [
+  { g: "Verbes" },
+  { fr: "prêter qqch à qqn", en: "to lend", eg: "Je prête mon vélo à Sophie." },
+  { fr: "emprunter qqch à qqn", en: "to borrow", eg: "J'emprunte la voiture à mon frère." },
+  { fr: "rendre qqch à qqn", en: "to give back", eg: "Je rends les clés au voisin." },
+  { fr: "rembourser qqn", en: "to pay back", eg: "Je te rembourse demain." },
+  { fr: "offrir qqch à qqn", en: "to give (a gift)", eg: "Il offre des fleurs à sa mère." },
+  { fr: "envoyer", en: "to send", eg: "Je t'envoie la recette." },
+  { fr: "apporter", en: "to bring", eg: "Elle nous apporte le courrier." },
+  { fr: "montrer", en: "to show", eg: "Montre-moi tes photos !" },
+  { fr: "expliquer", en: "to explain", eg: "Le prof nous explique la règle." },
+  { fr: "raconter", en: "to tell (a story)", eg: "Raconte-moi l'histoire !" },
+  { fr: "promettre", en: "to promise", eg: "Je te le promets." },
+  { fr: "confier qqch à qqn", en: "to entrust", eg: "Je lui confie mes clés." },
+  { g: "Noms" },
+  { fr: "un voisin / une voisine", en: "a neighbour" },
+  { fr: "un cadeau", en: "a gift" },
+  { fr: "un colis", en: "a parcel" },
+  { fr: "le courrier", en: "the mail" },
+  { fr: "une clé", en: "a key" },
+  { fr: "un chargeur", en: "a charger" },
+  { fr: "un tire-bouchon", en: "a corkscrew" },
+  { fr: "un appareil photo", en: "a camera" },
+  { fr: "une recette", en: "a recipe" },
+  { fr: "l'argent (m.)", en: "money" },
+  { g: "Expressions" },
+  { fr: "rendre service à qqn", en: "to do someone a favour" },
+  { fr: "avoir besoin de qqch", en: "to need something" },
+  { fr: "Ça marche !", en: "Deal! / OK!" },
+  { fr: "sans faute", en: "without fail" },
+  { fr: "C'est gentil !", en: "That's kind!" },
+];
+
+/* [] = a blank. ans: one array of accepted answers per blank. */
+const EX = [
+  { id: "A", title: "Choose the order", instr: "Tap the correct option.", type: "mc", items: [
+    { src: "Tu prêtes ta voiture à Paul ?", text: "Oui, je ___ prête.", opts: ["lui la", "la lui"], c: 1, why: "le/la/les before lui/leur." },
+    { src: "Il me montre ses photos.", text: "Il ___ montre.", opts: ["me les", "les me"], c: 0, why: "me/te/nous/vous always go first." },
+    { src: "Nous envoyons le colis à nos parents.", text: "Nous ___ envoyons.", opts: ["leur le", "le leur"], c: 1, why: "le before leur." },
+    { src: "Tu me rends la clé ?", text: "Oui, je ___ rends.", opts: ["te la", "la te"], c: 0, why: "te first, then la." },
+    { src: "Elle vous explique la règle.", text: "Elle ___ explique.", opts: ["vous l'", "la vous"], c: 0, why: "vous first; la → l' before a vowel." },
+    { src: "Je donne des bonbons aux enfants.", text: "Je ___ donne.", opts: ["en leur", "leur en"], c: 1, why: "en always comes last." },
+  ]},
+  { id: "B", title: "Two pronouns · présent", instr: "Replace the underlined words with pronouns.", type: "blanks", items: [
+    { src: "Je prête <u>mon vélo</u> <u>à Sophie</u>.", text: "Je [] [] prête.", ans: [["le"], ["lui"]] },
+    { src: "Marc offre <u>ces fleurs</u> <u>à sa mère</u>.", text: "Marc [] [] offre.", ans: [["les"], ["lui"]] },
+    { src: "Le prof explique <u>la leçon</u> <u>aux étudiants</u>.", text: "Le prof [] [] explique.", ans: [["la"], ["leur"]] },
+    { src: "Tu me racontes <u>l'histoire</u> ?", text: "Tu [] [] racontes ?", ans: [["me"], ["la"]] },
+    { src: "Ma voisine nous apporte <u>le courrier</u>.", text: "Ma voisine [] []apporte.", ans: [["nous"], ["l'"]], why: "le → l' before a vowel (apporte)." },
+    { src: "Je rends <u>les clés</u> <u>à mon voisin</u>.", text: "Je [] [] rends.", ans: [["les"], ["lui"]] },
+    { src: "Je vous envoie <u>la recette</u> ce soir.", text: "Je [] []envoie ce soir.", ans: [["vous"], ["l'"]], why: "la → l' before a vowel (envoie)." },
+    { src: "Ils montrent <u>leur appartement</u> <u>à leurs amis</u>.", text: "Ils [] [] montrent.", ans: [["le"], ["leur"]] },
+  ]},
+  { id: "C", title: "Négation", instr: "ne … pas wraps the pronouns and the verb.", type: "blanks", items: [
+    { src: "Je ne prête pas <u>mon chargeur</u> <u>à Julien</u>.", text: "Je ne [] [] prête pas.", ans: [["le"], ["lui"]] },
+    { src: "Tu ne me dis pas <u>la vérité</u> !", text: "Tu ne [] [] dis pas !", ans: [["me"], ["la"]] },
+    { src: "Nous ne rendons pas <u>les livres</u> <u>à Mme Martin</u>.", text: "Nous ne [] [] rendons pas.", ans: [["les"], ["lui"]], why: "Mme Martin is one person → lui." },
+    { src: "Elle ne nous montre pas <u>ses photos</u>.", text: "Elle ne [] [] montre pas.", ans: [["nous"], ["les"]] },
+  ]},
+  { id: "D", title: "Passé composé", instr: "Pronouns go before the auxiliary. Small blank after a participle = its ending (e, s, es).", type: "blanks", items: [
+    { src: "J'ai prêté <u>mon appareil photo</u> <u>à Léa</u>.", text: "Je [] [] ai prêté.", ans: [["le"], ["lui"]], why: "lui never elides, and le stays full before it." },
+    { src: "Tu as rendu <u>la clé</u> <u>au voisin</u> ?", text: "Oui, je [] [] ai rendu[].", ans: [["la"], ["lui"], ["e"]], why: "la (la clé) comes before avoir → rendue." },
+    { src: "Il m'a envoyé <u>les photos</u>.", text: "Il [] []a envoyé[].", ans: [["me"], ["les"], ["es"]], why: "les photos = feminine plural → envoyées." },
+    { src: "Nous avons expliqué <u>le problème</u> <u>à nos collègues</u>.", text: "Nous [] [] avons expliqué.", ans: [["le"], ["leur"]] },
+    { src: "Elle t'a raconté <u>l'histoire</u> ?", text: "Elle [] []a raconté[] ?", ans: [["te"], ["l'"], ["e"]], why: "te l'a (elision); l'histoire is feminine → racontée." },
+    { src: "Je n'ai pas remboursé <u>l'argent</u> <u>à Paul</u>.", text: "Je ne [] [] ai pas remboursé.", ans: [["le"], ["lui"]] },
+  ]},
+  { id: "E", title: "Verbe + infinitif", instr: "Pronouns go before the infinitive.", type: "blanks", items: [
+    { src: "Je vais prêter <u>ma voiture</u> <u>à Hugo</u>.", text: "Je vais [] [] prêter.", ans: [["la"], ["lui"]] },
+    { src: "Tu peux me montrer <u>ton jardin</u> ?", text: "Tu peux [] [] montrer ?", ans: [["me"], ["le"]] },
+    { src: "On doit rendre <u>les livres</u> <u>à la prof</u> demain.", text: "On doit [] [] rendre demain.", ans: [["les"], ["lui"]] },
+    { src: "Je ne veux pas raconter <u>ce secret</u> <u>à mes parents</u>.", text: "Je ne veux pas [] [] raconter.", ans: [["le"], ["leur"]] },
+  ]},
+  { id: "F", title: "Impératif", instr: "Positive: verb-COD-COI with hyphens (moi, toi). Negative: normal order.", type: "blanks", items: [
+    { src: "Donne-moi <u>le sel</u> !", text: "Donne-[]-[] !", ans: [["le"], ["moi"]] },
+    { src: "Montrez <u>la photo</u> <u>à Marie</u> !", text: "Montrez-[]-[] !", ans: [["la"], ["lui"]] },
+    { src: "Rends <u>les clés</u> <u>à tes voisins</u> !", text: "Rends-[]-[] !", ans: [["les"], ["leur"]] },
+    { src: "Ne me donne pas <u>ce papier</u> !", text: "Ne [] [] donne pas !", ans: [["me"], ["le"]], why: "Negative imperative → normal order." },
+    { src: "Envoie-nous <u>la recette</u> !", text: "Envoie-[]-[] !", ans: [["la"], ["nous"]] },
+    { src: "N'offre pas <u>ce cadeau</u> <u>à ta sœur</u> !", text: "Ne [] [] offre pas !", ans: [["le"], ["lui"]] },
+  ]},
+  { id: "G", title: "Answer with pronouns", instr: "Write the whole answer. Replace both objects.", type: "sentence", items: [
+    { src: "Tu prêtes ton tire-bouchon à ton voisin ?", lead: "Oui,", ans: ["je le lui prête"] },
+    { src: "Vous nous envoyez le colis ?", lead: "Oui,", ans: ["nous vous l'envoyons", "je vous l'envoie", "on vous l'envoie"] },
+    { src: "Tu as rendu les clés à Paul ?", lead: "Non,", ans: ["je ne les lui ai pas rendues"], why: "les clés = feminine plural → rendues." },
+    { src: "Elle va offrir ce livre à ses enfants ?", lead: "Oui,", ans: ["elle va le leur offrir"] },
+    { src: "Tu me montres ton appartement ?", lead: "Oui,", ans: ["je te le montre"] },
+    { src: "Il t'a remboursé l'argent ?", lead: "Non,", ans: ["il ne me l'a pas remboursé"], why: "me l'a: le → l' before a." },
+  ]},
+  { id: "H", title: "Bonus : en", instr: "en always comes last.", type: "blanks", items: [
+    { src: "Tu donnes <u>des bonbons</u> <u>aux enfants</u> ?", text: "Oui, je [] [] donne.", ans: [["leur"], ["en"]] },
+    { src: "Il te reste <u>du pain</u> ?", text: "Oui, il [] reste.", ans: [["m'en"]] },
+    { src: "Donne-moi <u>du café</u> !", text: "Donne-[] !", ans: [["m'en"]], why: "moi + en → m'en." },
+  ]},
+  { id: "V", title: "Vocabulaire", instr: "prêter, emprunter, rendre, rembourser, offrir, in the présent.", type: "blanks", items: [
+    { src: "Je n'ai pas de voiture, alors…", text: "j'[] la voiture de mon frère.", ans: [["emprunte"]] },
+    { src: "Mon frère est sympa :", text: "il me [] sa voiture.", ans: [["prête"]] },
+    { src: "Demain, sans faute :", text: "je lui [] sa voiture.", ans: [["rends"]] },
+    { src: "Tu m'as prêté 20 euros ?", text: "Je te [] demain, promis.", ans: [["rembourse"]] },
+    { src: "C'est ton anniversaire !", text: "Je t'[] ce petit cadeau.", ans: [["offre"]] },
+  ]},
+];
+
+const KEY = "fr01-v1";
+let store = {};
+try { store = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { store = {}; }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} }
+
+const norm = s => (s || "").toLowerCase().replace(/[’`´]/g, "'").replace(/\s+/g, " ").replace(/\s*'\s*/g, "'").trim();
+const sentNorm = s => norm(s).replace(/[.!?,;…]+/g, " ").replace(/^(oui|non)\s+/, "").replace(/\s+/g, " ").trim();
+const strip = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+function grade(val, accepted, f) {
+  const v = f(val);
+  if (!v) return "empty";
+  if (accepted.some(a => f(a) === v)) return "ok";
+  if (accepted.some(a => strip(f(a)) === strip(v))) return "near";
+  return "bad";
+}
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const $ = s => document.querySelector(s);
+
+/* ---------- Tabs ---------- */
+function show(view) {
+  if (!["regle", "vocab", "exos"].includes(view)) view = "regle";
+  document.querySelectorAll("section.view").forEach(s => s.hidden = s.id !== view);
+  document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.view === view));
+  try { localStorage.setItem(KEY + "-tab", view); } catch (e) {}
+}
+document.querySelectorAll("[data-view]").forEach(b => b.onclick = () => show(b.dataset.view));
+document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { show(b.dataset.go); window.scrollTo(0, 0); });
+
+/* ---------- Vocab ---------- */
+$("#vlist").innerHTML = VOCAB.map(v => v.g ? `<div class="vgroup">${v.g}</div>` :
+  `<div class="vrow"><div class="fr">${esc(v.fr)}</div><div class="en">${esc(v.en)}</div>${v.eg ? `<div class="eg">${esc(v.eg)}</div>` : ""}</div>`).join("");
+$("#vlist").addEventListener("click", e => { const r = e.target.closest(".vrow"); if (r) r.classList.toggle("show"); });
+$("#hideEn").onchange = e => { $("#vlist").classList.toggle("hide-en", e.target.checked); $("#vlist").querySelectorAll(".vrow").forEach(r => r.classList.remove("show")); };
+
+/* ---------- Exercises ---------- */
+function fillTemplate(text, answers) { let i = 0; return text.replace(/\[\]/g, () => `<b>${esc(answers[i++] || "")}</b>`); }
+
+function render() {
+  $("#exList").innerHTML = EX.map(sec => {
+    const items = sec.items.map((it, i) => {
+      const id = `${sec.id}${i + 1}`;
+      let body = "";
+      if (sec.type === "mc") {
+        body = `<div class="line">${esc(it.text)}</div><div class="mc" data-id="${id}">${it.opts.map((o, k) =>
+          `<button type="button" data-k="${k}" aria-pressed="${store[id] === k}">${String.fromCharCode(97 + k)}) ${esc(o)}</button>`).join("")}</div>`;
+      } else if (sec.type === "blanks") {
+        let n = 0;
+        const line = esc(it.text).replace(/\[\]/g, () => {
+          const bid = `${id}-${n}`; const exp = it.ans[n][0]; n++;
+          const w = Math.max(3, exp.length + 1.5);
+          return `<input class="blank" id="in-${bid}" data-b="${bid}" style="width:${w}ch" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" value="${esc(store[bid] || "")}">`;
+        });
+        body = `<div class="line">${line}</div>`;
+      } else {
+        body = `<div class="line">${esc(it.lead)} <input class="blank wide" id="in-${id}-0" data-b="${id}-0" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" value="${esc(store[id + "-0"] || "")}"></div>`;
+      }
+      return `<div class="item" id="it-${id}"><span class="num">${i + 1}</span><div class="src">${it.src}</div>${body}<div class="fb" hidden></div></div>`;
+    }).join("");
+    return `<div class="exsec" id="sec-${sec.id}">
+      <div class="exhead"><h2><span class="L">${sec.id}</span>${esc(sec.title)}</h2><span class="badge" id="badge-${sec.id}">${sec.items.length} items</span></div>
+      <p class="instr">${esc(sec.instr)}</p>
+      <div class="items">${items}</div>
+      <div class="row"><button class="btn primary" data-check="${sec.id}">Vérifier ${sec.id}</button></div>
+    </div>`;
+  }).join("");
+}
+render();
+
+$("#exList").addEventListener("input", e => {
+  const b = e.target.dataset.b; if (!b) return;
+  store[b] = e.target.value; e.target.classList.remove("ok", "bad", "near"); save();
+});
+$("#exList").addEventListener("keydown", e => {
+  if (e.key !== "Enter" || !e.target.dataset.b) return;
+  e.preventDefault();
+  const all = [...document.querySelectorAll("input.blank")]; const nx = all[all.indexOf(e.target) + 1];
+  if (nx) nx.focus(); else e.target.blur();
+});
+$("#exList").addEventListener("click", e => {
+  const opt = e.target.closest(".mc button");
+  if (opt) {
+    const box = opt.parentElement, id = box.dataset.id;
+    store[id] = +opt.dataset.k; save();
+    box.querySelectorAll("button").forEach(b => { b.setAttribute("aria-pressed", b === opt); b.classList.remove("ok", "bad"); });
+    return;
+  }
+  const c = e.target.closest("[data-check]");
+  if (c) { checkSection(c.dataset.check); updateScore(); }
+});
+
+const results = {}; // itemId -> {state, mine, correct, why}
+function checkSection(sid) {
+  const sec = EX.find(s => s.id === sid);
+  let ok = 0;
+  sec.items.forEach((it, i) => {
+    const id = `${sid}${i + 1}`, el = $(`#it-${id}`), fb = el.querySelector(".fb");
+    let state, mine, correct;
+    if (sec.type === "mc") {
+      const pick = store[id];
+      mine = pick == null ? "" : it.opts[pick]; correct = it.opts[it.c];
+      state = pick == null ? "empty" : pick === it.c ? "ok" : "bad";
+      el.querySelectorAll(".mc button").forEach(b => {
+        b.classList.remove("ok", "bad");
+        if (+b.dataset.k === it.c && state !== "empty") b.classList.add("ok");
+        else if (+b.dataset.k === pick) b.classList.add("bad");
+      });
+      correct = it.text.replace("___", correct);
+    } else if (sec.type === "blanks") {
+      const states = it.ans.map((acc, n) => {
+        const inp = $(`#in-${id}-${n}`), st = grade(inp.value, acc, norm);
+        inp.classList.remove("ok", "bad", "near"); inp.classList.add(st === "empty" ? "bad" : st);
+        return st;
+      });
+      state = states.every(s => s === "ok") ? "ok" : states.includes("empty") && states.every(s => s === "empty") ? "empty" : states.every(s => s === "ok" || s === "near") ? "near" : "bad";
+      mine = it.ans.map((_, n) => $(`#in-${id}-${n}`).value.trim() || "…").join(" / ");
+      correct = fillTemplate(esc(it.text), it.ans.map(a => a[0]));
+    } else {
+      const inp = $(`#in-${id}-0`); state = grade(inp.value, it.ans, sentNorm);
+      inp.classList.remove("ok", "bad", "near"); inp.classList.add(state === "empty" ? "bad" : state);
+      mine = inp.value.trim(); correct = `${esc(it.lead)} <b>${esc(it.show || it.ans[0])}</b>.`;
+    }
+    if (state === "ok") ok++;
+    results[id] = { state, mine, correct: correct.replace(/<[^>]+>/g, ""), why: it.why || "" };
+    fb.hidden = false; fb.className = "fb " + (state === "ok" ? "ok" : state === "near" ? "near" : "bad");
+    if (state === "ok") fb.innerHTML = `<span class="pen">Très bien !</span>`;
+    else if (state === "near") fb.innerHTML = `<span class="pen">Presque ! Check the accents.</span><span class="ans">${correct}</span>`;
+    else if (state === "empty") fb.innerHTML = `<span class="pen">Pas de réponse.</span><span class="ans">${correct}</span>${it.why ? `<span class="instr">${esc(it.why)}</span>` : ""}`;
+    else fb.innerHTML = `<span class="ans">${correct}</span>${it.why ? `<span class="pen">${esc(it.why)}</span>` : ""}`;
+  });
+  const badge = $(`#badge-${sid}`);
+  badge.textContent = `${ok}/${sec.items.length}`; badge.classList.toggle("full", ok === sec.items.length);
+}
+
+function updateScore() {
+  const total = EX.reduce((n, s) => n + s.items.length, 0);
+  const checked = Object.values(results);
+  const ok = checked.filter(r => r.state === "ok").length;
+  $("#scoreBig").textContent = `${ok}/${total}`;
+  $("#scoreBar").style.width = (100 * ok / total) + "%";
+  const errs = checked.filter(r => r.state !== "ok").length;
+  $("#scoreTxt").textContent = checked.length === 0 ? `Tap "Vérifier" under each exercise, or check everything at once.`
+    : ok === total ? "Parfait ! Everything is correct." : `${checked.length} of ${total} checked · ${errs} to review.`;
+}
+updateScore();
+
+$("#checkAll").onclick = () => { EX.forEach(s => checkSection(s.id)); updateScore(); toast("Tout est vérifié"); };
+
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2200); }
+
+$("#copyErr").onclick = () => {
+  EX.forEach(s => checkSection(s.id)); updateScore();
+  const lines = Object.entries(results).filter(([, r]) => r.state !== "ok")
+    .map(([id, r]) => `${id}: I wrote "${r.mine || "—"}" · correct: ${r.correct}`);
+  const total = EX.reduce((n, s) => n + s.items.length, 0);
+  const text = lines.length ? `Topic 01 (ordre des pronoms): ${total - lines.length}/${total}. My mistakes:\n` + lines.join("\n") : `Topic 01: ${total}/${total}, no mistakes.`;
+  const box = $("#copyBox"); box.value = text;
+  navigator.clipboard?.writeText(text).then(() => { box.hidden = true; toast("Copied. Paste it to Claude."); })
+    .catch(() => { box.hidden = false; box.focus(); box.select(); toast("Select the text below and copy it"); })
+    ?? (box.hidden = false, box.select());
+};
+
+$("#resetAll").onclick = () => { $("#resetConfirm").hidden = false; };
+$("#resetNo").onclick = () => { $("#resetConfirm").hidden = true; };
+$("#resetYes").onclick = () => {
+  store = {}; save(); for (const k in results) delete results[k];
+  render(); updateScore(); $("#resetConfirm").hidden = true; $("#copyBox").hidden = true; toast("Answers erased");
+};
+
+let startTab = "regle"; try { startTab = localStorage.getItem(KEY + "-tab") || "regle"; } catch (e) {}
+show(startTab);
+</script>
