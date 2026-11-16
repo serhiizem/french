@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px/1.4 system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<title>Je l'aide, je lui téléphone</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: one narrow column like a French school notebook (Seyès lines, red margin); sticky tabs; red-pen corrections. */
+:root {
+  --paper: #f7f8fc;
+  --card: #ffffff;
+  --ink: #1b2140;
+  --muted: #5b6386;
+  --line: #e0e5f2;
+  --seyes: #d6def5;
+  --blue: #2846b4;
+  --blue-soft: #e8edfc;
+  --red: #c8303a;
+  --red-soft: #fdecee;
+  --green: #1d7f47;
+  --green-soft: #e5f5ec;
+  --amber: #a46a0e;
+  --amber-soft: #fbf1df;
+  --f-display: "Bricolage Grotesque", "Space Grotesk", system-ui, sans-serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-pen: "Caveat", "Comic Sans MS", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+    --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+    --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+  --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+  --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.wrap { max-width: 720px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 7vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.35rem; font-weight: 800; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+b, strong { font-weight: 600; }
+.k { color: var(--blue); font-weight: 600; }
+
+/* Header: Seyès ruling + red margin */
+header.top {
+  margin-top: 16px; padding: 22px 18px 20px 30px; border-radius: 6px; position: relative;
+  background-color: var(--card);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 23px, var(--seyes) 23px 24px);
+  border: 1px solid var(--line);
+  display: grid; gap: 8px;
+}
+header.top::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: var(--red); opacity: .7; }
+.eyebrow { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.sub { color: var(--muted); }
+
+/* Tabs */
+nav.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper);
+  display: flex; gap: 6px; padding-block: 12px; margin-top: 8px; border-bottom: 1px solid var(--line);
+}
+nav.tabs button {
+  flex: 1; font: 600 .95rem var(--f-body); color: var(--muted); background: transparent; border: 1px solid transparent;
+  padding: 9px 6px; border-radius: 999px; cursor: pointer;
+}
+nav.tabs button[aria-selected="true"] { color: var(--blue); background: var(--blue-soft); border-color: var(--blue-soft); }
+nav.tabs button:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+section.view { display: grid; gap: 22px; padding-top: 22px; }
+
+/* Lesson */
+.order { display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; }
+.slot { flex: 1 1 90px; min-width: 0; border-radius: 6px; padding: 8px 8px 9px; text-align: center; border: 1px solid var(--line); background: var(--card); }
+.slot .n { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.slot .w { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 1.25; }
+.slot.s1 .w { color: var(--blue); } .slot.s2 .w { color: var(--red); } .slot.s3 .w { color: var(--green); } .slot.s4 .w, .slot.s5 .w { color: var(--amber); }
+.slot.v { background: var(--ink); border-color: var(--ink); } .slot.v .w, .slot.v .n { color: var(--paper); }
+.block { display: grid; gap: 10px; }
+.ex { font-size: 1.1rem; }
+.tip { background: var(--blue-soft); border-radius: 6px; padding: 12px 14px; }
+.warn { background: var(--amber-soft); border-radius: 6px; padding: 12px 14px; }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.bad { color: var(--red); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+td.good { color: var(--green); font-weight: 600; }
+.p1 { color: var(--blue); font-weight: 600; } .p2 { color: var(--red); font-weight: 600; } .p3 { color: var(--green); font-weight: 600; } .p5 { color: var(--amber); font-weight: 600; }
+
+/* Vocab */
+.vtools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.vlist { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+.vrow { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.vrow:last-child { border-bottom: 0; }
+.vrow .fr { font-weight: 600; }
+.vrow .eg { grid-column: 1 / -1; font-size: .88rem; color: var(--muted); margin-top: -6px; }
+.vrow .en { color: var(--muted); }
+.hide-en .vrow .en { color: transparent; background: var(--line); border-radius: 4px; }
+.hide-en .vrow.show .en { color: var(--muted); background: transparent; }
+.vgroup { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 14px 6px; border-bottom: 1px solid var(--line); background: var(--paper); }
+.vgroup:first-child { border-radius: 6px 6px 0 0; }
+
+/* Buttons */
+.btn { font: 600 .92rem var(--f-body); border-radius: 999px; padding: 9px 16px; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: var(--paper); }
+.btn.ghost { background: transparent; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Exercises */
+.score {
+  display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-items: center; background: var(--card);
+  border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px;
+}
+.score .big { font-family: var(--f-display); font-weight: 800; font-size: 2rem; font-variant-numeric: tabular-nums; line-height: 1; }
+.bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--green); transition: width .4s ease; }
+.score .row { grid-column: 1 / -1; }
+.exsec { display: grid; gap: 12px; }
+.exhead { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+.exhead h2 .L { color: var(--red); font-family: var(--f-pen); font-size: 1.7rem; margin-right: 6px; }
+.instr { color: var(--muted); font-size: .93rem; }
+.badge { font-variant-numeric: tabular-nums; font-weight: 600; font-size: .85rem; padding: 3px 10px; border-radius: 999px; background: var(--line); color: var(--muted); }
+.badge.full { background: var(--green-soft); color: var(--green); }
+.items { display: grid; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+.item { padding: 12px 14px 12px 40px; border-bottom: 1px solid var(--line); position: relative; display: grid; gap: 6px; min-width: 0; }
+.item:last-child { border-bottom: 0; }
+.item .num { position: absolute; left: 14px; top: 13px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.item .src { color: var(--muted); font-size: .92rem; }
+.item .line { font-size: 1.08rem; line-height: 2.1; overflow-wrap: anywhere; }
+input.blank {
+  font: 500 1.02rem var(--f-body); color: var(--blue); background: transparent; border: 0; border-bottom: 2px solid var(--seyes);
+  padding: 0 4px 1px; border-radius: 0; text-align: center; min-width: 3.2em; max-width: 100%;
+}
+input.blank.wide { width: 100%; text-align: left; }
+input.blank:focus { border-bottom-color: var(--blue); outline: none; background: var(--blue-soft); }
+input.ok { border-bottom-color: var(--green); color: var(--green); }
+input.near { border-bottom-color: var(--amber); color: var(--amber); }
+input.bad { border-bottom-color: var(--red); color: var(--red); }
+.mc { display: flex; flex-wrap: wrap; gap: 8px; }
+.mc button { font: 500 1rem var(--f-body); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+.mc button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+.mc button.ok { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+.mc button.bad { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+.fb { font-size: .95rem; display: grid; gap: 2px; }
+.fb .ans { color: var(--red); }
+.fb .ans b { font-weight: 600; }
+.fb .pen { font-family: var(--f-pen); font-size: 1.25rem; line-height: 1.2; color: var(--red); }
+.fb.ok .pen { color: var(--green); }
+.fb.near .pen { color: var(--amber); }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 999px; font-weight: 500; font-size: .9rem; z-index: 20; }
+.copybox { width: 100%; min-height: 120px; font: .85rem/1.4 ui-monospace, monospace; padding: 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+footer { color: var(--muted); font-size: .85rem; padding-top: 28px; }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+textarea.free { width: 100%; font: 1rem/1.5 var(--f-body); color: var(--blue); background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; resize: vertical; }
+textarea.free:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+a.home { color: var(--muted); font-size: .88rem; text-decoration: none; font-weight: 500; }
+a.home:hover, a.home:focus-visible { color: var(--blue); }
+.conj { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px 18px; font-size: 1.05rem; }
+.conj .e { color: var(--red); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="home" href="../">← Tous les topics</a>
+    <div class="eyebrow">Topic 05 · A2–B1 · Grammaire</div>
+    <h1>Je <span style="color:var(--red)">l'</span>aide, je <span style="color:var(--green)">lui</span> téléphone.</h1>
+    <p class="sub">COD ou COI ? Verb + person → <b>le / la / les</b>. Verb + <b>à</b> + person → <b>lui / leur</b>.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-regle" aria-selected="false" data-view="regle">Règle</button>
+    <button role="tab" id="tab-vocab" aria-selected="false" data-view="vocab">Vocabulaire</button>
+    <button role="tab" id="tab-exos" aria-selected="false" data-view="exos">Exercices</button>
+  </nav>
+
+  <!-- ============ RÈGLE ============ -->
+  <section class="view" id="regle" hidden>
+    <div class="block">
+      <h2>1. Qui ? or à qui ?</h2>
+      <div class="order" aria-label="COD vs COI">
+        <div class="slot s2"><div class="n">J'aide qui ?</div><div class="w">COD<br>le la les</div></div>
+        <div class="slot s3"><div class="n">Je téléphone à qui ?</div><div class="w">COI<br>lui leur</div></div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th></th><th>COD (direct)</th><th>COI (indirect)</th></tr>
+        <tr><td>Construction</td><td>verb + <b>person</b></td><td>verb + <b>à</b> + person</td></tr>
+        <tr><td>Exemple</td><td>J'aide <u>Marie</u>.</td><td>Je téléphone <u>à Marie</u>.</td></tr>
+        <tr><td>3rd person</td><td><b class="p2">le, la, l', les</b></td><td><b class="p3">lui, leur</b></td></tr>
+        <tr><td>→</td><td>Je <b class="p2">l'</b>aide.</td><td>Je <b class="p3">lui</b> téléphone.</td></tr>
+      </table></div>
+      <p class="tip"><b>me, te, nous, vous</b> are the same for both: Tu <b>m'</b>aides ? Tu <b>me</b> téléphones ? The choice only matters for the 3rd person.</p>
+    </div>
+
+    <div class="block">
+      <h2>2. The traps</h2>
+      <p>These verbs work differently from English. Learn them with <i>qqn</i> or <i>à qqn</i>.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>Verb</th><th>English</th><th>Exemple</th></tr>
+        <tr><td><b>aider</b> qqn</td><td>to help</td><td>Je <b class="p2">l'</b>aide.</td></tr>
+        <tr><td><b>écouter</b> qqn</td><td>to listen <b>to</b></td><td>Je <b class="p2">l'</b>écoute.</td></tr>
+        <tr><td><b>attendre</b> qqn</td><td>to wait <b>for</b></td><td>Je <b class="p2">les</b> attends.</td></tr>
+        <tr><td><b>chercher</b> qqn</td><td>to look <b>for</b></td><td>Je <b class="p2">le</b> cherche.</td></tr>
+        <tr><td><b>regarder</b> qqn</td><td>to look <b>at</b></td><td>Je <b class="p2">la</b> regarde.</td></tr>
+        <tr><td><b>appeler</b> qqn</td><td>to call</td><td>Je <b class="p2">l'</b>appelle.</td></tr>
+        <tr><td><b>remercier</b> qqn</td><td>to thank</td><td>Je <b class="p2">les</b> remercie.</td></tr>
+        <tr><td><b>téléphoner à</b> qqn</td><td>to call</td><td>Je <b class="p3">lui</b> téléphone.</td></tr>
+        <tr><td><b>demander à</b> qqn</td><td>to ask</td><td>Je <b class="p3">lui</b> demande.</td></tr>
+        <tr><td><b>répondre à</b> qqn</td><td>to answer</td><td>Je <b class="p3">leur</b> réponds.</td></tr>
+        <tr><td><b>ressembler à</b> qqn</td><td>to look like</td><td>Il <b class="p3">lui</b> ressemble.</td></tr>
+        <tr><td><b>sourire à</b> qqn</td><td>to smile at</td><td>Elle <b class="p3">lui</b> sourit.</td></tr>
+        <tr><td><b>obéir à</b> qqn</td><td>to obey</td><td>Ils <b class="p3">leur</b> obéissent.</td></tr>
+        <tr><td><b>conseiller à</b> qqn</td><td>to advise</td><td>Je <b class="p3">lui</b> conseille de…</td></tr>
+      </table></div>
+      <p class="warn"><b>appeler</b> (COD) and <b>téléphoner à</b> (COI) mean the same thing but don't work the same way: Je <b>l'</b>appelle = Je <b>lui</b> téléphone.</p>
+    </div>
+
+    <div class="block">
+      <h2>3. Other common verbs</h2>
+      <p><b class="p2">COD:</b> voir, inviter, connaître, aimer, rencontrer, quitter, croire, comprendre, embrasser, accompagner</p>
+      <p><b class="p3">COI:</b> parler à, écrire à, dire à, donner à, envoyer à, offrir à, prêter à, plaire à, manquer à</p>
+    </div>
+
+    <div class="block">
+      <h2>4. Passé composé: agreement only with a COD</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>COD (agreement)</th><th>COI (no agreement)</th></tr>
+        <tr><td>J'ai aidé Marie.<br>→ Je <b class="p2">l'</b>ai aidé<b class="p2">e</b>.</td><td>J'ai téléphoné à Marie.<br>→ Je <b class="p3">lui</b> ai téléphoné.</td></tr>
+        <tr><td>J'ai attendu mes amies.<br>→ Je <b class="p2">les</b> ai attendu<b class="p2">es</b>.</td><td>J'ai écrit à mes amies.<br>→ Je <b class="p3">leur</b> ai écrit.</td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>5. Bonus: reversed verbs</h2>
+      <p>With <b>manquer</b> and <b>plaire</b>, the person who misses or likes is the <b>COI</b>.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>Français</th><th>Literally</th><th>English</th></tr>
+        <tr><td>Tu <b class="p3">me</b> manques.</td><td>You are missing to me.</td><td><b>I</b> miss <b>you</b>.</td></tr>
+        <tr><td>Ses parents <b class="p3">lui</b> manquent.</td><td>His parents are missing to him.</td><td>He misses his parents.</td></tr>
+        <tr><td>Ce film <b class="p3">me</b> plaît.</td><td>This film pleases me.</td><td>I like this film.</td></tr>
+        <tr><td>Paris <b class="p3">leur</b> plaît.</td><td>Paris pleases them.</td><td>They like Paris.</td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>6. Common mistakes</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>✗</th><th>✓</th></tr>
+        <tr><td class="bad">Je lui aide.</td><td class="good">Je l'aide.</td></tr>
+        <tr><td class="bad">Je lui écoute.</td><td class="good">Je l'écoute.</td></tr>
+        <tr><td class="bad">Nous leur attendons.</td><td class="good">Nous les attendons.</td></tr>
+        <tr><td class="bad">Je l'ai téléphoné.</td><td class="good">Je lui ai téléphoné.</td></tr>
+        <tr><td class="bad">Je la demande l'heure.</td><td class="good">Je lui demande l'heure.</td></tr>
+        <tr><td class="bad">Je manque mes parents.</td><td class="good">Mes parents me manquent.</td></tr>
+      </table></div>
+      <div class="row"><button class="btn primary" data-go="vocab">Next: vocabulaire →</button></div>
+    </div>
+  </section>
+
+  <!-- ============ VOCAB ============ -->
+  <section class="view" id="vocab" hidden>
+    <div class="block">
+      <h2>Relations et communication</h2>
+      <p class="sub">People and staying in touch. Learn each verb <b>with its construction</b>: <i>qqn</i> (COD) or <i>à qqn</i> (COI).</p>
+    </div>
+    <div class="vtools">
+      <label class="row" style="gap:8px; cursor:pointer;"><input type="checkbox" id="hideEn"> Hide English (tap a row to reveal)</label>
+    </div>
+    <div class="vlist" id="vlist"></div>
+    <p class="warn"><b>donner un coup de main à qqn</b> (to give someone a hand) is COI: Je <b>lui</b> donne un coup de main.</p>
+    <div class="row"><button class="btn primary" data-go="exos">Next: exercices →</button></div>
+  </section>
+
+  <!-- ============ EXERCICES (built by shared/engine.js) ============ -->
+  <section class="view" id="exos" hidden></section>
+
+  <footer>Accents: on a phone, press and hold a letter (e → é è ê). Missing accents count as "presque".</footer>
+</div>
+
+<script>
+const TOPIC = { num: "05", name: "COD ou COI" };
+const VOCAB = [
+  { g: "Verbes : COD (verb + qqn)" },
+  { fr: "aider qqn", en: "to help someone", eg: "Je l'aide." },
+  { fr: "écouter qqn", en: "to listen to someone", eg: "Je l'écoute." },
+  { fr: "attendre qqn", en: "to wait for someone", eg: "Je les attends." },
+  { fr: "chercher qqn", en: "to look for someone", eg: "Je le cherche." },
+  { fr: "appeler qqn", en: "to call someone", eg: "Je l'appelle." },
+  { fr: "remercier qqn", en: "to thank someone", eg: "Je les remercie." },
+  { fr: "inviter qqn", en: "to invite someone", eg: "On les invite samedi." },
+  { fr: "accompagner qqn", en: "to go with someone", eg: "Je l'accompagne à la gare." },
+  { g: "Verbes : COI (verb + à qqn)" },
+  { fr: "téléphoner à qqn", en: "to phone someone", eg: "Je lui téléphone." },
+  { fr: "demander à qqn", en: "to ask someone", eg: "Je lui demande l'heure." },
+  { fr: "répondre à qqn", en: "to answer someone", eg: "Je leur réponds." },
+  { fr: "ressembler à qqn", en: "to look like someone", eg: "Il lui ressemble." },
+  { fr: "sourire à qqn", en: "to smile at someone", eg: "Elle lui sourit." },
+  { fr: "conseiller à qqn", en: "to advise someone", eg: "Je lui conseille de partir." },
+  { fr: "manquer à qqn", en: "to be missed by someone", eg: "Tu me manques. (I miss you.)" },
+  { g: "Noms" },
+  { fr: "un(e) collègue", en: "a colleague" },
+  { fr: "le patron / la patronne", en: "the boss" },
+  { fr: "les beaux-parents", en: "the in-laws" },
+  { fr: "un(e) ami(e) d'enfance", en: "a childhood friend" },
+  { fr: "un(e) inconnu(e)", en: "a stranger" },
+  { fr: "un texto / un SMS", en: "a text message" },
+  { fr: "un message vocal", en: "a voice message" },
+  { g: "Expressions" },
+  { fr: "prendre des nouvelles de qqn", en: "to check in on someone" },
+  { fr: "rester en contact", en: "to stay in touch" },
+  { fr: "donner un coup de main à qqn", en: "to give someone a hand" },
+  { fr: "faire la bise", en: "to greet with a kiss on the cheek" },
+  { fr: "se disputer (avec qqn)", en: "to argue (with someone)" },
+  { fr: "se réconcilier", en: "to make up" },
+  { fr: "Tu me manques.", en: "I miss you." },
+];
+
+const EX = [
+  { id: "A", title: "Le or lui?", instr: "Ask qui ? (COD) or à qui ? (COI).", type: "mc", items: [
+    { src: "J'aide mon frère.", text: "Je ___ aide.", opts: ["l'", "lui"], c: 0, why: "aider qqn: COD." },
+    { src: "Je téléphone à ma mère.", text: "Je ___ téléphone.", opts: ["la", "lui"], c: 1, why: "téléphoner à qqn: COI." },
+    { src: "Tu écoutes le prof ?", text: "Tu ___ écoutes ?", opts: ["lui", "l'"], c: 1, why: "écouter qqn: COD (no « to » in French)." },
+    { src: "Il répond à ses clients.", text: "Il ___ répond.", opts: ["les", "leur"], c: 1, why: "répondre à qqn: COI." },
+    { src: "Nous attendons nos amis.", text: "Nous ___ attendons.", opts: ["leur", "les"], c: 1, why: "attendre qqn: COD (no « for » in French)." },
+    { src: "Elle demande à son patron.", text: "Elle ___ demande.", opts: ["lui", "le"], c: 0, why: "demander à qqn: COI." },
+    { src: "J'appelle ma sœur ce soir.", text: "Je ___ appelle.", opts: ["l'", "lui"], c: 0, why: "appeler qqn: COD (but téléphoner à!)." },
+    { src: "Vous ressemblez à votre père.", text: "Vous ___ ressemblez.", opts: ["le", "lui"], c: 1, why: "ressembler à qqn: COI." },
+  ]},
+  { id: "B", title: "Replace with a pronoun", instr: "le, la, l', les or lui, leur.", type: "blanks", items: [
+    { src: "Je regarde <u>les enfants</u>.", text: "Je [] regarde.", ans: [["les"]] },
+    { src: "Il écrit <u>à sa grand-mère</u>.", text: "Il [] écrit.", ans: [["lui"]] },
+    { src: "Nous invitons <u>nos voisins</u>.", text: "Nous [] invitons.", ans: [["les"]] },
+    { src: "Tu parles <u>à tes collègues</u> ?", text: "Tu [] parles ?", ans: [["leur"]] },
+    { src: "Je cherche <u>Paul</u>.", text: "Je [] cherche.", ans: [["le"]] },
+    { src: "Elle sourit <u>au bébé</u>.", text: "Elle [] sourit.", ans: [["lui"]], why: "au bébé = à + le bébé → COI." },
+    { src: "On remercie <u>la serveuse</u>.", text: "On [] remercie.", ans: [["la"]] },
+    { src: "Ils obéissent <u>à leurs parents</u>.", text: "Ils [] obéissent.", ans: [["leur"]] },
+    { src: "Je connais <u>ton frère</u>.", text: "Je [] connais.", ans: [["le"]] },
+    { src: "Je conseille <u>à Marie</u> de partir.", text: "Je [] conseille de partir.", ans: [["lui"]] },
+  ]},
+  { id: "C", title: "Négation, infinitive, passé composé", instr: "Small blank after a participle = its ending (e, s, es).", type: "blanks", items: [
+    { src: "Je n'aide pas <u>mes voisins</u>.", text: "Je ne [] aide pas.", ans: [["les"]] },
+    { src: "Tu ne réponds pas <u>à Julie</u> ?", text: "Tu ne [] réponds pas ?", ans: [["lui"]] },
+    { src: "Je vais appeler <u>mon père</u>.", text: "Je vais []appeler.", ans: [["l'"]] },
+    { src: "On va téléphoner <u>aux enfants</u>.", text: "On va [] téléphoner.", ans: [["leur"]] },
+    { src: "J'ai aidé <u>Marie</u> hier.", text: "Je []ai aidé[] hier.", ans: [["l'"], ["e"]], why: "COD before avoir → agreement: aidée." },
+    { src: "J'ai téléphoné <u>à Marie</u> hier.", text: "Je [] ai téléphoné hier.", ans: [["lui"]], why: "COI → no agreement." },
+    { src: "Tu as attendu <u>tes amies</u> ?", text: "Tu [] as attendu[] ?", ans: [["les"], ["es"]], why: "les (amies) before avoir → attendues." },
+    { src: "Il a écrit <u>à ses parents</u>.", text: "Il [] a écrit.", ans: [["leur"]] },
+  ]},
+  { id: "D", title: "Find the mistake", instr: "Rewrite the whole sentence correctly.", type: "sentence", items: [
+    { src: "Je lui aide tous les jours.", lead: "", ans: ["Je l'aide tous les jours."], why: "aider qqn: COD." },
+    { src: "Je l'ai téléphoné hier.", lead: "", ans: ["Je lui ai téléphoné hier."], why: "téléphoner à qqn: COI." },
+    { src: "Tu lui écoutes ?", lead: "", ans: ["Tu l'écoutes ?"], why: "écouter qqn: COD." },
+    { src: "Je la demande l'heure.", lead: "", ans: ["Je lui demande l'heure."], why: "demander à qqn: COI." },
+    { src: "Nous leur attendons depuis une heure.", lead: "", ans: ["Nous les attendons depuis une heure."], why: "attendre qqn: COD." },
+  ]},
+  { id: "E", title: "Manquer and plaire", instr: "Reversed verbs: the person who misses or likes is the COI.", type: "mc", items: [
+    { src: "I miss you.", text: "___", opts: ["Je te manque.", "Tu me manques."], c: 1, why: "You are missing to me → Tu me manques." },
+    { src: "She misses her parents.", text: "Ses parents ___ manquent.", opts: ["la", "lui"], c: 1, why: "manquer à qqn → lui." },
+    { src: "Your friends miss you.", text: "Tu ___ manques.", opts: ["leur", "les"], c: 0, why: "Tu manques à tes amis → Tu leur manques." },
+    { src: "Marc likes this restaurant.", text: "Ce restaurant ___ plaît.", opts: ["le", "lui"], c: 1, why: "plaire à qqn → lui." },
+  ]},
+  { id: "F", title: "Answer with a pronoun", instr: "Write the whole answer after Oui / Non.", type: "sentence", items: [
+    { src: "Tu aides ta mère ?", lead: "Oui,", ans: ["je l'aide"] },
+    { src: "Tu as téléphoné à ton frère ?", lead: "Non,", ans: ["je ne lui ai pas téléphoné"] },
+    { src: "Vous attendez les invités ?", lead: "Oui,", ans: ["nous les attendons", "on les attend"] },
+    { src: "Tu vas répondre à ce client ?", lead: "Oui,", ans: ["je vais lui répondre"] },
+    { src: "Tu as vu Sophie ?", lead: "Oui,", ans: ["je l'ai vue"], why: "l' (Sophie) before avoir → vue." },
+    { src: "Tu écris souvent à tes grands-parents ?", lead: "Oui,", ans: ["je leur écris souvent"] },
+  ]},
+  { id: "V", title: "Vocabulaire", instr: "Relations et communication.", type: "blanks", items: [
+    { src: "a text message", text: "Je n'ai pas le temps de l'appeler, je vais lui envoyer un [].", ans: [["texto", "sms", "message"]] },
+    { src: "made up", text: "On s'est disputés hier, mais aujourd'hui on s'est [].", ans: [["réconciliés"]] },
+    { src: "a hand", text: "Tu peux me donner un coup de [] pour déménager ?", ans: [["main"]] },
+    { src: "check in on", text: "Je n'ai pas vu Paul depuis longtemps : je vais prendre de ses [].", ans: [["nouvelles"]] },
+    { src: "cheek kiss", text: "En France, on fait la [] pour dire bonjour.", ans: [["bise"]] },
+    { src: "stay in touch", text: "Mes amis d'enfance habitent loin, mais on reste en [].", ans: [["contact"]] },
+    { src: "in-laws", text: "Les parents de mon mari, ce sont mes [].", ans: [["beaux-parents"]] },
+  ]},
+  { id: "W", title: "À toi !", instr: "Free writing, 2–3 simple sentences each. Not checked here: tap \"Copier pour Claude\" and paste it to Claude for a correction.", type: "free", items: [
+    { src: "Qui est-ce que tu aides souvent ? Comment ? (Je l'aide à…, Je lui…)" },
+    { src: "À qui est-ce que tu téléphones chaque semaine ? Qu'est-ce que tu lui dis ?" },
+    { src: "Qui te manque en ce moment ? Pourquoi ?" },
+  ]},
+];
+</script>
+<script>
+/* Shared exercise engine for every topic page.
+   The topic page defines, before loading this file:
+     TOPIC = { num: "02", name: "Conditionnel présent" }
+     VOCAB = [ { g: "Group" } | { fr, en, eg? } ]
+     EX    = [ { id, title, instr, type: "mc"|"blanks"|"sentence"|"free", items: [...] } ]
+   Item shapes:
+     mc:       { src, text: "… ___ …", opts: [..], c: indexOfCorrect, why? }
+     blanks:   { src, text: "… [] … [] …", ans: [[accepted…], [accepted…]], why? }
+     sentence: { src, lead: "Oui," | "", ans: [accepted full answers…], why? }
+     free:     { src }  (not graded: included in "Copier" so Claude can correct it)
+*/
+(function () {
+  const KEY = "fr" + TOPIC.num + "-v1";
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { store = {}; }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+
+  const norm = s => (s || "").toLowerCase().replace(/[’`´]/g, "'").replace(/\s+/g, " ").replace(/\s*'\s*/g, "'").trim();
+  const sentNorm = s => norm(s).replace(/[.!?,;…]+/g, " ").replace(/^(oui|non)\s+/, "").replace(/\s+/g, " ").trim();
+  const strip = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const $ = s => document.querySelector(s);
+  const graded = EX.filter(s => s.type !== "free");
+  const TOTAL = graded.reduce((n, s) => n + s.items.length, 0);
+  const INPUT_ATTRS = 'autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"';
+
+  function grade(val, accepted, f) {
+    const v = f(val);
+    if (!v) return "empty";
+    if (accepted.some(a => f(a) === v)) return "ok";
+    if (accepted.some(a => strip(f(a)) === strip(v))) return "near";
+    return "bad";
+  }
+
+  /* ---------- Exercise shell ---------- */
+  $("#exos").innerHTML = `
+    <div class="score">
+      <div class="big" id="scoreBig">0/${TOTAL}</div>
+      <div style="display:grid; gap:6px; min-width:0;">
+        <div class="bar"><i id="scoreBar"></i></div>
+        <div class="instr" id="scoreTxt"></div>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="checkAll">Tout vérifier</button>
+        <button class="btn" id="copyErr">Copier pour Claude</button>
+        <button class="btn ghost" id="resetAll">Effacer tout</button>
+      </div>
+    </div>
+    <div id="resetConfirm" class="warn" hidden>
+      <div class="row" style="justify-content:space-between;"><span>Erase all your answers?</span>
+      <span class="row"><button class="btn" id="resetYes">Oui, effacer</button><button class="btn ghost" id="resetNo">Annuler</button></span></div>
+    </div>
+    <textarea id="copyBox" class="copybox" readonly hidden></textarea>
+    <div id="exList" style="display:grid; gap:28px;"></div>`;
+  document.body.insertAdjacentHTML("beforeend", '<div class="toast" id="toast" hidden></div>');
+
+  /* ---------- Tabs ---------- */
+  function show(view) {
+    if (!["regle", "vocab", "exos"].includes(view)) view = "regle";
+    document.querySelectorAll("section.view").forEach(s => s.hidden = s.id !== view);
+    document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.view === view));
+    try { localStorage.setItem(KEY + "-tab", view); } catch (e) {}
+  }
+  document.querySelectorAll("[data-view]").forEach(b => b.onclick = () => show(b.dataset.view));
+  document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { show(b.dataset.go); window.scrollTo(0, 0); });
+
+  /* ---------- Vocab ---------- */
+  const vlist = $("#vlist");
+  vlist.innerHTML = VOCAB.map(v => v.g ? `<div class="vgroup">${esc(v.g)}</div>` :
+    `<div class="vrow"><div class="fr">${esc(v.fr)}</div><div class="en">${esc(v.en)}</div>${v.eg ? `<div class="eg">${esc(v.eg)}</div>` : ""}</div>`).join("");
+  vlist.addEventListener("click", e => { const r = e.target.closest(".vrow"); if (r) r.classList.toggle("show"); });
+  $("#hideEn").onchange = e => { vlist.classList.toggle("hide-en", e.target.checked); vlist.querySelectorAll(".vrow").forEach(r => r.classList.remove("show")); };
+
+  /* ---------- Render exercises ---------- */
+  const fillTemplate = (text, answers) => { let i = 0; return esc(text).replace(/\[\]/g, () => `<b>${esc(answers[i++] || "")}</b>`); };
+  const withStop = s => /[.!?…]$/.test(s.trim()) ? s : s + ".";
+
+  function itemBody(sec, it, id) {
+    if (sec.type === "mc") {
+      return `<div class="line">${esc(it.text)}</div><div class="mc" data-id="${id}">${it.opts.map((o, k) =>
+        `<button type="button" data-k="${k}" aria-pressed="${store[id] === k}">${String.fromCharCode(97 + k)}) ${esc(o)}</button>`).join("")}</div>`;
+    }
+    if (sec.type === "blanks") {
+      let n = 0;
+      const line = esc(it.text).replace(/\[\]/g, () => {
+        const bid = `${id}-${n}`, w = Math.max(3, it.ans[n][0].length + 1.5); n++;
+        return `<input class="blank" id="in-${bid}" data-b="${bid}" style="width:${w}ch" ${INPUT_ATTRS} value="${esc(store[bid] || "")}">`;
+      });
+      return `<div class="line">${line}</div>`;
+    }
+    if (sec.type === "sentence") {
+      return `<div class="line">${it.lead ? esc(it.lead) + " " : ""}<input class="blank wide" id="in-${id}-0" data-b="${id}-0" ${INPUT_ATTRS} value="${esc(store[id + "-0"] || "")}"></div>`;
+    }
+    return `<textarea class="free" id="in-${id}-0" data-b="${id}-0" rows="3" spellcheck="false" placeholder="Écris ici…">${esc(store[id + "-0"] || "")}</textarea>`;
+  }
+
+  function render() {
+    $("#exList").innerHTML = EX.map(sec => {
+      const items = sec.items.map((it, i) => {
+        const id = `${sec.id}${i + 1}`;
+        return `<div class="item" id="it-${id}"><span class="num">${i + 1}</span><div class="src">${it.src}</div>${itemBody(sec, it, id)}<div class="fb" hidden></div></div>`;
+      }).join("");
+      const badge = sec.type === "free" ? "for Claude" : `${sec.items.length} items`;
+      const btn = sec.type === "free" ? "" : `<div class="row"><button class="btn primary" data-check="${sec.id}">Vérifier ${sec.id}</button></div>`;
+      return `<div class="exsec" id="sec-${sec.id}">
+        <div class="exhead"><h2><span class="L">${sec.id}</span>${esc(sec.title)}</h2><span class="badge" id="badge-${sec.id}">${badge}</span></div>
+        <p class="instr">${esc(sec.instr)}</p>
+        <div class="items">${items}</div>${btn}
+      </div>`;
+    }).join("");
+  }
+  render();
+
+  const list = $("#exList");
+  list.addEventListener("input", e => {
+    const b = e.target.dataset.b; if (!b) return;
+    store[b] = e.target.value; e.target.classList.remove("ok", "bad", "near"); save();
+  });
+  list.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || !e.target.matches("input.blank")) return;
+    e.preventDefault();
+    const all = [...document.querySelectorAll("input.blank")], nx = all[all.indexOf(e.target) + 1];
+    if (nx) nx.focus(); else e.target.blur();
+  });
+  list.addEventListener("click", e => {
+    const opt = e.target.closest(".mc button");
+    if (opt) {
+      const box = opt.parentElement;
+      store[box.dataset.id] = +opt.dataset.k; save();
+      box.querySelectorAll("button").forEach(b => { b.setAttribute("aria-pressed", b === opt); b.classList.remove("ok", "bad"); });
+      return;
+    }
+    const c = e.target.closest("[data-check]");
+    if (c) { checkSection(c.dataset.check); updateScore(); }
+  });
+
+  /* ---------- Checking ---------- */
+  const results = {};
+  function checkSection(sid) {
+    const sec = EX.find(s => s.id === sid);
+    if (sec.type === "free") return;
+    let ok = 0;
+    sec.items.forEach((it, i) => {
+      const id = `${sid}${i + 1}`, el = $(`#it-${id}`), fb = el.querySelector(".fb");
+      let state, mine, correct;
+      if (sec.type === "mc") {
+        const pick = store[id];
+        state = pick == null ? "empty" : pick === it.c ? "ok" : "bad";
+        mine = pick == null ? "" : it.opts[pick];
+        correct = esc(it.text).replace("___", `<b>${esc(it.opts[it.c])}</b>`);
+        el.querySelectorAll(".mc button").forEach(b => {
+          b.classList.remove("ok", "bad");
+          if (+b.dataset.k === it.c && state !== "empty") b.classList.add("ok");
+          else if (+b.dataset.k === pick) b.classList.add("bad");
+        });
+      } else if (sec.type === "blanks") {
+        const states = it.ans.map((acc, n) => {
+          const inp = $(`#in-${id}-${n}`), st = grade(inp.value, acc, norm);
+          inp.classList.remove("ok", "bad", "near"); inp.classList.add(st === "empty" ? "bad" : st);
+          return st;
+        });
+        state = states.every(s => s === "ok") ? "ok"
+          : states.every(s => s === "empty") ? "empty"
+          : states.every(s => s === "ok" || s === "near") ? "near" : "bad";
+        mine = it.ans.map((_, n) => $(`#in-${id}-${n}`).value.trim() || "…").join(" / ");
+        correct = fillTemplate(it.text, it.ans.map(a => a[0]));
+      } else {
+        const inp = $(`#in-${id}-0`);
+        state = grade(inp.value, it.ans, sentNorm);
+        inp.classList.remove("ok", "bad", "near"); inp.classList.add(state === "empty" ? "bad" : state);
+        mine = inp.value.trim();
+        correct = `${it.lead ? esc(it.lead) + " " : ""}<b>${esc(withStop(it.ans[0]))}</b>`;
+      }
+      if (state === "ok") ok++;
+      results[id] = { state, mine, correct: correct.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"') };
+      const why = it.why ? esc(it.why) : "";
+      fb.hidden = false;
+      fb.className = "fb " + (state === "ok" ? "ok" : state === "near" ? "near" : "bad");
+      fb.innerHTML =
+        state === "ok" ? `<span class="pen">Très bien !</span>` :
+        state === "near" ? `<span class="pen">Presque ! Check the accents.</span><span class="ans">${correct}</span>` :
+        state === "empty" ? `<span class="pen">Pas de réponse.</span><span class="ans">${correct}</span>${why ? `<span class="instr">${why}</span>` : ""}` :
+        `<span class="ans">${correct}</span>${why ? `<span class="pen">${why}</span>` : ""}`;
+    });
+    const badge = $(`#badge-${sid}`);
+    badge.textContent = `${ok}/${sec.items.length}`;
+    badge.classList.toggle("full", ok === sec.items.length);
+  }
+
+  function updateScore() {
+    const checked = Object.values(results), ok = checked.filter(r => r.state === "ok").length;
+    $("#scoreBig").textContent = `${ok}/${TOTAL}`;
+    $("#scoreBar").style.width = (100 * ok / TOTAL) + "%";
+    $("#scoreTxt").textContent = checked.length === 0 ? `Tap "Vérifier" under each exercise, or check everything at once.`
+      : ok === TOTAL ? "Parfait ! Everything is correct."
+      : `${checked.length} of ${TOTAL} checked · ${checked.length - ok} to review.`;
+  }
+  updateScore();
+
+  function toast(msg) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2200); }
+
+  const checkAll = () => { graded.forEach(s => checkSection(s.id)); updateScore(); };
+  $("#checkAll").onclick = () => { checkAll(); toast("Tout est vérifié"); };
+
+  $("#copyErr").onclick = () => {
+    checkAll();
+    const errs = Object.entries(results).filter(([, r]) => r.state !== "ok")
+      .map(([id, r]) => `${id}: I wrote "${r.mine || "—"}" · correct: ${r.correct}`);
+    const free = EX.filter(s => s.type === "free").flatMap(s => s.items.map((it, i) => {
+      const v = (store[`${s.id}${i + 1}-0`] || "").trim();
+      return v ? `${s.id}${i + 1} (${it.src.replace(/<[^>]+>/g, "")}): ${v}` : "";
+    })).filter(Boolean);
+    let text = `Topic ${TOPIC.num} (${TOPIC.name}): ${TOTAL - errs.length}/${TOTAL}.`;
+    text += errs.length ? `\nMy mistakes:\n${errs.join("\n")}` : " No mistakes.";
+    if (free.length) text += `\n\nPlease correct my free writing:\n${free.join("\n")}`;
+    const box = $("#copyBox"); box.value = text;
+    const fallback = () => { box.hidden = false; box.focus(); box.select(); toast("Select the text below and copy it"); };
+    try {
+      navigator.clipboard.writeText(text).then(() => { box.hidden = true; toast("Copied. Paste it to Claude."); }, fallback);
+    } catch (e) { fallback(); }
+  };
+
+  $("#resetAll").onclick = () => { $("#resetConfirm").hidden = false; };
+  $("#resetNo").onclick = () => { $("#resetConfirm").hidden = true; };
+  $("#resetYes").onclick = () => {
+    store = {}; save(); for (const k in results) delete results[k];
+    render(); updateScore();
+    EX.forEach(s => { if (s.type !== "free") { const b = $(`#badge-${s.id}`); b.textContent = `${s.items.length} items`; b.classList.remove("full"); } });
+    $("#resetConfirm").hidden = true; $("#copyBox").hidden = true; toast("Answers erased");
+  };
+
+  let startTab = "regle"; try { startTab = localStorage.getItem(KEY + "-tab") || "regle"; } catch (e) {}
+  show(startTab);
+})();
+</script>
+
+</body>
+</html>

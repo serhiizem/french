@@ -29,9 +29,9 @@ All topics: **https://serhiizem.github.io/french/**
 | 02 | [Le conditionnel présent](02-conditionnel-present/) — *Si j'étais riche, je voyagerais* | [open](https://serhiizem.github.io/french/02-conditionnel-present/) |
 | 03 | [Les phrases avec si : si + présent](03-si-present/) — *S'il pleut demain, je prendrai le bus* | [open](https://serhiizem.github.io/french/03-si-present/) |
 | 04 | [Les pronoms y et en](04-pronoms-y-en/) — *J'y vais, j'en prends un kilo* | [open](https://serhiizem.github.io/french/04-pronoms-y-en/) |
+| 05 | [COD ou COI ?](05-cod-coi/) — *Je l'aide, je lui téléphone* | [open](https://serhiizem.github.io/french/05-cod-coi/) |
 
 ### Ideas for the next topics
-- COD ou COI ? (*le* or *lui*? *aider qqn* vs *téléphoner à qqn*)
 - Passé composé ou imparfait ?
 - Accord du participe passé (avoir / être)
 - Pronoms relatifs : *qui, que, où, dont*
