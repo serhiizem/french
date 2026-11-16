@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px/1.4 system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<title>J'y vais, j'en prends</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: one narrow column like a French school notebook (Seyès lines, red margin); sticky tabs; red-pen corrections. */
+:root {
+  --paper: #f7f8fc;
+  --card: #ffffff;
+  --ink: #1b2140;
+  --muted: #5b6386;
+  --line: #e0e5f2;
+  --seyes: #d6def5;
+  --blue: #2846b4;
+  --blue-soft: #e8edfc;
+  --red: #c8303a;
+  --red-soft: #fdecee;
+  --green: #1d7f47;
+  --green-soft: #e5f5ec;
+  --amber: #a46a0e;
+  --amber-soft: #fbf1df;
+  --f-display: "Bricolage Grotesque", "Space Grotesk", system-ui, sans-serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-pen: "Caveat", "Comic Sans MS", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+    --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+    --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11131c; --card: #191c28; --ink: #e6e8f3; --muted: #9ba2c2; --line: #2a2f43; --seyes: #222842;
+  --blue: #8fa5ff; --blue-soft: #1e2546; --red: #ff7d84; --red-soft: #3a1c22; --green: #62d396; --green-soft: #15301f;
+  --amber: #f1b75a; --amber-soft: #352a14; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.wrap { max-width: 720px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 7vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.35rem; font-weight: 800; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+b, strong { font-weight: 600; }
+.k { color: var(--blue); font-weight: 600; }
+
+/* Header: Seyès ruling + red margin */
+header.top {
+  margin-top: 16px; padding: 22px 18px 20px 30px; border-radius: 6px; position: relative;
+  background-color: var(--card);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 23px, var(--seyes) 23px 24px);
+  border: 1px solid var(--line);
+  display: grid; gap: 8px;
+}
+header.top::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: var(--red); opacity: .7; }
+.eyebrow { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.sub { color: var(--muted); }
+
+/* Tabs */
+nav.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper);
+  display: flex; gap: 6px; padding-block: 12px; margin-top: 8px; border-bottom: 1px solid var(--line);
+}
+nav.tabs button {
+  flex: 1; font: 600 .95rem var(--f-body); color: var(--muted); background: transparent; border: 1px solid transparent;
+  padding: 9px 6px; border-radius: 999px; cursor: pointer;
+}
+nav.tabs button[aria-selected="true"] { color: var(--blue); background: var(--blue-soft); border-color: var(--blue-soft); }
+nav.tabs button:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+section.view { display: grid; gap: 22px; padding-top: 22px; }
+
+/* Lesson */
+.order { display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; }
+.slot { flex: 1 1 90px; min-width: 0; border-radius: 6px; padding: 8px 8px 9px; text-align: center; border: 1px solid var(--line); background: var(--card); }
+.slot .n { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.slot .w { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 1.25; }
+.slot.s1 .w { color: var(--blue); } .slot.s2 .w { color: var(--red); } .slot.s3 .w { color: var(--green); } .slot.s4 .w, .slot.s5 .w { color: var(--amber); }
+.slot.v { background: var(--ink); border-color: var(--ink); } .slot.v .w, .slot.v .n { color: var(--paper); }
+.block { display: grid; gap: 10px; }
+.ex { font-size: 1.1rem; }
+.tip { background: var(--blue-soft); border-radius: 6px; padding: 12px 14px; }
+.warn { background: var(--amber-soft); border-radius: 6px; padding: 12px 14px; }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+td.bad { color: var(--red); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+td.good { color: var(--green); font-weight: 600; }
+.p1 { color: var(--blue); font-weight: 600; } .p2 { color: var(--red); font-weight: 600; } .p3 { color: var(--green); font-weight: 600; } .p5 { color: var(--amber); font-weight: 600; }
+
+/* Vocab */
+.vtools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.vlist { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+.vrow { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.vrow:last-child { border-bottom: 0; }
+.vrow .fr { font-weight: 600; }
+.vrow .eg { grid-column: 1 / -1; font-size: .88rem; color: var(--muted); margin-top: -6px; }
+.vrow .en { color: var(--muted); }
+.hide-en .vrow .en { color: transparent; background: var(--line); border-radius: 4px; }
+.hide-en .vrow.show .en { color: var(--muted); background: transparent; }
+.vgroup { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 14px 6px; border-bottom: 1px solid var(--line); background: var(--paper); }
+.vgroup:first-child { border-radius: 6px 6px 0 0; }
+
+/* Buttons */
+.btn { font: 600 .92rem var(--f-body); border-radius: 999px; padding: 9px 16px; cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: var(--paper); }
+.btn.ghost { background: transparent; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Exercises */
+.score {
+  display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-items: center; background: var(--card);
+  border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px;
+}
+.score .big { font-family: var(--f-display); font-weight: 800; font-size: 2rem; font-variant-numeric: tabular-nums; line-height: 1; }
+.bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--green); transition: width .4s ease; }
+.score .row { grid-column: 1 / -1; }
+.exsec { display: grid; gap: 12px; }
+.exhead { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+.exhead h2 .L { color: var(--red); font-family: var(--f-pen); font-size: 1.7rem; margin-right: 6px; }
+.instr { color: var(--muted); font-size: .93rem; }
+.badge { font-variant-numeric: tabular-nums; font-weight: 600; font-size: .85rem; padding: 3px 10px; border-radius: 999px; background: var(--line); color: var(--muted); }
+.badge.full { background: var(--green-soft); color: var(--green); }
+.items { display: grid; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+.item { padding: 12px 14px 12px 40px; border-bottom: 1px solid var(--line); position: relative; display: grid; gap: 6px; min-width: 0; }
+.item:last-child { border-bottom: 0; }
+.item .num { position: absolute; left: 14px; top: 13px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.item .src { color: var(--muted); font-size: .92rem; }
+.item .line { font-size: 1.08rem; line-height: 2.1; overflow-wrap: anywhere; }
+input.blank {
+  font: 500 1.02rem var(--f-body); color: var(--blue); background: transparent; border: 0; border-bottom: 2px solid var(--seyes);
+  padding: 0 4px 1px; border-radius: 0; text-align: center; min-width: 3.2em; max-width: 100%;
+}
+input.blank.wide { width: 100%; text-align: left; }
+input.blank:focus { border-bottom-color: var(--blue); outline: none; background: var(--blue-soft); }
+input.ok { border-bottom-color: var(--green); color: var(--green); }
+input.near { border-bottom-color: var(--amber); color: var(--amber); }
+input.bad { border-bottom-color: var(--red); color: var(--red); }
+.mc { display: flex; flex-wrap: wrap; gap: 8px; }
+.mc button { font: 500 1rem var(--f-body); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+.mc button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+.mc button.ok { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+.mc button.bad { border-color: var(--red); background: var(--red-soft); color: var(--red); }
+.fb { font-size: .95rem; display: grid; gap: 2px; }
+.fb .ans { color: var(--red); }
+.fb .ans b { font-weight: 600; }
+.fb .pen { font-family: var(--f-pen); font-size: 1.25rem; line-height: 1.2; color: var(--red); }
+.fb.ok .pen { color: var(--green); }
+.fb.near .pen { color: var(--amber); }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 999px; font-weight: 500; font-size: .9rem; z-index: 20; }
+.copybox { width: 100%; min-height: 120px; font: .85rem/1.4 ui-monospace, monospace; padding: 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+footer { color: var(--muted); font-size: .85rem; padding-top: 28px; }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+textarea.free { width: 100%; font: 1rem/1.5 var(--f-body); color: var(--blue); background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; resize: vertical; }
+textarea.free:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+a.home { color: var(--muted); font-size: .88rem; text-decoration: none; font-weight: 500; }
+a.home:hover, a.home:focus-visible { color: var(--blue); }
+.conj { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px 18px; font-size: 1.05rem; }
+.conj .e { color: var(--red); font-weight: 600; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="home" href="../">← Tous les topics</a>
+    <div class="eyebrow">Topic 04 · A2–B1 · Grammaire</div>
+    <h1>J'<span style="color:var(--blue)">y</span> vais, j'<span style="color:var(--red)">en</span> prends un kilo.</h1>
+    <p class="sub">Les pronoms <b>y</b> et <b>en</b>: <b>en</b> replaces <i>de</i> + something, <b>y</b> replaces <i>à</i> + something or a place.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-regle" aria-selected="false" data-view="regle">Règle</button>
+    <button role="tab" id="tab-vocab" aria-selected="false" data-view="vocab">Vocabulaire</button>
+    <button role="tab" id="tab-exos" aria-selected="false" data-view="exos">Exercices</button>
+  </nav>
+
+  <!-- ============ RÈGLE ============ -->
+  <section class="view" id="regle" hidden>
+    <div class="block">
+      <h2>1. En</h2>
+      <div class="order" aria-label="en replaces">
+        <div class="slot s2"><div class="n">en =</div><div class="w">de + thing</div></div>
+        <div class="slot s2"><div class="n">en =</div><div class="w">du / de la / des</div></div>
+        <div class="slot s2"><div class="n">en =</div><div class="w">quantity</div></div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th>en replaces…</th><th>Exemple</th><th>→</th></tr>
+        <tr><td>du / de la / des</td><td>Tu veux <u>du café</u> ?</td><td>Oui, j'<b class="p2">en</b> veux.</td></tr>
+        <tr><td>a quantity <b>(keep the number!)</b></td><td>J'ai <u>deux sœurs</u>.</td><td>J'<b class="p2">en</b> ai <b>deux</b>.</td></tr>
+        <tr><td></td><td>Il achète <u>un kilo de pommes</u>.</td><td>Il <b class="p2">en</b> achète <b>un kilo</b>.</td></tr>
+        <tr><td></td><td>Nous avons <u>beaucoup d'amis</u>.</td><td>Nous <b class="p2">en</b> avons <b>beaucoup</b>.</td></tr>
+        <tr><td>de + thing</td><td>Tu parles <u>de ton voyage</u> ?</td><td>Tu <b class="p2">en</b> parles ?</td></tr>
+        <tr><td></td><td>J'ai besoin <u>de farine</u>.</td><td>J'<b class="p2">en</b> ai besoin.</td></tr>
+        <tr><td>de + place (from)</td><td>Il revient <u>du marché</u>.</td><td>Il <b class="p2">en</b> revient.</td></tr>
+      </table></div>
+      <p class="tip">Negative: Je n'ai <b>pas de</b> café. → Je <b>n'en</b> ai <b>pas</b>. (no number after <i>pas</i>)</p>
+      <p class="sub">Verbs with <b>de</b>: parler de, avoir besoin de, avoir envie de, s'occuper de, se souvenir de, être content de, rêver de, revenir de.</p>
+    </div>
+
+    <div class="block">
+      <h2>2. Y</h2>
+      <div class="order" aria-label="y replaces">
+        <div class="slot s1"><div class="n">y =</div><div class="w">place</div></div>
+        <div class="slot s1"><div class="n">y =</div><div class="w">à + thing</div></div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <tr><th>y replaces…</th><th>Exemple</th><th>→</th></tr>
+        <tr><td>a place (à, au, en, dans, chez, sur…)</td><td>Je vais <u>au marché</u>.</td><td>J'<b class="p1">y</b> vais.</td></tr>
+        <tr><td></td><td>Elle habite <u>en Italie</u>.</td><td>Elle <b class="p1">y</b> habite.</td></tr>
+        <tr><td></td><td>Les clés sont <u>dans le sac</u>.</td><td>Les clés <b class="p1">y</b> sont.</td></tr>
+        <tr><td>à + thing</td><td>Je pense <u>à mon voyage</u>.</td><td>J'<b class="p1">y</b> pense.</td></tr>
+        <tr><td></td><td>Il joue <u>au tennis</u>.</td><td>Il <b class="p1">y</b> joue.</td></tr>
+        <tr><td></td><td>Je réponds <u>à ce message</u>.</td><td>J'<b class="p1">y</b> réponds.</td></tr>
+      </table></div>
+      <p class="sub">Verbs with <b>à</b>: penser à, réfléchir à, s'intéresser à, répondre à, jouer à, participer à, s'habituer à.</p>
+    </div>
+
+    <div class="block">
+      <h2>3. Things vs people</h2>
+      <p><b>y</b> and <b>en</b> are for <b>things and places</b>. For people:</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>Thing</th><th>Person</th></tr>
+        <tr><td>Je pense à mon pays.<br>→ J'<b class="p1">y</b> pense.</td><td>Je pense à ma mère.<br>→ Je pense <b class="p3">à elle</b>.</td></tr>
+        <tr><td>Je parle de mon travail.<br>→ J'<b class="p2">en</b> parle.</td><td>Je parle de mon chef.<br>→ Je parle <b class="p3">de lui</b>.</td></tr>
+        <tr><td>Je réponds à la lettre.<br>→ J'<b class="p1">y</b> réponds.</td><td>Je réponds à Paul.<br>→ Je <b class="p3">lui</b> réponds.</td></tr>
+      </table></div>
+      <p class="warn">Most verbs with <i>à</i> + person use <b>lui / leur</b> (topic 01). But <i>penser à</i>, <i>s'intéresser à</i> and <i>s'habituer à</i> use <b>à lui / à elle</b>.</p>
+    </div>
+
+    <div class="block">
+      <h2>4. Position</h2>
+      <p>Same rules as the other pronouns:</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>Structure</th><th>Exemple</th></tr>
+        <tr><td>Présent</td><td>J'<b class="k">y</b> vais. · J'<b class="k">en</b> veux.</td></tr>
+        <tr><td>Négation</td><td>Je <b class="k">n'y</b> vais <b class="k">pas</b>. · Je <b class="k">n'en</b> veux <b class="k">pas</b>.</td></tr>
+        <tr><td>Passé composé</td><td>J'<b class="k">y</b> suis allé. · J'<b class="k">en</b> ai mangé.</td></tr>
+        <tr><td>Verbe + infinitif</td><td>Je vais <b class="k">y</b> aller. · Je veux <b class="k">en</b> acheter.</td></tr>
+        <tr><td>Impératif +</td><td>Va<b class="k">s-y</b> ! · Prends-<b class="k">en</b> ! · Mange<b class="k">s-en</b> !</td></tr>
+        <tr><td>Impératif −</td><td><b class="k">N'y</b> va pas ! · <b class="k">N'en</b> mange pas !</td></tr>
+      </table></div>
+      <p class="warn">In the positive imperative, <i>-er</i> verbs and <i>aller</i> <b>add an s</b> before y / en: va → <b>vas-y</b>, mange → <b>manges-en</b>.</p>
+      <p class="tip">With other pronouns, <b>y</b> comes before <b>en</b>, and <b>en</b> is always last: Il <b>y en</b> a. · Je <b>lui en</b> donne.</p>
+    </div>
+
+    <div class="block">
+      <h2>5. Everyday expressions</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>Français</th><th>English</th></tr>
+        <tr><td><b>On y va !</b></td><td>Let's go!</td></tr>
+        <tr><td><b>Vas-y ! / Allez-y !</b></td><td>Go ahead!</td></tr>
+        <tr><td><b>Ça y est !</b></td><td>That's it! / Done!</td></tr>
+        <tr><td><b>Il y en a. / Il n'y en a plus.</b></td><td>There is some. / There's none left.</td></tr>
+        <tr><td><b>Je m'en vais.</b></td><td>I'm leaving.</td></tr>
+        <tr><td><b>J'en ai marre !</b> <span class="sub">(familiar)</span></td><td>I'm fed up!</td></tr>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>6. Common mistakes</h2>
+      <div class="tbl-wrap"><table>
+        <tr><th>✗</th><th>✓</th></tr>
+        <tr><td class="bad">Tu as des frères ? — Oui, j'ai deux.</td><td class="good">Oui, j'en ai deux.</td></tr>
+        <tr><td class="bad">Je vais à Paris. → J'en vais.</td><td class="good">J'y vais.</td></tr>
+        <tr><td class="bad">Va-y !</td><td class="good">Vas-y !</td></tr>
+        <tr><td class="bad">Je pense à ma mère. → J'y pense.</td><td class="good">Je pense à elle.</td></tr>
+        <tr><td class="bad">Il en y a.</td><td class="good">Il y en a.</td></tr>
+        <tr><td class="bad">Je n'ai pas en.</td><td class="good">Je n'en ai pas.</td></tr>
+      </table></div>
+      <div class="row"><button class="btn primary" data-go="vocab">Next: vocabulaire →</button></div>
+    </div>
+  </section>
+
+  <!-- ============ VOCAB ============ -->
+  <section class="view" id="vocab" hidden>
+    <div class="block">
+      <h2>Au marché et en cuisine</h2>
+      <p class="sub">The market and cooking. Shops go with <b>y</b> (<i>J'y vais</i>), quantities go with <b>en</b> (<i>J'en prends un kilo</i>). All of them appear in the exercises.</p>
+    </div>
+    <div class="vtools">
+      <label class="row" style="gap:8px; cursor:pointer;"><input type="checkbox" id="hideEn"> Hide English (tap a row to reveal)</label>
+    </div>
+    <div class="vlist" id="vlist"></div>
+    <p class="warn">At the market, you'll hear: <i>Et avec ceci ?</i> (Anything else?) · <i>Vous en voulez combien ?</i> (How many / how much?) · <i>J'en prends deux, s'il vous plaît.</i></p>
+    <div class="row"><button class="btn primary" data-go="exos">Next: exercices →</button></div>
+  </section>
+
+  <!-- ============ EXERCICES (built by shared/engine.js) ============ -->
+  <section class="view" id="exos" hidden></section>
+
+  <footer>Accents: on a phone, press and hold a letter (e → é è ê). Missing accents count as "presque".</footer>
+</div>
+
+<script>
+const TOPIC = { num: "04", name: "pronoms y et en" };
+const VOCAB = [
+  { g: "Les commerces" },
+  { fr: "le marché", en: "the market" },
+  { fr: "la boulangerie", en: "the bakery" },
+  { fr: "la boucherie", en: "the butcher's" },
+  { fr: "la poissonnerie", en: "the fishmonger's" },
+  { fr: "l'épicerie (f.)", en: "the grocery shop" },
+  { fr: "le supermarché", en: "the supermarket" },
+  { g: "Les quantités" },
+  { fr: "un kilo de", en: "a kilo of", eg: "J'en prends un kilo." },
+  { fr: "une livre de", en: "half a kilo (500 g)", eg: "Une livre de cerises." },
+  { fr: "une bouteille de", en: "a bottle of" },
+  { fr: "une douzaine de", en: "a dozen", eg: "Une douzaine d'œufs." },
+  { fr: "une tranche de", en: "a slice of", eg: "Deux tranches de jambon." },
+  { fr: "un morceau de", en: "a piece of", eg: "Un morceau de fromage." },
+  { fr: "un paquet de", en: "a packet of" },
+  { fr: "une boîte de", en: "a tin / box of" },
+  { fr: "un peu de · assez de · trop de", en: "a little · enough · too much", eg: "J'en ai assez." },
+  { g: "En cuisine" },
+  { fr: "faire les courses", en: "to do the shopping" },
+  { fr: "la farine", en: "flour" },
+  { fr: "le beurre", en: "butter" },
+  { fr: "le jambon", en: "ham" },
+  { fr: "un œuf / des œufs", en: "an egg / eggs" },
+  { fr: "goûter", en: "to taste", eg: "Tu veux goûter ?" },
+  { fr: "il reste…", en: "there is … left", eg: "Il reste du lait ?" },
+  { fr: "il manque…", en: "… is missing", eg: "Il manque du sel." },
+  { g: "Expressions" },
+  { fr: "On y va !", en: "Let's go!" },
+  { fr: "Vas-y ! / Allez-y !", en: "Go ahead!" },
+  { fr: "Ça y est !", en: "That's it! / Done!" },
+  { fr: "Il y en a. / Il n'y en a plus.", en: "There is some. / There's none left." },
+  { fr: "Je m'en vais.", en: "I'm leaving." },
+  { fr: "J'en ai marre ! (familiar)", en: "I'm fed up!" },
+];
+
+const EX = [
+  { id: "A", title: "Y or en?", instr: "Type y or en.", type: "blanks", items: [
+    { src: "Tu vas à la boulangerie ?", text: "Oui, j'[] vais.", ans: [["y"]], why: "A place → y." },
+    { src: "Tu veux du fromage ?", text: "Oui, j'[] veux bien.", ans: [["en"]], why: "du fromage → en." },
+    { src: "Il pense à ses vacances.", text: "Il [] pense.", ans: [["y"]], why: "penser à + thing → y." },
+    { src: "Elle a besoin de farine.", text: "Elle [] a besoin.", ans: [["en"]], why: "avoir besoin de → en." },
+    { src: "Vous habitez en Espagne ?", text: "Oui, nous [] habitons.", ans: [["y"]], why: "A place → y." },
+    { src: "Tu reviens du marché ?", text: "Oui, j'[] reviens.", ans: [["en"]], why: "revenir de + place → en." },
+    { src: "Tu t'intéresses à la cuisine ?", text: "Oui, je m'[] intéresse.", ans: [["y"]], why: "s'intéresser à + thing → y." },
+    { src: "Combien de frères tu as ?", text: "J'[] ai deux.", ans: [["en"]], why: "A quantity → en (+ deux)." },
+  ]},
+  { id: "B", title: "Replace with en", instr: "Keep the quantity at the end!", type: "blanks", items: [
+    { src: "Je mange <u>des pommes</u> tous les jours.", text: "J'[] mange tous les jours.", ans: [["en"]] },
+    { src: "Tu as <u>deux voitures</u> ?", text: "Oui, j'[] ai [].", ans: [["en"], ["deux"]] },
+    { src: "Il achète <u>un kilo de tomates</u>.", text: "Il [] achète un [].", ans: [["en"], ["kilo"]] },
+    { src: "Nous avons <u>beaucoup d'amis</u>.", text: "Nous [] avons [].", ans: [["en"], ["beaucoup"]] },
+    { src: "Elle ne boit pas <u>de café</u>.", text: "Elle n'[] boit pas.", ans: [["en"]] },
+    { src: "Vous parlez <u>de votre voyage</u> ?", text: "Vous [] parlez ?", ans: [["en"]] },
+    { src: "Je voudrais <u>une douzaine d'œufs</u>.", text: "J'[] voudrais une [].", ans: [["en"], ["douzaine"]] },
+    { src: "Il y a <u>du lait</u> dans le frigo ?", text: "Oui, il y [] a.", ans: [["en"]] },
+  ]},
+  { id: "C", title: "Replace with y", instr: "Places and à + thing.", type: "blanks", items: [
+    { src: "Je vais <u>au marché</u> le samedi.", text: "J'[] vais le samedi.", ans: [["y"]] },
+    { src: "Elle est née <u>en Italie</u>.", text: "Elle [] est née.", ans: [["y"]] },
+    { src: "Nous allons <u>chez le boucher</u>.", text: "Nous [] allons.", ans: [["y"]] },
+    { src: "Tu penses <u>à ton rendez-vous</u> ?", text: "Tu [] penses ?", ans: [["y"]] },
+    { src: "Les clés sont <u>dans le sac</u>.", text: "Les clés [] sont.", ans: [["y"]] },
+    { src: "Il joue <u>au tennis</u> le mardi.", text: "Il [] joue le mardi.", ans: [["y"]] },
+    { src: "Je ne réponds pas <u>à ce message</u>.", text: "Je n'[] réponds pas.", ans: [["y"]] },
+  ]},
+  { id: "D", title: "Tenses and position", instr: "Passé composé, infinitive, imperative.", type: "blanks", items: [
+    { src: "Tu es allé à Lyon ?", text: "Oui, j'[] suis allé l'année dernière.", ans: [["y"]], why: "Before the auxiliary." },
+    { src: "Tu as acheté du pain ?", text: "Non, je n'[] ai pas acheté.", ans: [["en"]] },
+    { src: "On va au cinéma ce soir ?", text: "Oui, on va [] aller !", ans: [["y"]], why: "Before the infinitive." },
+    { src: "Tu veux goûter ce gâteau ?", text: "Oui, je veux [] goûter un morceau.", ans: [["en"]] },
+    { src: "Va au supermarché !", text: "Vas-[] !", ans: [["y"]], why: "va + y → vas-y." },
+    { src: "Prends des fraises !", text: "Prends-[] !", ans: [["en"]] },
+    { src: "Mange de la salade !", text: "[]-en !", ans: [["manges"]], why: "-er verbs add an s before y / en: manges-en." },
+    { src: "Ne va pas à la boucherie !", text: "N'[] va pas !", ans: [["y"]] },
+    { src: "Il y a des tomates ?", text: "Oui, il [] [] a.", ans: [["y"], ["en"]], why: "y before en: il y en a." },
+  ]},
+  { id: "E", title: "Answer with y or en", instr: "Write the whole answer after Oui / Non.", type: "sentence", items: [
+    { src: "Tu vas souvent à la piscine ?", lead: "Oui,", ans: ["j'y vais souvent"] },
+    { src: "Vous avez des enfants ? (trois)", lead: "Oui,", ans: ["nous en avons trois", "on en a trois", "j'en ai trois"], why: "Keep the number: en … trois." },
+    { src: "Tu as besoin de mon aide ?", lead: "Non,", ans: ["je n'en ai pas besoin"] },
+    { src: "Elle est déjà allée au Canada ?", lead: "Non,", ans: ["elle n'y est jamais allée", "elle n'y est pas allée", "elle n'y est pas encore allée"], why: "y before the auxiliary; allée agrees with elle." },
+    { src: "Tu as mangé des croissants ? (deux)", lead: "Oui,", ans: ["j'en ai mangé deux"] },
+    { src: "Il pense à son examen ?", lead: "Oui,", ans: ["il y pense"] },
+  ]},
+  { id: "F", title: "Thing or person?", instr: "y / en for things, lui / à elle / de lui for people.", type: "mc", items: [
+    { src: "Je pense souvent à ma grand-mère.", text: "Je pense souvent ___.", opts: ["à elle", "y"], c: 0, why: "penser à + person → à elle." },
+    { src: "Je pense souvent à mon pays.", text: "J'___ pense souvent.", opts: ["lui", "y"], c: 1, why: "A thing → y." },
+    { src: "Tu parles de ton chef ?", text: "Tu parles ___ ?", opts: ["en", "de lui"], c: 1, why: "parler de + person → de lui." },
+    { src: "Tu parles de ton travail ?", text: "Tu ___ parles ?", opts: ["en", "lui"], c: 0, why: "parler de + thing → en." },
+    { src: "Je téléphone à Paul.", text: "Je ___ téléphone.", opts: ["y", "lui"], c: 1, why: "téléphoner à + person → lui." },
+    { src: "Je réponds à la lettre.", text: "J'___ réponds.", opts: ["y", "lui"], c: 0, why: "répondre à + thing → y." },
+  ]},
+  { id: "G", title: "Expressions", instr: "Everyday phrases with y and en.", type: "blanks", items: [
+    { src: "Let's go!", text: "Allez, on [] va !", ans: [["y"]] },
+    { src: "That's it!", text: "C'est fini ? — Oui, ça [] est !", ans: [["y"]] },
+    { src: "I'm leaving.", text: "Il est tard, je m'[] vais.", ans: [["en"]] },
+    { src: "None left.", text: "Des œufs ? Il n'y [] a plus.", ans: [["en"]] },
+    { src: "Go ahead!", text: "Tu as une question ? Vas-[] !", ans: [["y"]] },
+    { src: "I'm fed up! (familiar)", text: "Je travaille trop, j'[] ai marre !", ans: [["en"]] },
+  ]},
+  { id: "V", title: "Vocabulaire", instr: "Au marché et en cuisine.", type: "blanks", items: [
+    { src: "a dozen", text: "Je voudrais une [] d'œufs.", ans: [["douzaine"]] },
+    { src: "slices", text: "Deux [] de jambon, s'il vous plaît.", ans: [["tranches"]] },
+    { src: "flour", text: "Pour faire un gâteau, il faut de la [].", ans: [["farine"]] },
+    { src: "the shopping", text: "On n'a plus de lait : il faut faire les [].", ans: [["courses"]] },
+    { src: "to taste", text: "Tu veux [] la sauce ? Elle est bonne ?", ans: [["goûter"]] },
+    { src: "is there … left", text: "Il [] encore du fromage ? — Oui, il en reste un peu.", ans: [["reste"]] },
+    { src: "the butcher's", text: "J'achète la viande à la [].", ans: [["boucherie"]] },
+  ]},
+  { id: "W", title: "À toi !", instr: "Free writing, 2–3 simple sentences each. Not checked here: tap \"Copier pour Claude\" and paste it to Claude for a correction.", type: "free", items: [
+    { src: "Tu vas souvent au marché ou au supermarché ? Qu'est-ce que tu y achètes ? (use y and en)" },
+    { src: "Qu'est-ce qu'il y a dans ton frigo en ce moment ? (Il y a du…, J'en ai…, Je n'en ai plus…)" },
+    { src: "À quoi est-ce que tu penses souvent en ce moment ? Tu en parles avec qui ?" },
+  ]},
+];
+</script>
+<script>
+/* Shared exercise engine for every topic page.
+   The topic page defines, before loading this file:
+     TOPIC = { num: "02", name: "Conditionnel présent" }
+     VOCAB = [ { g: "Group" } | { fr, en, eg? } ]
+     EX    = [ { id, title, instr, type: "mc"|"blanks"|"sentence"|"free", items: [...] } ]
+   Item shapes:
+     mc:       { src, text: "… ___ …", opts: [..], c: indexOfCorrect, why? }
+     blanks:   { src, text: "… [] … [] …", ans: [[accepted…], [accepted…]], why? }
+     sentence: { src, lead: "Oui," | "", ans: [accepted full answers…], why? }
+     free:     { src }  (not graded: included in "Copier" so Claude can correct it)
+*/
+(function () {
+  const KEY = "fr" + TOPIC.num + "-v1";
+  let store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { store = {}; }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+
+  const norm = s => (s || "").toLowerCase().replace(/[’`´]/g, "'").replace(/\s+/g, " ").replace(/\s*'\s*/g, "'").trim();
+  const sentNorm = s => norm(s).replace(/[.!?,;…]+/g, " ").replace(/^(oui|non)\s+/, "").replace(/\s+/g, " ").trim();
+  const strip = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const $ = s => document.querySelector(s);
+  const graded = EX.filter(s => s.type !== "free");
+  const TOTAL = graded.reduce((n, s) => n + s.items.length, 0);
+  const INPUT_ATTRS = 'autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"';
+
+  function grade(val, accepted, f) {
+    const v = f(val);
+    if (!v) return "empty";
+    if (accepted.some(a => f(a) === v)) return "ok";
+    if (accepted.some(a => strip(f(a)) === strip(v))) return "near";
+    return "bad";
+  }
+
+  /* ---------- Exercise shell ---------- */
+  $("#exos").innerHTML = `
+    <div class="score">
+      <div class="big" id="scoreBig">0/${TOTAL}</div>
+      <div style="display:grid; gap:6px; min-width:0;">
+        <div class="bar"><i id="scoreBar"></i></div>
+        <div class="instr" id="scoreTxt"></div>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="checkAll">Tout vérifier</button>
+        <button class="btn" id="copyErr">Copier pour Claude</button>
+        <button class="btn ghost" id="resetAll">Effacer tout</button>
+      </div>
+    </div>
+    <div id="resetConfirm" class="warn" hidden>
+      <div class="row" style="justify-content:space-between;"><span>Erase all your answers?</span>
+      <span class="row"><button class="btn" id="resetYes">Oui, effacer</button><button class="btn ghost" id="resetNo">Annuler</button></span></div>
+    </div>
+    <textarea id="copyBox" class="copybox" readonly hidden></textarea>
+    <div id="exList" style="display:grid; gap:28px;"></div>`;
+  document.body.insertAdjacentHTML("beforeend", '<div class="toast" id="toast" hidden></div>');
+
+  /* ---------- Tabs ---------- */
+  function show(view) {
+    if (!["regle", "vocab", "exos"].includes(view)) view = "regle";
+    document.querySelectorAll("section.view").forEach(s => s.hidden = s.id !== view);
+    document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.view === view));
+    try { localStorage.setItem(KEY + "-tab", view); } catch (e) {}
+  }
+  document.querySelectorAll("[data-view]").forEach(b => b.onclick = () => show(b.dataset.view));
+  document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { show(b.dataset.go); window.scrollTo(0, 0); });
+
+  /* ---------- Vocab ---------- */
+  const vlist = $("#vlist");
+  vlist.innerHTML = VOCAB.map(v => v.g ? `<div class="vgroup">${esc(v.g)}</div>` :
+    `<div class="vrow"><div class="fr">${esc(v.fr)}</div><div class="en">${esc(v.en)}</div>${v.eg ? `<div class="eg">${esc(v.eg)}</div>` : ""}</div>`).join("");
+  vlist.addEventListener("click", e => { const r = e.target.closest(".vrow"); if (r) r.classList.toggle("show"); });
+  $("#hideEn").onchange = e => { vlist.classList.toggle("hide-en", e.target.checked); vlist.querySelectorAll(".vrow").forEach(r => r.classList.remove("show")); };
+
+  /* ---------- Render exercises ---------- */
+  const fillTemplate = (text, answers) => { let i = 0; return esc(text).replace(/\[\]/g, () => `<b>${esc(answers[i++] || "")}</b>`); };
+  const withStop = s => /[.!?…]$/.test(s.trim()) ? s : s + ".";
+
+  function itemBody(sec, it, id) {
+    if (sec.type === "mc") {
+      return `<div class="line">${esc(it.text)}</div><div class="mc" data-id="${id}">${it.opts.map((o, k) =>
+        `<button type="button" data-k="${k}" aria-pressed="${store[id] === k}">${String.fromCharCode(97 + k)}) ${esc(o)}</button>`).join("")}</div>`;
+    }
+    if (sec.type === "blanks") {
+      let n = 0;
+      const line = esc(it.text).replace(/\[\]/g, () => {
+        const bid = `${id}-${n}`, w = Math.max(3, it.ans[n][0].length + 1.5); n++;
+        return `<input class="blank" id="in-${bid}" data-b="${bid}" style="width:${w}ch" ${INPUT_ATTRS} value="${esc(store[bid] || "")}">`;
+      });
+      return `<div class="line">${line}</div>`;
+    }
+    if (sec.type === "sentence") {
+      return `<div class="line">${it.lead ? esc(it.lead) + " " : ""}<input class="blank wide" id="in-${id}-0" data-b="${id}-0" ${INPUT_ATTRS} value="${esc(store[id + "-0"] || "")}"></div>`;
+    }
+    return `<textarea class="free" id="in-${id}-0" data-b="${id}-0" rows="3" spellcheck="false" placeholder="Écris ici…">${esc(store[id + "-0"] || "")}</textarea>`;
+  }
+
+  function render() {
+    $("#exList").innerHTML = EX.map(sec => {
+      const items = sec.items.map((it, i) => {
+        const id = `${sec.id}${i + 1}`;
+        return `<div class="item" id="it-${id}"><span class="num">${i + 1}</span><div class="src">${it.src}</div>${itemBody(sec, it, id)}<div class="fb" hidden></div></div>`;
+      }).join("");
+      const badge = sec.type === "free" ? "for Claude" : `${sec.items.length} items`;
+      const btn = sec.type === "free" ? "" : `<div class="row"><button class="btn primary" data-check="${sec.id}">Vérifier ${sec.id}</button></div>`;
+      return `<div class="exsec" id="sec-${sec.id}">
+        <div class="exhead"><h2><span class="L">${sec.id}</span>${esc(sec.title)}</h2><span class="badge" id="badge-${sec.id}">${badge}</span></div>
+        <p class="instr">${esc(sec.instr)}</p>
+        <div class="items">${items}</div>${btn}
+      </div>`;
+    }).join("");
+  }
+  render();
+
+  const list = $("#exList");
+  list.addEventListener("input", e => {
+    const b = e.target.dataset.b; if (!b) return;
+    store[b] = e.target.value; e.target.classList.remove("ok", "bad", "near"); save();
+  });
+  list.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || !e.target.matches("input.blank")) return;
+    e.preventDefault();
+    const all = [...document.querySelectorAll("input.blank")], nx = all[all.indexOf(e.target) + 1];
+    if (nx) nx.focus(); else e.target.blur();
+  });
+  list.addEventListener("click", e => {
+    const opt = e.target.closest(".mc button");
+    if (opt) {
+      const box = opt.parentElement;
+      store[box.dataset.id] = +opt.dataset.k; save();
+      box.querySelectorAll("button").forEach(b => { b.setAttribute("aria-pressed", b === opt); b.classList.remove("ok", "bad"); });
+      return;
+    }
+    const c = e.target.closest("[data-check]");
+    if (c) { checkSection(c.dataset.check); updateScore(); }
+  });
+
+  /* ---------- Checking ---------- */
+  const results = {};
+  function checkSection(sid) {
+    const sec = EX.find(s => s.id === sid);
+    if (sec.type === "free") return;
+    let ok = 0;
+    sec.items.forEach((it, i) => {
+      const id = `${sid}${i + 1}`, el = $(`#it-${id}`), fb = el.querySelector(".fb");
+      let state, mine, correct;
+      if (sec.type === "mc") {
+        const pick = store[id];
+        state = pick == null ? "empty" : pick === it.c ? "ok" : "bad";
+        mine = pick == null ? "" : it.opts[pick];
+        correct = esc(it.text).replace("___", `<b>${esc(it.opts[it.c])}</b>`);
+        el.querySelectorAll(".mc button").forEach(b => {
+          b.classList.remove("ok", "bad");
+          if (+b.dataset.k === it.c && state !== "empty") b.classList.add("ok");
+          else if (+b.dataset.k === pick) b.classList.add("bad");
+        });
+      } else if (sec.type === "blanks") {
+        const states = it.ans.map((acc, n) => {
+          const inp = $(`#in-${id}-${n}`), st = grade(inp.value, acc, norm);
+          inp.classList.remove("ok", "bad", "near"); inp.classList.add(st === "empty" ? "bad" : st);
+          return st;
+        });
+        state = states.every(s => s === "ok") ? "ok"
+          : states.every(s => s === "empty") ? "empty"
+          : states.every(s => s === "ok" || s === "near") ? "near" : "bad";
+        mine = it.ans.map((_, n) => $(`#in-${id}-${n}`).value.trim() || "…").join(" / ");
+        correct = fillTemplate(it.text, it.ans.map(a => a[0]));
+      } else {
+        const inp = $(`#in-${id}-0`);
+        state = grade(inp.value, it.ans, sentNorm);
+        inp.classList.remove("ok", "bad", "near"); inp.classList.add(state === "empty" ? "bad" : state);
+        mine = inp.value.trim();
+        correct = `${it.lead ? esc(it.lead) + " " : ""}<b>${esc(withStop(it.ans[0]))}</b>`;
+      }
+      if (state === "ok") ok++;
+      results[id] = { state, mine, correct: correct.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"') };
+      const why = it.why ? esc(it.why) : "";
+      fb.hidden = false;
+      fb.className = "fb " + (state === "ok" ? "ok" : state === "near" ? "near" : "bad");
+      fb.innerHTML =
+        state === "ok" ? `<span class="pen">Très bien !</span>` :
+        state === "near" ? `<span class="pen">Presque ! Check the accents.</span><span class="ans">${correct}</span>` :
+        state === "empty" ? `<span class="pen">Pas de réponse.</span><span class="ans">${correct}</span>${why ? `<span class="instr">${why}</span>` : ""}` :
+        `<span class="ans">${correct}</span>${why ? `<span class="pen">${why}</span>` : ""}`;
+    });
+    const badge = $(`#badge-${sid}`);
+    badge.textContent = `${ok}/${sec.items.length}`;
+    badge.classList.toggle("full", ok === sec.items.length);
+  }
+
+  function updateScore() {
+    const checked = Object.values(results), ok = checked.filter(r => r.state === "ok").length;
+    $("#scoreBig").textContent = `${ok}/${TOTAL}`;
+    $("#scoreBar").style.width = (100 * ok / TOTAL) + "%";
+    $("#scoreTxt").textContent = checked.length === 0 ? `Tap "Vérifier" under each exercise, or check everything at once.`
+      : ok === TOTAL ? "Parfait ! Everything is correct."
+      : `${checked.length} of ${TOTAL} checked · ${checked.length - ok} to review.`;
+  }
+  updateScore();
+
+  function toast(msg) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2200); }
+
+  const checkAll = () => { graded.forEach(s => checkSection(s.id)); updateScore(); };
+  $("#checkAll").onclick = () => { checkAll(); toast("Tout est vérifié"); };
+
+  $("#copyErr").onclick = () => {
+    checkAll();
+    const errs = Object.entries(results).filter(([, r]) => r.state !== "ok")
+      .map(([id, r]) => `${id}: I wrote "${r.mine || "—"}" · correct: ${r.correct}`);
+    const free = EX.filter(s => s.type === "free").flatMap(s => s.items.map((it, i) => {
+      const v = (store[`${s.id}${i + 1}-0`] || "").trim();
+      return v ? `${s.id}${i + 1} (${it.src.replace(/<[^>]+>/g, "")}): ${v}` : "";
+    })).filter(Boolean);
+    let text = `Topic ${TOPIC.num} (${TOPIC.name}): ${TOTAL - errs.length}/${TOTAL}.`;
+    text += errs.length ? `\nMy mistakes:\n${errs.join("\n")}` : " No mistakes.";
+    if (free.length) text += `\n\nPlease correct my free writing:\n${free.join("\n")}`;
+    const box = $("#copyBox"); box.value = text;
+    const fallback = () => { box.hidden = false; box.focus(); box.select(); toast("Select the text below and copy it"); };
+    try {
+      navigator.clipboard.writeText(text).then(() => { box.hidden = true; toast("Copied. Paste it to Claude."); }, fallback);
+    } catch (e) { fallback(); }
+  };
+
+  $("#resetAll").onclick = () => { $("#resetConfirm").hidden = false; };
+  $("#resetNo").onclick = () => { $("#resetConfirm").hidden = true; };
+  $("#resetYes").onclick = () => {
+    store = {}; save(); for (const k in results) delete results[k];
+    render(); updateScore();
+    EX.forEach(s => { if (s.type !== "free") { const b = $(`#badge-${s.id}`); b.textContent = `${s.items.length} items`; b.classList.remove("full"); } });
+    $("#resetConfirm").hidden = true; $("#copyBox").hidden = true; toast("Answers erased");
+  };
+
+  let startTab = "regle"; try { startTab = localStorage.getItem(KEY + "-tab") || "regle"; } catch (e) {}
+  show(startTab);
+})();
+</script>
+
+</body>
+</html>
